@@ -29,3 +29,13 @@ L:1/4
 K:G
 G G G A | B2 A2 | G B A A | G4 |
 G G G A | B2 A2 | G B A A | G4 |]
+
+X:2
+T:II
+C:Mező Imre
+M:4/4
+L:1/8
+K:D
+dD D/E/F/G/ AF A/G/F/E/ | dE E/F/G/F/ EA A/G/F/E/ | EA A/B/c/d/ eA e/f/g/a/ | ea a/g/f/g/ eA B/A/B/c/ |
+dA b/a/g/f/ eA a/g/f/e/ | fA g/f/e/f/ eA a/g/f/e/ | dA D/E/F/G/ AF A/G/F/E/ | dE E/F/G/F/ Ec B/A/G/F/ |
+BF A/G/F/E/ AF B/A/G/F/ | BF B/A/G/F/ Ec B/A/G/F/ | dA D/E/F/G/ AF A/G/F/E/ | D2 z2 z4 |]
