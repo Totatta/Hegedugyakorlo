@@ -1,0 +1,53 @@
+Hegedűkottát kell átírnod ABC zenei formátumba egy gyakorló alkalmazás számára. A kotta fotóját mellékelem.
+
+Feladat:
+Írd át a kottán lévő hegedűszólamot (violinkulcs, egyszólamú dallam) ABC formátumba. Csak a kész ABC szöveget add vissza egy ```abc kódblokkban, előtte és utána semmi mást. Ha valamiben bizonytalan vagy, a kódblokk UTÁN írd le röviden.
+
+Fejléc (ebben a sorrendben):
+X:<a darab sorszáma a könyvben, ha van; különben 1>
+T:<cím, ahogy a kottán áll, a sorszámmal együtt, pl. „12. Menüett”>
+C:<szerző vagy „népdal”, ha fel van tüntetve; különben hagyd el a sort>
+M:<ütemmutató, pl. 4/4, 3/4, 2/4, 6/8; a „C” jelet írd 4/4-nek>
+L:1/8
+K:<hangnem az előjegyzés alapján, pl. G, D, A, F, Bb, Em, Am>
+
+Hangmagasságok (violinkulcs, ABC jelöléssel):
+- G, A, B,  = a g, a, h hangok az ötvonal alatt (üres G húr, 1. és 2. ujj a G húron)
+- C D E F G A B = c¹-től h¹-ig (a pótvonalas c¹ = C, az alsó vonal = E, az alsó vonalköz = F)
+- c d e f g a b = c²-től h²-ig (a 3. vonalköz = c, a felső vonal = f)
+- c' d' e' = c³ fölötte
+- FIGYELEM: az ABC-ben a „B” a magyar H hang! A magyar B (h-bé) = _B.
+- Előjegyzés szerinti módosítást NEM kell kiírni a hangoknál, mert a K: sor megadja.
+- Alkalmi módosítás: ^ = kereszt, _ = bé, = = feloldójel (pl. ^F, _B, =c). Az ütemen belül érvényes marad, mint a kottában.
+
+Ritmus (L:1/8 alapegység = nyolcad):
+- tizenhatod = /2 (pl. A/2), nyolcad = semmi (A), negyed = 2 (A2), pontozott negyed = 3 (A3), fél = 4, pontozott fél = 6, egész = 8
+- pontozott nyolcad + tizenhatod: A3/2 B/2
+- szünet: z, ugyanígy hosszal (z2 = negyed szünet, z4 = fél szünet, z8 = egész szünet)
+- az egy negyedbe tartozó, gerendával összekötött nyolcadokat írd egybe szóköz nélkül (pl. AB cd), a negyedeket szóközzel válaszd el
+- átkötés: kötőjel a hang után (A2- A2)
+- triola: (3ABc
+- a vonóíveket és a díszítéseket (staccato, akcentus, trilla) hagyd el; az ujjrendszámokat és a dinamikát is
+
+Ütemvonalak és ismétlés:
+- ütemvonal: |, darab vége: |]
+- ismétlés: |: … :|, első és második befejezés: |1 … :|2 … ||
+- felütés: az első ütem lehet rövidebb, így írd, ahogy a kottában van
+- soronként kb. 4 ütem legyen, a kotta sortöréseit nem kell követni
+
+Önellenőrzés, mielőtt válaszolsz:
+1. Minden teljes ütem hosszát add össze nyolcadokban: 4/4 = 8, 3/4 = 6, 2/4 = 4, 6/8 = 6. Ha valamelyik nem jön ki, nézd meg újra a kottát.
+2. Ellenőrizd az előjegyzést (hány kereszt vagy bé), és hogy a K: sor egyezik-e vele.
+3. Ellenőrizd, hogy minden hang a megfelelő vonalon vagy vonalközben van-e (az alsó vonal E, a felső vonal f).
+
+Példa a formátumra:
+```abc
+X:5
+T:5. Kis menüett
+C:népdal
+M:3/4
+L:1/8
+K:D
+A2 | d2 f2 a2 | g2 e2 c2 | d4 A2 | B2 c2 d2 |
+e3 f e2 | d6 :|
+```

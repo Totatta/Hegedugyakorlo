@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffe3f1">
+<title>Hangmatrica – hegedűgyakorló</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"HMMusic";src:url(data:font/woff2;base64,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) format("woff2");}
+:root{
+  --bg:#fff5fa; --card:#ffffff; --ink:#4a2747; --muted:#9a7896; --line:#f1d6e6;
+  --pink:#ec5e9f; --pink2:#ffd0e6; --lav:#8b6cf0; --lav2:#ece6ff;
+  --good:#2aa866; --warn:#e7951a; --bad:#e0566a; --miss:#b9a6b6;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-weight:600}
+button{font:inherit;color:inherit;cursor:pointer}
+#app{max-width:520px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;padding:8px 12px calc(12px + env(safe-area-inset-bottom));gap:8px}
+.top{display:flex;align-items:center;gap:8px}
+.brand{font-weight:900;font-size:17px;white-space:nowrap}
+.chip{flex:1;min-width:0;border:0;background:var(--lav2);color:#4b3596;border-radius:999px;padding:8px 12px;font-weight:800;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.icon{border:0;background:var(--pink2);border-radius:14px;width:42px;height:38px;font-size:19px;flex:none}
+
+.sceneBox{background:var(--card);border-radius:22px;padding:8px;box-shadow:0 2px 0 var(--line)}
+.scene{position:relative;width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;container-type:inline-size;background:#eee}
+.scene .bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stk{position:absolute;inset:0}
+.st{position:absolute;transform:translate(-50%,-100%);line-height:1;pointer-events:none;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  filter:drop-shadow(0 0 .05em #fff) drop-shadow(0 0 .05em #fff) drop-shadow(0 .04em .04em rgba(80,30,70,.28))}
+.st i{display:block;font-style:normal}
+.st i.fl{transform:scaleX(-1)}
+.st.pop{animation:pop .6s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes pop{0%{transform:translate(-50%,-100%) scale(.1) rotate(-25deg);opacity:0}100%{transform:translate(-50%,-100%) scale(1);opacity:1}}
+.spark{position:absolute;font-size:4.5cqw;pointer-events:none;z-index:999;font-style:normal;transform:translate(-50%,-50%);animation:spk .9s ease-out forwards}
+@keyframes spk{to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.4);opacity:0}}
+.sceneInfo{display:flex;align-items:center;gap:8px;padding:6px 4px 0;font-size:13px;flex-wrap:wrap}
+#sceneName{font-weight:900}
+#phaseInfo{color:var(--muted);flex:1;text-align:right}
+.bar{flex-basis:100%;height:8px;background:var(--pink2);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--lav));border-radius:8px;transition:width .4s}
+
+.card{background:var(--card);border-radius:22px;padding:10px 12px 12px;box-shadow:0 2px 0 var(--line);flex:1;display:flex;flex-direction:column;gap:6px;justify-content:center}
+.staff{max-width:380px;margin:0 auto;width:100%}
+.nameRow{display:flex;align-items:center;gap:12px;justify-content:center}
+.fcol{flex:1;min-width:0;max-width:240px}
+.stsvg{width:100%;height:auto;display:block}
+.stsvg .sl{stroke:var(--ink);stroke-width:1.1;opacity:.75}
+.stsvg .bl{opacity:1;stroke-width:1.5}
+.stsvg .mus{font-family:"HMMusic";fill:var(--ink)}
+.stsvg .clef{font-size:48px}
+.stsvg .acc{font-size:22px}
+.stsvg .acc.big{font-size:30px}
+.stsvg .rest{font-size:34px}
+.stsvg .nh{fill:var(--ink)}
+.stsvg .hole{fill:#fff}
+.stsvg .stem{stroke:var(--ink);stroke-width:1.4}
+.stsvg .tie{fill:none;stroke:var(--ink);stroke-width:1.3}
+.stsvg .tsig{font:900 21px "Nunito",sans-serif;fill:var(--ink);text-anchor:middle}
+.stsvg .trip{font:800 11px "Nunito",sans-serif;fill:var(--ink);text-anchor:middle}
+.stsvg .cur .nh,.stsvg g.cur .nh,.stsvg .nh.cur{fill:var(--pink)}
+.stsvg .stem.cur{stroke:var(--pink)}
+.stsvg .r-ok .nh,.stsvg .nh.r-ok{fill:var(--good)} .stsvg .stem.r-ok{stroke:var(--good)}
+.stsvg .r-warn .nh,.stsvg .nh.r-warn{fill:var(--warn)} .stsvg .stem.r-warn{stroke:var(--warn)}
+.stsvg .r-bad .nh,.stsvg .nh.r-bad{fill:var(--bad)} .stsvg .stem.r-bad{stroke:var(--bad)}
+.stsvg .r-miss .nh,.stsvg .nh.r-miss{fill:var(--miss)} .stsvg .stem.r-miss{stroke:var(--miss)}
+.stsvg .rlab{font:800 10px "Nunito",sans-serif;text-anchor:middle}
+.stsvg .rlab.r-ok{fill:var(--good)} .stsvg .rlab.r-warn{fill:var(--warn)} .stsvg .rlab.r-bad{fill:var(--bad)} .stsvg .rlab.r-miss{fill:var(--miss)}
+#nameBig{min-width:90px;text-align:center;font-size:46px;font-weight:900;line-height:1.05;color:var(--pink)}
+#finger{text-align:center;font-size:14px;font-weight:800;background:var(--lav2);color:#4b3596;border-radius:12px;padding:6px 8px;position:relative;overflow:hidden}
+#finger.covered{color:transparent}
+#finger.covered::after{content:"👆 Segítség";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#4b3596;background:var(--lav2)}
+#posInfo{font-size:12px;color:var(--muted);margin-top:3px;text-align:center}#posInfo:empty{display:none}
+.meter{position:relative;padding:4px 0}
+.scale{position:relative;height:14px;border-radius:8px;background:linear-gradient(90deg,#ffe0e6,#fff3d6 35%,#e3f7ea 50%,#fff3d6 65%,#ffe0e6)}
+.scale::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:2px;background:var(--good);transform:translateX(-50%)}
+#needle{position:absolute;top:-4px;width:6px;height:22px;border-radius:4px;background:var(--muted);transform:translateX(-50%);left:50%;opacity:0;transition:left .08s linear}
+.meter.live #needle{opacity:1}
+.meter.near #needle{background:var(--good)}
+.meter::after{content:"mély          pont jó          magas";white-space:pre;display:block;text-align:center;font-size:10px;color:var(--muted);margin-top:3px}
+.status{min-height:44px;font-size:16px;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;padding:2px 4px}
+.status.good{color:var(--good)} .status.err{color:var(--bad);font-size:14px}
+#rhInfo{font-size:13px;color:var(--muted);text-align:center}
+.rstaff{width:100%;max-width:420px;margin:0 auto}
+.rstaff.small{margin-top:4px;border-top:1px dashed var(--line)}
+
+.controls{display:flex;gap:8px}
+.controls button{border:0;border-radius:18px;background:var(--lav2);color:#4b3596;font-weight:900;font-size:16px;padding:14px 12px}
+#micBtn{flex:1;background:var(--pink);color:#fff;font-size:19px;box-shadow:0 3px 0 #c5427f}
+#micBtn.on{background:#fff;color:var(--pink);box-shadow:inset 0 0 0 3px var(--pink)}
+#playBtn{width:56px}
+#prevBtn{width:52px}
+
+#veil{position:fixed;inset:0;background:rgba(60,20,55,.35);z-index:50}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:88dvh;overflow:auto;background:#fff;border-radius:24px 24px 0 0;z-index:60;padding:14px 16px calc(20px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto;box-shadow:0 -6px 30px rgba(80,20,70,.2)}
+.sheet h2{margin:0 0 8px;font-size:20px;font-weight:900;display:flex;justify-content:space-between;align-items:center}
+.sheet h3{margin:16px 0 6px;font-size:15px;font-weight:900}
+.x{border:0;background:var(--pink2);border-radius:12px;width:36px;height:36px;font-size:18px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip2{border:2px solid var(--line);background:#fff;border-radius:999px;padding:7px 11px;font-weight:800;font-size:13px;color:var(--muted)}
+.chip2.sel{border-color:var(--pink);background:var(--pink2);color:var(--ink)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #f7e8f0}
+.row label{flex:1}
+.row small,.muted{display:block;color:var(--muted);font-size:12px;font-weight:600}
+.row input[type=range]{width:46%;accent-color:var(--pink)}
+.row input[type=checkbox]{width:24px;height:24px;accent-color:var(--pink)}
+.seg{display:flex;gap:6px}.seg button{border:2px solid var(--line);background:#fff;border-radius:12px;padding:6px 12px;font-weight:800}.seg button.sel{border-color:var(--pink);background:var(--pink2)}
+.btn{border:0;border-radius:14px;background:var(--lav2);color:#4b3596;font-weight:900;padding:11px 14px;font-size:15px}
+.btn.main{background:var(--pink);color:#fff}
+.btn:disabled{opacity:.45}
+.prow{border:2px solid var(--line);border-radius:16px;padding:10px;margin-bottom:8px}
+.pt b{font-size:16px}.pt small{display:block;color:var(--muted);font-size:12px}
+.tag{font-size:11px;background:var(--lav2);color:#4b3596;border-radius:8px;padding:1px 6px;margin-left:6px}
+.pb{display:flex;gap:6px;margin-top:8px}
+.pb button{flex:1;border:0;border-radius:12px;background:var(--pink2);font-weight:900;padding:9px 4px;font-size:14px}
+.pb .del{flex:none;width:42px;background:#f6eef3}
+#impBox{border:2px dashed var(--lav);border-radius:16px;padding:12px;margin-top:10px}
+#impBox ol{padding-left:18px;margin:0 0 8px;font-size:14px}
+#impText{width:100%;min-height:120px;border:2px solid var(--line);border-radius:12px;padding:8px;font:13px ui-monospace,Menlo,monospace}
+.impBtns{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+#impRes .warn{color:var(--warn);font-size:13px;margin:4px 0;padding-left:18px}
+#impRes .ok{color:var(--good)} #impRes .err,.err{color:var(--bad)}
+#setupMsg{font-weight:800;color:var(--lav);margin:8px 0;min-height:1em}
+details{margin-top:10px;font-size:14px} summary{font-weight:900;cursor:pointer}
+details input[type=text],details input[type=password]{width:100%;border:2px solid var(--line);border-radius:10px;padding:8px;font:inherit;margin:4px 0}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.acell small{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.acell.now .scene{outline:3px dashed var(--pink);outline-offset:2px}
+.ov{position:fixed;inset:0;z-index:80;background:rgba(60,20,55,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;overflow:hidden}
+.ov[hidden],.sheet[hidden],#veil[hidden]{display:none}
+.ov .scene{max-width:500px;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.doneCard{background:#fff;border-radius:24px;padding:14px;max-width:520px;width:100%;text-align:center}
+.doneCard h2{margin:10px 0 2px;font-weight:900;color:var(--pink)}
+.doneCard p{margin:0 0 10px;color:var(--muted)}
+.conf{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall 2s linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(540deg)}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <div class="brand">🎻</div>
+    <button id="modeChip" class="chip">🎲 Szabad gyakorlás</button>
+    <button id="albumBtn" class="icon" aria-label="Album">📒</button>
+    <button id="setBtn" class="icon" aria-label="Beállítások">⚙️</button>
+  </header>
+
+  <section class="sceneBox">
+    <div id="scene" class="scene"></div>
+    <div class="sceneInfo"><span id="sceneName"></span><span id="phaseInfo"></span><div class="bar"><i id="progFill"></i></div></div>
+  </section>
+
+  <section class="card">
+    <div id="singleView">
+      <div id="staff" class="staff"></div>
+      <div class="nameRow"><div id="nameBig"></div><div class="fcol"><div id="finger"></div><div id="posInfo"></div></div></div>
+      <div class="meter"><div class="scale"><i id="needle"></i></div></div>
+    </div>
+    <div id="rhythmView" hidden>
+      <div id="rhInfo"></div>
+      <div id="rstaff" class="rstaff"></div>
+    </div>
+    <div id="status" class="status"></div>
+  </section>
+
+  <nav class="controls">
+    <button id="prevBtn" hidden aria-label="Előző ütem">‹</button>
+    <button id="micBtn">🎤 Kezdjük!</button>
+    <button id="playBtn" aria-label="Meghallgatom">🔊</button>
+    <button id="skipBtn">Tovább ›</button>
+  </nav>
+</div>
+
+<div id="veil" hidden></div>
+
+<div id="setSheet" class="sheet" hidden>
+  <h2>Beállítások <button class="x">✕</button></h2>
+  <h3>Húrok (szabad gyakorlás)</h3>
+  <div id="strChips" class="chips"></div>
+  <h3>Ujjak (szabad gyakorlás)</h3>
+  <div id="varChips" class="chips"></div>
+  <h3>Hangfelismerés</h3>
+  <div class="row"><label>Tűrés: <span id="v_tol"></span><small>Ennyit térhet el a hang a tisztától. Kisebb szám = szigorúbb. Hangolás: a¹ = 440 Hz.</small></label><input type="range" id="s_tol" min="5" max="20" step="1"></div>
+  <div class="row"><label>Fogás mutatása<small>Kikapcsolva a „Segítség” mezőre koppintva derül ki.</small></label><input type="checkbox" id="s_fing"></div>
+  <h3>Kép</h3>
+  <div class="row"><label>Matrica egy képen</label><div id="perPic" class="seg"><button data-v="12">12</button><button data-v="20">20</button><button data-v="30">30</button></div></div>
+  <div id="themeChips" class="chips"></div>
+  <div class="row"><label>Új képet kezdek<small>A mostani, félkész kép elvész.</small></label><button id="resetScene" class="btn">Új kép</button></div>
+  <h3>Ritmusos gyakorlás</h3>
+  <div class="row"><label>Tempó: <span id="v_tempo"></span></label><input type="range" id="s_tempo" min="40" max="120" step="4"></div>
+  <div class="row"><label>Ritmus tűrés: <span id="v_rtol"></span><small>Ennyit csúszhat egy hang a helyéhez képest.</small></label><input type="range" id="s_rtol" min="60" max="250" step="10"></div>
+  <div class="row"><label>Késés kiegyenlítése: <span id="v_lat"></span><small>Ha mindig „későn”-t mutat, növeld.</small></label><input type="range" id="s_lat" min="0" max="400" step="10"></div>
+  <div class="row"><label>Előbb lejátssza az ütemet</label><input type="checkbox" id="s_demo"></div>
+  <div class="row"><label>Metronóm játék közben</label><input type="checkbox" id="s_metro"></div>
+</div>
+
+<div id="modeSheet" class="sheet" hidden>
+  <h2>Mit gyakorolunk? <button class="x">✕</button></h2>
+  <button id="freeBtn" class="btn main" style="width:100%">🎲 Szabad gyakorlás<br><small style="font-weight:600">Véletlen hangok a kiválasztott húrokon és ujjakkal</small></button>
+  <h3>Kották</h3>
+  <p id="srcInfo" class="muted"></p>
+  <div id="pieceList"></div>
+  <p id="setupMsg"></p>
+  <button id="impBtn" class="btn" style="width:100%">＋ Új darab hozzáadása</button>
+  <div id="impBox" hidden>
+    <ol>
+      <li>Másold ki a promptot, és küldd el egy MI-nek (pl. Claude) a lefotózott kottával együtt.</li>
+      <li>A kapott választ illeszd be ide.</li>
+      <li>Ellenőrizd, aztán mentsd el.</li>
+    </ol>
+    <button id="copyPrompt" class="btn">1. Prompt másolása</button>
+    <textarea id="impText" placeholder="X:1&#10;T:Darab címe&#10;M:4/4&#10;L:1/4&#10;K:D&#10;F F G A | A G F E | ..."></textarea>
+    <div class="impBtns"><button id="impCheck" class="btn">Ellenőrzés</button><button id="impSave" class="btn" disabled>Mentés ezen a telefonon</button><button id="impUp" class="btn main" disabled>Feltöltés GitHubra</button></div>
+    <div id="impRes"></div>
+    <details>
+      <summary>GitHub beállítás (egyszer kell)</summary>
+      <p class="muted">A feltöltéssel a darab a tárolóban lévő darabok.txt fájlba kerül, így minden eszközön megjelenik. A kulcs csak ezen az eszközön marad.</p>
+      <ol class="muted" style="font-size:13px">
+        <li>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.</li>
+        <li>Repository access: Only select repositories → ez a tároló.</li>
+        <li>Permissions → Contents: Read and write. Generate, majd másold ide.</li>
+      </ol>
+      <label>Tároló (felhasználó/név)<input type="text" id="ghRepo" placeholder="Totatta/hegedu-matrica"></label>
+      <label>Kulcs (token)<input type="password" id="ghToken" placeholder="github_pat_…"></label>
+      <button id="ghSave" class="btn">Mentés és próba</button>
+      <p id="ghRes" class="muted"></p>
+      <p id="ghState" class="muted"></p>
+    </details>
+  </div>
+</div>
+
+<div id="albumSheet" class="sheet" hidden>
+  <h2>📒 Albumom <button class="x">✕</button></h2>
+  <p id="albumCount" class="muted"></p>
+  <div id="albumGrid" class="agrid"></div>
+</div>
+
+<div id="doneOv" class="ov" hidden>
+  <div class="doneCard">
+    <div id="doneScene" class="scene"></div>
+    <h2 id="doneTitle"></h2>
+    <p id="doneStars"></p>
+    <button class="btn main">Jöhet a következő kép! ✨</button>
+  </div>
+</div>
+<div id="bigOv" class="ov" hidden><div id="bigScene" class="scene"></div></div>
+
+<script>
+const KOTTA_PROMPT = "Hegedűkottát kell átírnod ABC zenei formátumba egy gyakorló alkalmazás számára. A kotta fotóját mellékelem.\n\nFeladat:\nÍrd át a kottán lévő hegedűszólamot (violinkulcs, egyszólamú dallam) ABC formátumba. Csak a kész ABC szöveget add vissza egy ```abc kódblokkban, előtte és utána semmi mást. Ha valamiben bizonytalan vagy, a kódblokk UTÁN írd le röviden.\n\nFejléc (ebben a sorrendben):\nX:<a darab sorszáma a könyvben, ha van; különben 1>\nT:<cím, ahogy a kottán áll, a sorszámmal együtt, pl. „12. Menüett”>\nC:<szerző vagy „népdal”, ha fel van tüntetve; különben hagyd el a sort>\nM:<ütemmutató, pl. 4/4, 3/4, 2/4, 6/8; a „C” jelet írd 4/4-nek>\nL:1/8\nK:<hangnem az előjegyzés alapján, pl. G, D, A, F, Bb, Em, Am>\n\nHangmagasságok (violinkulcs, ABC jelöléssel):\n- G, A, B,  = a g, a, h hangok az ötvonal alatt (üres G húr, 1. és 2. ujj a G húron)\n- C D E F G A B = c¹-től h¹-ig (a pótvonalas c¹ = C, az alsó vonal = E, az alsó vonalköz = F)\n- c d e f g a b = c²-től h²-ig (a 3. vonalköz = c, a felső vonal = f)\n- c' d' e' = c³ fölötte\n- FIGYELEM: az ABC-ben a „B” a magyar H hang! A magyar B (h-bé) = _B.\n- Előjegyzés szerinti módosítást NEM kell kiírni a hangoknál, mert a K: sor megadja.\n- Alkalmi módosítás: ^ = kereszt, _ = bé, = = feloldójel (pl. ^F, _B, =c). Az ütemen belül érvényes marad, mint a kottában.\n\nRitmus (L:1/8 alapegység = nyolcad):\n- tizenhatod = /2 (pl. A/2), nyolcad = semmi (A), negyed = 2 (A2), pontozott negyed = 3 (A3), fél = 4, pontozott fél = 6, egész = 8\n- pontozott nyolcad + tizenhatod: A3/2 B/2\n- szünet: z, ugyanígy hosszal (z2 = negyed szünet, z4 = fél szünet, z8 = egész szünet)\n- az egy negyedbe tartozó, gerendával összekötött nyolcadokat írd egybe szóköz nélkül (pl. AB cd), a negyedeket szóközzel válaszd el\n- átkötés: kötőjel a hang után (A2- A2)\n- triola: (3ABc\n- a vonóíveket és a díszítéseket (staccato, akcentus, trilla) hagyd el; az ujjrendszámokat és a dinamikát is\n\nÜtemvonalak és ismétlés:\n- ütemvonal: |, darab vége: |]\n- ismétlés: |: … :|, első és második befejezés: |1 … :|2 … ||\n- felütés: az első ütem lehet rövidebb, így írd, ahogy a kottában van\n- soronként kb. 4 ütem legyen, a kotta sortöréseit nem kell követni\n\nÖnellenőrzés, mielőtt válaszolsz:\n1. Minden teljes ütem hosszát add össze nyolcadokban: 4/4 = 8, 3/4 = 6, 2/4 = 4, 6/8 = 6. Ha valamelyik nem jön ki, nézd meg újra a kottát.\n2. Ellenőrizd az előjegyzést (hány kereszt vagy bé), és hogy a K: sor egyezik-e vele.\n3. Ellenőrizd, hogy minden hang a megfelelő vonalon vagy vonalközben van-e (az alsó vonal E, a felső vonal f).\n\nPélda a formátumra:\n```abc\nX:5\nT:5. Kis menüett\nC:népdal\nM:3/4\nL:1/8\nK:D\nA2 | d2 f2 a2 | g2 e2 c2 | d4 A2 | B2 c2 d2 |\ne3 f e2 | d6 :|\n```\n";
+const DEFAULT_PIECES = "% Hangmatrica – darabok\n% Minden darab X: sorral kezdődik, a darabok között legyen egy üres sor.\n% Új darabot az appból is feltölthetsz („＋ Új darab hozzáadása”), vagy ide másolhatod a végére.\n\nX:1\nT:Örömóda\nC:L. van Beethoven\nM:4/4\nL:1/4\nK:D\nF F G A | A G F E | D D E F | F3/2 E/ E2 |\nF F G A | A G F E | D D E F | E3/2 D/ D2 |]\n\nX:2\nT:Twinkle, Twinkle, Little Star\nC:francia népdal\nM:4/4\nL:1/4\nK:A\nA A e e | f f e2 | d d c c | B B A2 |\ne e d d | c c B2 | e e d d | c c B2 |\nA A e e | f f e2 | d d c c | B B A2 |]\n\nX:3\nT:Au clair de la lune\nC:francia népdal\nM:4/4\nL:1/4\nK:G\nG G G A | B2 A2 | G B A A | G4 |\nG G G A | B2 A2 | G B A A | G4 |]\n";
+</script>
+<script>
+// ================= Zene: hangnevek, fogások, kotta rajzolás, hangszintézis =================
+const Music = (function () {
+  const SEMI = [0, 2, 4, 5, 7, 9, 11];
+  const HUN0 = ['C', 'D', 'E', 'F', 'G', 'A', 'H'];
+  const HUNB = ['Cesz', 'Desz', 'Esz', 'Fesz', 'Gesz', 'Asz', 'B'];
+  const HUNS = ['Cisz', 'Disz', 'Eisz', 'Fisz', 'Gisz', 'Aisz', 'Hisz'];
+  function huName(L, alt) {
+    if (alt === 0) return HUN0[L];
+    if (alt === -1) return HUNB[L];
+    if (alt === 1) return HUNS[L];
+    if (alt === 2) return HUN0[L] + 'isisz';
+    if (alt === -2) return L === 6 ? 'Besz' : HUNB[L] + 'esz';
+    return HUN0[L];
+  }
+  // fekete billentyűknél: kereszt vagy bé
+  function spellMidi(m, preferFlat) {
+    const pc = ((m % 12) + 12) % 12, oct = Math.floor(m / 12) - 1;
+    const nat = SEMI.indexOf(pc);
+    if (nat >= 0) return { L: nat, oct, alt: 0 };
+    if (preferFlat || pc === 10) { const L = SEMI.indexOf(pc + 1); return { L, oct, alt: -1 }; }
+    return { L: SEMI.indexOf(pc - 1), oct, alt: 1 };
+  }
+  const midiOf = (L, oct, alt) => 12 * (oct + 1) + SEMI[L] + alt;
+  const stepOf = (L, oct) => L + 7 * oct;
+
+  // ---------- hegedű, első fekvés ----------
+  const STRINGS = [
+    { id: 'G', L: 4, oct: 3, m: 55 }, { id: 'D', L: 1, oct: 4, m: 62 },
+    { id: 'A', L: 5, oct: 4, m: 69 }, { id: 'E', L: 2, oct: 5, m: 76 }];
+  const VARS = [
+    { id: '0', f: 0, off: 0, lab: 'üres húr', rank: 0 },
+    { id: '1lo', f: 1, off: 1, lab: '1. ujj (mély)', rank: 3 },
+    { id: '1', f: 1, off: 2, lab: '1. ujj', rank: 1 },
+    { id: '2lo', f: 2, off: 3, lab: '2. ujj (mély)', rank: 1 },
+    { id: '2hi', f: 2, off: 4, lab: '2. ujj (magas)', rank: 1 },
+    { id: '3', f: 3, off: 5, lab: '3. ujj', rank: 1 },
+    { id: '3hi', f: 3, off: 6, lab: '3. ujj (magas)', rank: 2 },
+    { id: '4', f: 4, off: 7, lab: '4. ujj', rank: 1.5 },
+    { id: '4hi', f: 4, off: 8, lab: '4. ujj (magas)', rank: 3 }];
+  function violinNote(s, v) {
+    const m = s.m + v.off;
+    const li = s.L + v.f, L = li % 7, oct = s.oct + Math.floor(li / 7);
+    let alt = m - midiOf(L, oct, 0);
+    let sp = { L, oct, alt };
+    if (Math.abs(alt) > 1 || (alt === 1 && (L === 2 || L === 6)) || (alt === -1 && (L === 0 || L === 3))) sp = spellMidi(m, v.off === 1 || v.off === 3);
+    return { m, L: sp.L, oct: sp.oct, alt: sp.alt, step: stepOf(sp.L, sp.oct), str: s.id, v: v.id, fing: s.id + ' húr · ' + v.lab };
+  }
+  function pool(strings, vars) {
+    const out = [];
+    for (const s of STRINGS) if (strings[s.id]) for (const v of VARS) if (vars[v.id]) out.push(violinNote(s, v));
+    return out;
+  }
+  function fingeringFor(m) {
+    const c = [];
+    for (const s of STRINGS) for (const v of VARS) if (s.m + v.off === m) c.push({ s, v, r: v.rank });
+    if (!c.length) return null;
+    c.sort((a, b) => a.r - b.r);
+    const p = c[0];
+    let txt = p.s.id + ' húr · ' + p.v.lab;
+    const alt4 = c.find(x => x.v.f === 4 && x !== p);
+    if (p.v.f === 0 && alt4) txt += ' (vagy ' + alt4.s.id + ' húr 4. ujj)';
+    return txt;
+  }
+
+  // ---------- kotta rajzolás (SVG) ----------
+  const SP = 10;                // vonalköz
+  const BOT = 85;               // alsó vonal (E4) y
+  const yOf = step => BOT - (step - 30) * SP / 2;
+  const ACC = { '1': '♯', '-1': '♭', '0': '♮', '2': '♯♯', '-2': '♭♭' };
+  const SHARP_STEPS = [38, 35, 39, 36, 33, 37, 34];   // F5 C5 G5 D5 A4 E5 B4
+  const FLAT_STEPS = [34, 37, 33, 36, 32, 35, 31];    // B4 E5 A4 D5 G4 C5 F4
+  function staffLines(x0, x1) {
+    let o = '';
+    for (let k = 0; k < 5; k++) o += `<line x1="${x0}" x2="${x1}" y1="${BOT - k * SP}" y2="${BOT - k * SP}" class="sl"/>`;
+    return o;
+  }
+  function clef(x) { return `<text x="${x}" y="${BOT - SP + 13}" class="mus clef">\u{1D11E}</text>`; }
+  function keySig(x, fifths) {
+    let o = '';
+    const n = Math.abs(fifths), steps = fifths > 0 ? SHARP_STEPS : FLAT_STEPS, g = fifths > 0 ? '♯' : '♭';
+    for (let i = 0; i < n; i++) o += `<text x="${x + i * 9}" y="${yOf(steps[i]) + (fifths > 0 ? 6 : 4)}" class="mus acc">${g}</text>`;
+    return { svg: o, w: n * 9 + (n ? 6 : 0) };
+  }
+  function ledgers(x, step, w) {
+    let o = '';
+    for (let s = 28; s >= step; s -= 2) o += `<line x1="${x - w}" x2="${x + w}" y1="${yOf(s)}" y2="${yOf(s)}" class="sl"/>`;
+    for (let s = 40; s <= step; s += 2) o += `<line x1="${x - w}" x2="${x + w}" y1="${yOf(s)}" y2="${yOf(s)}" class="sl"/>`;
+    return o;
+  }
+  function head(x, y, filled, cls) {
+    if (filled) return `<ellipse cx="${x}" cy="${y}" rx="6.2" ry="4.6" transform="rotate(-22 ${x} ${y})" class="nh ${cls || ''}"/>`;
+    return `<g class="${cls || ''}"><ellipse cx="${x}" cy="${y}" rx="6.4" ry="4.8" transform="rotate(-22 ${x} ${y})" class="nh"/><ellipse cx="${x}" cy="${y}" rx="3.9" ry="2.2" transform="rotate(-22 ${x} ${y})" class="hole"/></g>`;
+  }
+  function wholeHead(x, y, cls) {
+    return `<g class="${cls || ''}"><ellipse cx="${x}" cy="${y}" rx="8" ry="5.3" class="nh"/><ellipse cx="${x}" cy="${y}" rx="3.4" ry="4.3" transform="rotate(-50 ${x} ${y})" class="hole"/></g>`;
+  }
+  // egyetlen hang (egész kotta)
+  function single(note, fifths) {
+    const W = 200;
+    let o = `<svg viewBox="0 18 ${W} 104" class="stsvg">` + staffLines(6, W - 6) + clef(8);
+    let x0 = 52;
+    if (fifths) { const k = keySig(x0, fifths); o += k.svg; x0 += k.w; }
+    if (note) {
+      const x = Math.max(x0 + 40, 128), y = yOf(note.step);
+      o += ledgers(x, note.step, 13);
+      if (note.showAcc) o += `<text x="${x - 26}" y="${y + (note.alt < 0 ? 3 : 4)}" class="mus acc big">${ACC[note.alt] || ''}</text>`;
+      o += wholeHead(x, y, 'cur');
+    }
+    return o + '</svg>';
+  }
+  // egy ütem ritmussal
+  const RES_CLS = { ok: 'r-ok', early: 'r-warn', late: 'r-warn', wrong: 'r-bad', miss: 'r-miss' };
+  const RES_TXT = { ok: '✓', early: 'korán', late: 'későn', wrong: '✗', miss: '–' };
+  function bar(b, opt) {
+    const notes = b.notes;
+    const W = opt.width || 360;
+    let o = '';
+    let x0 = 46;
+    if (opt.fifths) { const k = keySig(x0, opt.fifths); o += k.svg; x0 += k.w; }
+    if (opt.meterText) {
+      const mt = opt.meterText === 'C' || opt.meterText === 'C|' ? ['4', '4'] : opt.meterText.split('/');
+      o += `<text x="${x0 + 6}" y="${BOT - 2 * SP - 2}" class="tsig">${mt[0]}</text><text x="${x0 + 6}" y="${BOT + 2}" class="tsig">${mt[1] || ''}</text>`;
+      x0 += 22;
+    }
+    const total = Math.max(b.len || 0, opt.barLen || 4);
+    const xs = [];
+    // arányos elhelyezés minimális távolsággal
+    let t = 0; const span = W - 16 - x0 - 14;
+    notes.forEach(n => { xs.push(x0 + 14 + span * (t / total)); t += n.d; });
+    for (let k = 1; k < xs.length; k++) if (xs[k] - xs[k - 1] < 22) xs[k] = xs[k - 1] + 22;
+    // gerendázás: azonos negyeden belüli nyolcadok/tizenhatodok
+    const beat = opt.beat || 1;
+    const groups = [];
+    let tt = 0, g = null;
+    notes.forEach((n, k) => {
+      const beamable = n.m != null && n.d < 1 - 1e-6;
+      const bi = Math.floor((tt + 1e-6) / beat);
+      if (beamable && g && g.bi === bi && g.last === k - 1) { g.idx.push(k); g.last = k; }
+      else { if (g && g.idx.length > 1) groups.push(g); g = beamable ? { bi, idx: [k], last: k } : null; }
+      tt += n.d;
+    });
+    if (g && g.idx.length > 1) groups.push(g);
+    const inGroup = {}; groups.forEach((gr, gi) => gr.idx.forEach(k => inGroup[k] = gi));
+    // szár iránya csoportonként
+    const up = notes.map(n => n.m == null ? true : n.step < 34);
+    groups.forEach(gr => { const avg = gr.idx.reduce((a, k) => a + notes[k].step, 0) / gr.idx.length; gr.up = avg < 34; gr.idx.forEach(k => up[k] = gr.up); });
+    const stemEnd = [];
+    let ri = 0;
+    notes.forEach((n, k) => {
+      const x = xs[k];
+      const res = opt.results ? opt.results[k] : null;
+      const cls = (res ? RES_CLS[res.r] : '') + (opt.cursor === k ? ' cur' : '');
+      if (n.m == null) {
+        const d = n.d;
+        if (n.whole || d >= 4 - 1e-6) o += `<rect x="${x - 6}" y="${BOT - 3 * SP}" width="12" height="5" class="nh"/>`;
+        else if (d >= 2 - 1e-6) o += `<rect x="${x - 6}" y="${BOT - 2 * SP - 5}" width="12" height="5" class="nh"/>`;
+        else if (d >= 1 - 1e-6) o += `<text x="${x - 5}" y="${BOT - 2 * SP + 1}" class="mus rest">\u{1D13D}</text>`;
+        else o += `<text x="${x - 5}" y="${BOT - 2 * SP + 1}" class="mus rest">\u{1D13E}</text>`;
+        if (Math.abs(d - .75) < 1e-3 || Math.abs(d - 1.5) < 1e-3 || Math.abs(d - 3) < 1e-3) o += `<circle cx="${x + 9}" cy="${BOT - 2 * SP - 4}" r="1.8" class="nh"/>`;
+        stemEnd.push(null); return;
+      }
+      const y = yOf(n.step);
+      o += ledgers(x, n.step, 10);
+      if (n.acc != null) o += `<text x="${x - 19}" y="${y + (n.acc < 0 ? 4 : 5)}" class="mus acc">${ACC[n.acc] || ''}</text>`;
+      const d = n.d;
+      const dotted = [.75, 1.5, 3, .375].some(v => Math.abs(d - v) < 1e-3);
+      const base = dotted ? d / 1.5 : d;
+      let sx = null, sy = null;
+      if (base >= 4 - 1e-6) o += wholeHead(x, y, cls);
+      else {
+        o += head(x, y, base < 2 - 1e-6, cls);
+        const u = up[k];
+        sx = u ? x + 5.6 : x - 5.6; const len = 33;
+        sy = u ? y - len : y + len;
+        if (inGroup[k] !== undefined) { const gr = groups[inGroup[k]]; sy = gr.up ? Math.min(sy, ...gr.idx.map(j => yOf(notes[j].step) - 33)) : Math.max(sy, ...gr.idx.map(j => yOf(notes[j].step) + 33)); }
+        o += `<line x1="${sx}" x2="${sx}" y1="${y + (u ? -1 : 1)}" y2="${sy}" class="stem ${cls}"/>`;
+        if (inGroup[k] === undefined && base < 1 - 1e-6) {
+          const flags = base < .5 - 1e-6 ? 2 : 1;
+          for (let f = 0; f < flags; f++) {
+            const fy = sy + (u ? f * 7 : -f * 7);
+            o += u ? `<path d="M${sx} ${fy} q2 9 10 14 q-4 -8 -10 -9z" class="nh ${cls}"/>` : `<path d="M${sx} ${fy} q2 -9 10 -14 q-4 8 -10 9z" class="nh ${cls}"/>`;
+          }
+        }
+      }
+      if (dotted) o += `<circle cx="${x + 11}" cy="${y - ((n.step % 2 === 0) ? 3 : 0)}" r="1.9" class="nh ${cls}"/>`;
+      stemEnd.push(sx != null ? { x: sx, y: sy, base } : null);
+      if (n.tie) {
+        const nx = xs[k + 1] != null ? xs[k + 1] : W - 10;
+        o += `<path d="M${x + 4} ${y + 8} Q${(x + nx) / 2} ${y + 18} ${nx - 4} ${y + 8}" class="tie"/>`;
+      }
+      if (res) {
+        o += `<text x="${x}" y="${124}" class="rlab ${RES_CLS[res.r]}">${RES_TXT[res.r]}</text>`;
+      }
+      ri++;
+    });
+    // gerendák
+    groups.forEach(gr => {
+      const a = stemEnd[gr.idx[0]], z = stemEnd[gr.idx[gr.idx.length - 1]];
+      if (!a || !z) return;
+      const dir = gr.up ? 1 : -1;
+      o += `<path d="M${a.x} ${a.y} L${z.x} ${z.y} L${z.x} ${z.y + 4.5 * dir} L${a.x} ${a.y + 4.5 * dir}Z" class="nh"/>`;
+      // második gerenda a tizenhatodokhoz
+      for (let q = 0; q < gr.idx.length; q++) {
+        const k = gr.idx[q]; const e = stemEnd[k]; if (!e || e.base >= .5 - 1e-6) continue;
+        const nk = gr.idx[q + 1], pk = gr.idx[q - 1];
+        let x1 = e.x, x2;
+        if (nk !== undefined && stemEnd[nk] && stemEnd[nk].base < .5 - 1e-6) x2 = stemEnd[nk].x;
+        else if (pk !== undefined && stemEnd[pk] && stemEnd[pk].base < .5 - 1e-6) continue;
+        else x2 = nk !== undefined ? e.x + 8 : e.x - 8;
+        const yA = a.y + (z.y - a.y) * ((x1 - a.x) / ((z.x - a.x) || 1)) + 7 * dir;
+        const yB = a.y + (z.y - a.y) * ((x2 - a.x) / ((z.x - a.x) || 1)) + 7 * dir;
+        o += `<path d="M${x1} ${yA} L${x2} ${yB} L${x2} ${yB + 4 * dir} L${x1} ${yA + 4 * dir}Z" class="nh"/>`;
+      }
+      if (gr.idx.some(k => notes[k].trip)) {
+        const mx = (a.x + z.x) / 2, my = gr.up ? Math.min(a.y, z.y) - 6 : Math.max(a.y, z.y) + 13;
+        o += `<text x="${mx}" y="${my}" class="trip">3</text>`;
+      }
+    });
+    const endX = W - 8;
+    let barline = `<line x1="${endX}" x2="${endX}" y1="${BOT - 4 * SP}" y2="${BOT}" class="sl bl"/>`;
+    if (b.endRepeat) barline += `<circle cx="${endX - 7}" cy="${BOT - 1.5 * SP}" r="2" class="nh"/><circle cx="${endX - 7}" cy="${BOT - 2.5 * SP}" r="2" class="nh"/>`;
+    return `<svg viewBox="0 0 ${W} 130" class="stsvg">` + staffLines(4, endX) + clef(6) + o + barline + '</svg>';
+  }
+
+  // ---------- hangszintézis ----------
+  let ctx = null;
+  function ac() { if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; ctx = new C(); } if (ctx.state === 'suspended') ctx.resume(); return ctx; }
+  function blip(f, t0, dur, type, vol) {
+    const c = ac(), o = c.createOscillator(), g = c.createGain(); o.type = type; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(vol, t0 + .012); g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+    o.connect(g).connect(c.destination); o.start(t0); o.stop(t0 + dur + .05);
+  }
+  function violin(m, t0, dur, A4) {
+    const c = ac(), f = A4 * Math.pow(2, (m - 69) / 12);
+    const o = c.createOscillator(), flt = c.createBiquadFilter(), g = c.createGain(), lfo = c.createOscillator(), lg = c.createGain();
+    o.type = 'sawtooth'; o.frequency.value = f; flt.type = 'lowpass'; flt.frequency.value = Math.min(4200, f * 6); flt.Q.value = .7;
+    lfo.frequency.value = 5.6; lg.gain.setValueAtTime(0, t0); lg.gain.linearRampToValueAtTime(f * .005, t0 + Math.min(.5, dur * .6)); lfo.connect(lg).connect(o.frequency);
+    const rel = Math.min(.12, dur * .3);
+    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(.2, t0 + .05); g.gain.setValueAtTime(.18, t0 + Math.max(.06, dur - rel)); g.gain.linearRampToValueAtTime(0, t0 + dur);
+    o.connect(flt).connect(g).connect(c.destination); o.start(t0); lfo.start(t0); o.stop(t0 + dur + .05); lfo.stop(t0 + dur + .05);
+  }
+  function chime() { const t = ac().currentTime;[0, 4, 7, 12].forEach((s, i) => blip(1046 * Math.pow(2, s / 12), t + i * .07, .3, 'sine', .14)); }
+  function fanfare() { const t = ac().currentTime;[0, 4, 7, 12, 7, 12, 16].forEach((s, i) => blip(660 * Math.pow(2, s / 12), t + i * .11, .4, 'triangle', .15)); }
+  function click(t, accent) { blip(accent ? 1760 : 1320, t, .05, 'square', accent ? .1 : .06); }
+
+  return { huName, spellMidi, midiOf, stepOf, STRINGS, VARS, pool, fingeringFor, single, bar, ac, violin, chime, fanfare, click, yOf };
+})();
+
+// ================= ABC beolvasó (egyszólamú dallam, violinkulcs) =================
+const ABC = (function () {
+  const SEMI = [0, 2, 4, 5, 7, 9, 11];                 // C D E F G A H
+  const LIDX = { c: 0, d: 1, e: 2, f: 3, g: 4, a: 5, b: 6 };
+  const SHARP_ORDER = [3, 0, 4, 1, 5, 2, 6], FLAT_ORDER = [6, 2, 5, 1, 4, 0, 3];
+  const MAJ = { C: 0, G: 1, D: 2, A: 3, E: 4, B: 5, 'F#': 6, 'C#': 7, F: -1, Bb: -2, Eb: -3, Ab: -4, Db: -5, Gb: -6, Cb: -7 };
+  const MODE = { '': 0, maj: 0, ion: 0, m: -3, min: -3, aeo: -3, dor: -2, mix: -1, lyd: 1, phr: -4, loc: -5 };
+
+  function keyAlts(fifths) {
+    const a = [0, 0, 0, 0, 0, 0, 0];
+    if (fifths > 0) for (let i = 0; i < fifths; i++) a[SHARP_ORDER[i]] = 1;
+    if (fifths < 0) for (let i = 0; i < -fifths; i++) a[FLAT_ORDER[i]] = -1;
+    return a;
+  }
+  function parseKey(v) {
+    const tok = (v || 'C').trim().split(/\s+/)[0] || 'C';
+    if (/^none$/i.test(tok)) return { fifths: 0, name: 'nincs előjegyzés', ok: true };
+    const m = /^([A-Ga-g])([#b]?)([A-Za-z]*)$/.exec(tok);
+    if (!m) return { fifths: 0, name: 'C-dúr', ok: false };
+    const tonic = m[1].toUpperCase() + m[2];
+    let mode = m[3].toLowerCase(); if (mode.length > 3) mode = mode.slice(0, 3); if (mode === 'maj' || mode === 'ma') mode = '';
+    const md = MODE[mode];
+    if (MAJ[tonic] === undefined || md === undefined) return { fifths: 0, name: 'C-dúr', ok: false };
+    const fifths = Math.max(-7, Math.min(7, MAJ[tonic] + md));
+    const L = LIDX[m[1].toLowerCase()], alt = m[2] === '#' ? 1 : m[2] === 'b' ? -1 : 0;
+    const nm = Music.huName(L, alt);
+    return { fifths, ok: true, name: md === -3 ? nm.toLowerCase() + '-moll' : md === 0 ? nm + '-dúr' : nm + ' ' + m[3] };
+  }
+  function parseMeter(v) {
+    v = (v || '4/4').trim();
+    if (v === 'C') return [4, 4]; if (v === 'C|') return [2, 2];
+    const m = /^(\d+)\/(\d+)/.exec(v); if (m) return [+m[1], +m[2]];
+    return [4, 4];
+  }
+  function parseLen(v) { const m = /^(\d+)\/(\d+)/.exec((v || '').trim()); return m ? +m[1] / +m[2] : null; }
+
+  function slug(s) { return (s || 'darab').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'darab'; }
+
+  function parsePiece(text) {
+    const head = { X: '', T: '', C: '', M: '', L: '', K: '', Q: '' };
+    const bodyLines = [];
+    let inBody = false;
+    for (let raw of text.split(/\r?\n/)) {
+      const line = raw.replace(/\s+$/, '');
+      if (!inBody) {
+        const h = /^([A-Za-z]):\s*(.*)$/.exec(line);
+        if (h) { if (head[h[1]] === '' ) head[h[1]] = h[2].replace(/%.*$/, '').trim(); if (h[1] === 'K') inBody = true; continue; }
+        if (/^\s*%/.test(line) || !line.trim()) continue;
+        inBody = true;
+      }
+      if (/^[A-Za-z]:/.test(line) && !/^[A-Ga-gz]:/.test(line)) { // fejléc a törzsben (pl. W:, N:)
+        const h = /^([A-Za-z]):\s*(.*)$/.exec(line); if (h && h[1] === 'K') bodyLines.push('[K:' + h[2] + ']'); continue;
+      }
+      bodyLines.push(line);
+    }
+    const meter = parseMeter(head.M);
+    const barLen = meter[0] * 4 / meter[1];
+    let unit = parseLen(head.L); if (!unit) unit = (meter[0] / meter[1] < .75) ? 1 / 16 : 1 / 8;
+    let key = parseKey(head.K);
+    const warnings = [];
+    if (!key.ok) warnings.push('A hangnemet (K:) nem értem: „' + head.K + '” – C-dúrnak veszem.');
+    const startKey = key;
+    let kAlt = keyAlts(key.fifths);
+
+    const bars = [];
+    let cur = { notes: [], startRepeat: false, endRepeat: false, volta: null, final: false };
+    let pendStart = false, pendVolta = null, curVolta = null;
+    let barAlt = {};
+    let tripLeft = 0, tripMul = 1;
+    let brokenNext = 1;
+    let lastNote = null, tieOpen = null;
+
+    function closeBar(kind) {
+      const hasNotes = cur.notes.length > 0;
+      if (hasNotes) {
+        cur.startRepeat = cur.startRepeat || false;
+        bars.push(cur);
+      } else if ((kind.end || kind.final) && bars.length) {
+        const pb = bars[bars.length - 1]; if (kind.end) pb.endRepeat = true; if (kind.final) pb.final = true;
+      }
+      if (hasNotes) { if (kind.end) cur.endRepeat = true; if (kind.final) cur.final = true; }
+      const ended = kind.end || kind.final;
+      if (ended) curVolta = null;
+      cur = { notes: [], startRepeat: false, endRepeat: false, volta: null, final: false };
+      barAlt = {};
+      if (kind.start) { pendStart = true; curVolta = null; }
+      if (kind.volta) { pendVolta = kind.volta; }
+    }
+    function addNote(n) {
+      if (pendStart) { cur.startRepeat = true; pendStart = false; }
+      if (pendVolta) { curVolta = pendVolta; pendVolta = null; }
+      cur.volta = curVolta;
+      if (tieOpen && n.m != null && tieOpen.m === n.m) { n.cont = true; }
+      tieOpen = null;
+      if (tripLeft > 0) { n.d *= tripMul; n.trip = true; tripLeft--; }
+      if (brokenNext !== 1) { n.d *= brokenNext; brokenNext = 1; }
+      cur.notes.push(n); lastNote = n;
+    }
+
+    const body = bodyLines.join('\n');
+    let i = 0;
+    const N = body.length;
+    function readDur() {
+      let num = '', den = 1, j = i;
+      while (j < N && /\d/.test(body[j])) num += body[j++];
+      let n = num ? +num : 1;
+      if (body[j] === '/') {
+        let slashes = 0; while (body[j] === '/') { slashes++; j++; }
+        let dd = ''; while (j < N && /\d/.test(body[j])) dd += body[j++];
+        den = dd ? +dd * Math.pow(2, slashes - 1) : Math.pow(2, slashes);
+      }
+      i = j; return n / den;
+    }
+    function readPitch() {
+      // visszaad: {L, oct, acc(explicit|null)} vagy null; i a hang után
+      let acc = null, j = i;
+      if (body.startsWith('^^', j)) { acc = 2; j += 2; } else if (body.startsWith('__', j)) { acc = -2; j += 2; }
+      else if (body[j] === '^') { acc = 1; j++; } else if (body[j] === '_') { acc = -1; j++; } else if (body[j] === '=') { acc = 0; j++; }
+      const ch = body[j];
+      if (!ch || !/[A-Ga-g]/.test(ch)) return null;
+      j++;
+      const L = LIDX[ch.toLowerCase()];
+      let oct = ch === ch.toUpperCase() ? 4 : 5;
+      while (body[j] === ',' || body[j] === "'") { oct += body[j] === ',' ? -1 : 1; j++; }
+      i = j;
+      return { L, oct, acc };
+    }
+    function resolve(p) {
+      const k = p.L + ':' + p.oct;
+      let alt;
+      if (p.acc !== null) { alt = p.acc; barAlt[k] = alt; }
+      else alt = barAlt[k] !== undefined ? barAlt[k] : kAlt[p.L];
+      return { m: 12 * (p.oct + 1) + SEMI[p.L] + alt, step: p.L + 7 * p.oct, alt, acc: p.acc };
+    }
+
+    while (i < N) {
+      const c = body[i];
+      if (c === '%') { while (i < N && body[i] !== '\n') i++; continue; }
+      if (c === '\n' || c === ' ' || c === '\t' || c === '\\') { i++; continue; }
+      if (c === '"') { i++; while (i < N && body[i] !== '"') i++; i++; continue; }
+      if (c === '!' || c === '+') { const e = body.indexOf(c, i + 1); i = e < 0 ? N : e + 1; continue; }
+      if (c === '{') { const e = body.indexOf('}', i); i = e < 0 ? N : e + 1; continue; }
+      if (/[.~HLMOPSTuvJR]/.test(c)) { i++; continue; }
+      if (c === '(') {
+        const m = /^\((\d)(?::\d*)?(?::\d*)?/.exec(body.slice(i));
+        if (m) { const p = +m[1]; tripLeft = p; tripMul = p === 3 ? 2 / 3 : p === 2 ? 3 / 2 : p === 4 ? 3 / 4 : (p === 6 ? 2 / 3 : 2 / p); i += m[0].length; continue; }
+        i++; continue; // ív kezdete
+      }
+      if (c === ')') { i++; continue; }
+      if (c === '-') { if (lastNote) { lastNote.tie = true; tieOpen = lastNote; } i++; continue; }
+      if (c === '>' || c === '<') {
+        let k = 0; while (body[i] === c) { k++; i++; }
+        const f = k === 1 ? .5 : k === 2 ? .25 : .125;
+        if (lastNote) { if (c === '>') { lastNote.d *= (2 - f); brokenNext = f; } else { lastNote.d *= f; brokenNext = 2 - f; } }
+        continue;
+      }
+      // ütemvonalak
+      if (c === '|' || c === ':' || (c === '[' && /[|\d]/.test(body[i + 1] || ''))) {
+        let j = i, tok = '';
+        if (body[j] === '[') { tok += '['; j++; }
+        while (j < N && /[|:\]]/.test(body[j])) { if (body[j] === ']' && !tok.includes('|')) break; tok += body[j]; j++; }
+        let volta = null;
+        if (/\d/.test(body[j] || '') && /[|\[]$/.test(tok)) { volta = +body[j]; j++; while (/[,\-\d]/.test(body[j] || '')) j++; }
+        i = j;
+        if (tok === '[' && cur.notes.length === 0) { pendVolta = volta; continue; }
+        if (tok === ':') continue;
+        const end = /^\[?:/.test(tok);
+        const start = tok === '::' || (/:$/.test(tok) && tok.includes('|'));
+        const fin = !end && !start && /\|\]|\|\||\[\|/.test(tok);
+        closeBar({ end, start, final: fin, volta });
+        continue;
+      }
+      if (c === '[' && /[A-Za-z]:/.test(body.slice(i + 1, i + 3))) { // [K:..] [L:..] [M:..]
+        const e = body.indexOf(']', i); const inner = body.slice(i + 1, e < 0 ? N : e);
+        const f = inner[0], v = inner.slice(2);
+        if (f === 'K') { key = parseKey(v); kAlt = keyAlts(key.fifths); }
+        if (f === 'L') { const u = parseLen(v); if (u) unit = u; }
+        i = e < 0 ? N : e + 1; continue;
+      }
+      if (c === '[') { // akkord: a legmagasabb hangot vesszük
+        i++; let best = null, d0 = null;
+        while (i < N && body[i] !== ']') {
+          const p = readPitch();
+          if (p) { const r = resolve(p); const d = readDur(); if (d0 === null) d0 = d; if (!best || r.m > best.m) best = r; }
+          else i++;
+        }
+        i++;
+        const mul = readDur();
+        if (best) addNote({ m: best.m, step: best.step, acc: best.acc, d: unit * 4 * (d0 || 1) * mul });
+        continue;
+      }
+      if (c === 'z' || c === 'x') { i++; const d = readDur(); addNote({ m: null, d: unit * 4 * d }); continue; }
+      if (c === 'Z' || c === 'X') { i++; let n = ''; while (/\d/.test(body[i] || '')) n += body[i++]; for (let k = 0; k < (n ? +n : 1); k++) { addNote({ m: null, d: barLen, whole: true }); closeBar({}); } continue; }
+      const p = readPitch();
+      if (p) { const r = resolve(p); const d = readDur(); addNote({ m: r.m, step: r.step, acc: r.acc, alt: r.alt, d: unit * 4 * d }); continue; }
+      i++; // ismeretlen jel: átugorjuk
+    }
+    if (cur.notes.length) closeBar({ final: true });
+
+    // ütemhossz ellenőrzése
+    bars.forEach((b, k) => {
+      b.len = b.notes.reduce((a, n) => a + n.d, 0);
+      const diff = Math.abs(b.len - barLen);
+      if (diff > 1e-3 && !(k === 0) && !(k === bars.length - 1) && !(b.final) && !(bars[k + 1] && bars[k + 1].volta && b.endRepeat)) {
+        warnings.push((k + 1) + '. ütem: ' + fmtBeats(b.len) + ' negyed, ' + fmtBeats(barLen) + ' kellene.');
+      }
+    });
+    const playable = bars.some(b => b.notes.some(n => n.m != null));
+    if (!playable) warnings.unshift('Nem találtam hangokat.');
+
+    const seq = expand(bars);
+    const title = head.T || 'Névtelen darab';
+    return { id: (head.X ? head.X + '-' : '') + slug(title), x: head.X, title, composer: head.C, meterText: head.M || '4/4', meter, barLen, key: startKey, bars, seq, warnings, ok: playable };
+  }
+  function fmtBeats(x) { return (Math.round(x * 100) / 100).toString().replace('.', ','); }
+
+  function expand(bars) {
+    const out = [];
+    let pass = 1, repStart = 0, jumpedEnd = -1;
+    const done = new Set();
+    let guard = 0;
+    for (let i = 0; i < bars.length && guard < 2000; guard++) {
+      const b = bars[i];
+      if (b.startRepeat && pass === 1) repStart = i;
+      if (pass === 2 && i > jumpedEnd && !b.volta) pass = 1;
+      if (b.volta && b.volta !== pass) { i++; continue; }
+      out.push(b);
+      if (b.endRepeat && !done.has(i)) { done.add(i); jumpedEnd = i; pass = 2; i = repStart; continue; }
+      if (b.endRepeat && done.has(i)) { pass = 1; repStart = i + 1; }
+      i++;
+    }
+    return out;
+  }
+
+  // több darab egy szövegben (X: soronként elválasztva)
+  function parseMany(text) {
+    text = (text || '').replace(/```[a-z]*\n?/gi, '').replace(/```/g, '');
+    const chunks = [];
+    let curr = [];
+    for (const line of text.split(/\r?\n/)) {
+      if (/^X:/.test(line) && curr.some(l => /^[A-Za-z]:|[A-Ga-g]/.test(l))) { chunks.push(curr.join('\n')); curr = []; }
+      curr.push(line);
+    }
+    chunks.push(curr.join('\n'));
+    return chunks.filter(c => /^K:/m.test(c)).map(c => Object.assign(parsePiece(c), { raw: c.trim() }));
+  }
+
+  return { parsePiece, parseMany, keyAlts, SHARP_ORDER, FLAT_ORDER, fmtBeats };
+})();
+
+// ================= Témák (háttér + matricák) =================
+// Koordináták: 400 × 300-as képen. A matrica (x,y) pontja az alja közepe.
+const THEMES = (function () {
+  const cloud = (x, y, s, o) => `<g fill="#fff" opacity="${o || .92}"><ellipse cx="${x}" cy="${y}" rx="${24 * s}" ry="${10 * s}"/><ellipse cx="${x - 11 * s}" cy="${y - 5 * s}" rx="${11 * s}" ry="${9 * s}"/><ellipse cx="${x + 7 * s}" cy="${y - 8 * s}" rx="${13 * s}" ry="${11 * s}"/></g>`;
+  const sun = (x, y, r, c) => `<circle cx="${x}" cy="${y}" r="${r * 1.6}" fill="${c}" opacity=".25"/><circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`;
+  const grad = (id, stops, vert) => `<linearGradient id="${id}" x1="0" y1="0" x2="${vert === false ? 1 : 0}" y2="${vert === false ? 0 : 1}">${stops.map((s, i) => `<stop offset="${s[0]}" stop-color="${s[1]}"/>`).join('')}</linearGradient>`;
+  const dots = (n, x0, y0, x1, y1, r, cols, seed) => {
+    let s = seed || 7, o = '';
+    const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+    for (let i = 0; i < n; i++) o += `<circle cx="${(x0 + rnd() * (x1 - x0)).toFixed(1)}" cy="${(y0 + rnd() * (y1 - y0)).toFixed(1)}" r="${(r * (.6 + rnd() * .7)).toFixed(1)}" fill="${cols[i % cols.length]}"/>`;
+    return o;
+  };
+
+  const T = [];
+
+  // 1. Tündérkert
+  T.push({
+    id: 'kert', name: 'Tündérkert', p1: 'Virágok', p2: 'Állatok',
+    bg: () => `<defs>${grad('kS', [[0, '#ffd6ec'], [1, '#e9dcff']])}${grad('kG', [[0, '#9fdc8c'], [1, '#5fb86a']])}</defs>
+      <rect width="400" height="300" fill="url(#kS)"/>${sun(330, 52, 22, '#ffe28a')}${cloud(90, 55, 1.1)}${cloud(230, 35, .8)}
+      <path d="M0 160 Q90 120 190 150 T400 140 V300 H0Z" fill="#b8e6a0"/>
+      <path d="M0 175 Q120 150 230 172 T400 168 V300 H0Z" fill="url(#kG)"/>
+      <path d="M170 300 Q200 230 215 174 Q222 230 260 300Z" fill="#f3dcb5" opacity=".9"/>
+      ${dots(40, 0, 180, 400, 298, 2.2, ['#fff', '#ffc2e0', '#fff3a3'], 3)}`,
+    zones: { ground: [[8, 190, 392, 296, 1]], sky: [[20, 22, 380, 140]] },
+    items1: [['🌷', 'ground'], ['🌸', 'ground'], ['🌼', 'ground'], ['🌻', 'ground', 1.2], ['🌹', 'ground'], ['🍄', 'ground'], ['🌳', 'ground', 1.6, .4], ['🌺', 'ground'], ['🌿', 'ground']],
+    items2: [['🐰', 'ground'], ['🦔', 'ground'], ['🐞', 'ground', .8], ['🐌', 'ground', .8], ['🐿️', 'ground'], ['🦋', 'sky'], ['🐝', 'sky', .8], ['🐦', 'sky']],
+    finale: ['🧚‍♀️', 'sky', 1.5]
+  });
+
+  // 2. Víz alatti világ
+  T.push({
+    id: 'tenger', name: 'Víz alatti világ', p1: 'Tengeri kert', p2: 'Halak',
+    bg: () => `<defs>${grad('tW', [[0, '#7fd8f5'], [.6, '#3aa6d8'], [1, '#2a7fbf']])}${grad('tL', [[0, '#ffffff'], [1, '#ffffff00']])}</defs>
+      <rect width="400" height="300" fill="url(#tW)"/>
+      <path d="M60 0 L110 0 L170 230 L120 230Z M210 0 L240 0 L280 230 L250 230Z M320 0 L360 0 L390 200 L360 200Z" fill="url(#tL)" opacity=".18"/>
+      <path d="M0 238 Q70 218 150 236 T300 230 T400 236 V300 H0Z" fill="#f6dfa3"/>
+      <path d="M0 258 Q100 244 200 258 T400 254 V300 H0Z" fill="#efcf86"/>
+      ${dots(14, 20, 20, 380, 200, 3.5, ['#ffffff66'], 11)}${dots(30, 0, 250, 400, 298, 1.6, ['#d9b56a', '#fff1c9'], 5)}`,
+    zones: { bottom: [[8, 246, 392, 296, 1]], water: [[16, 26, 384, 222]] },
+    items1: [['🌿', 'bottom', 1.2], ['🐚', 'bottom', .8], ['🪨', 'bottom'], ['⭐', 'bottom', .7], ['🌾', 'bottom', 1.2], ['🍀', 'bottom', .8]],
+    items2: [['🐠', 'water'], ['🐟', 'water'], ['🐡', 'water'], ['🐬', 'water', 1.3], ['🐳', 'water', 1.4, .5], ['🐙', 'water'], ['🦑', 'water'], ['🐢', 'water', 1.1], ['🦀', 'bottom', .9], ['🦐', 'bottom', .8]],
+    finale: ['🧜‍♀️', 'water', 1.6]
+  });
+
+  // 3. Cukrászda
+  T.push({
+    id: 'cuki', name: 'Cukrászda', p1: 'Tortadíszek', p2: 'Sütemények',
+    bg: () => `<defs><pattern id="cP" width="28" height="300" patternUnits="userSpaceOnUse"><rect width="28" height="300" fill="#ffe3ef"/><rect width="14" height="300" fill="#ffd2e6"/></pattern></defs>
+      <rect width="400" height="300" fill="url(#cP)"/>
+      <rect x="22" y="40" width="70" height="62" rx="6" fill="#bfe9ff" stroke="#fff" stroke-width="5"/><path d="M57 40V102M22 71H92" stroke="#fff" stroke-width="4"/>
+      <rect x="300" y="78" width="88" height="8" rx="3" fill="#c98a5b"/>
+      <rect x="0" y="236" width="400" height="64" fill="#f7c8a8"/><rect x="0" y="236" width="400" height="8" fill="#e8a982"/>
+      <ellipse cx="200" cy="238" rx="98" ry="10" fill="#e6e6ef"/>
+      <rect x="112" y="178" width="176" height="56" rx="8" fill="#fff5fa" stroke="#f5a3c7" stroke-width="3"/>
+      <rect x="132" y="128" width="136" height="50" rx="8" fill="#ffe0ef" stroke="#f5a3c7" stroke-width="3"/>
+      <rect x="152" y="84" width="96" height="44" rx="8" fill="#fff5fa" stroke="#f5a3c7" stroke-width="3"/>
+      <path d="M112 190 q11 10 22 0 t22 0 t22 0 t22 0 t22 0 t22 0 t22 0 t22 0" fill="none" stroke="#f5a3c7" stroke-width="5" stroke-linecap="round"/>
+      <path d="M132 140 q11 10 22 0 t22 0 t22 0 t22 0 t22 0 t22 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+      <path d="M152 96 q12 10 24 0 t24 0 t24 0 t24 0" fill="none" stroke="#f5a3c7" stroke-width="5" stroke-linecap="round"/>`,
+    zones: { cake: [[120, 206, 280, 230, 1], [140, 156, 260, 175, 1], [160, 112, 240, 126, 1]], table: [[8, 262, 112, 296, 1], [288, 262, 392, 296, 1], [306, 70, 384, 77]], top: [[186, 80, 214, 82]] },
+    items1: [['🍓', 'cake', .7], ['🍒', 'cake', .7], ['🫐', 'cake', .65], ['🌸', 'cake', .7], ['🍋', 'cake', .65], ['🍑', 'cake', .7], ['🎀', 'cake', .7]],
+    items2: [['🧁', 'table'], ['🍩', 'table'], ['🍪', 'table'], ['🍭', 'table'], ['🍬', 'table', .8], ['🍰', 'table'], ['🍫', 'table'], ['🍮', 'table']],
+    finale: ['👑', 'top', 1.3]
+  });
+
+  // 4. Lovastanya
+  T.push({
+    id: 'tanya', name: 'Lovastanya', p1: 'A tanya', p2: 'Állatok',
+    bg: () => `<defs>${grad('lS', [[0, '#bfe6ff'], [1, '#fff0f7']])}</defs>
+      <rect width="400" height="300" fill="url(#lS)"/>${sun(60, 50, 20, '#ffd76a')}${cloud(200, 45, 1)}${cloud(330, 70, .8)}
+      <path d="M0 150 Q100 110 220 145 T400 130 V300 H0Z" fill="#c6e8a4"/>
+      <g transform="translate(300 112)"><rect x="0" y="16" width="56" height="42" fill="#e86a7a"/><path d="M-6 18 L28 -6 L62 18Z" fill="#c9455a"/><rect x="20" y="34" width="16" height="24" fill="#fff"/><path d="M20 34 L36 58 M36 34 L20 58" stroke="#e86a7a" stroke-width="2"/></g>
+      <path d="M0 172 Q140 150 270 170 T400 168 V300 H0Z" fill="#8fd17a"/>
+      <g stroke="#b07a4f" stroke-width="4" stroke-linecap="round"><path d="M0 186 L400 178 M0 200 L400 192"/>${[20, 70, 120, 170, 220, 270, 320, 370].map(x => `<path d="M${x} ${178 + (400 - x) * .02} v${30}"/>`).join('')}</g>
+      ${dots(36, 0, 215, 400, 298, 2, ['#fff', '#ffe27a'], 9)}`,
+    zones: { ground: [[8, 214, 392, 296, 1]], sky: [[20, 18, 280, 120]] },
+    items1: [['🌳', 'ground', 1.6, .4], ['🌾', 'ground'], ['🌻', 'ground', 1.2], ['🌼', 'ground', .8], ['🪵', 'ground'], ['🌷', 'ground', .8], ['🍎', 'ground', .7]],
+    items2: [['🐴', 'ground'], ['🐎', 'ground', 1.4], ['🐑', 'ground'], ['🐄', 'ground', 1.2], ['🐔', 'ground', .9], ['🐈', 'ground', .9], ['🐕', 'ground'], ['🐐', 'ground'], ['🐦', 'sky', .8]],
+    finale: ['🦄', 'ground', 1.6]
+  });
+
+  // 5. Babaház
+  T.push({
+    id: 'babahaz', name: 'Babaház', p1: 'Berendezés', p2: 'Lakók',
+    bg: () => `<rect width="400" height="300" fill="#e9f7ff"/>${cloud(50, 40, .8)}${cloud(350, 30, .7)}
+      <path d="M40 92 L200 18 L360 92Z" fill="#c86b9a"/><circle cx="200" cy="62" r="16" fill="#fff6c9" stroke="#fff" stroke-width="4"/>
+      <rect x="52" y="92" width="296" height="200" fill="#fff"/>
+      <rect x="58" y="98" width="140" height="92" fill="#ffe1ee"/><rect x="202" y="98" width="140" height="92" fill="#e6e1ff"/>
+      <rect x="58" y="194" width="140" height="92" fill="#dff5e1"/><rect x="202" y="194" width="140" height="92" fill="#fff1cf"/>
+      <g fill="#d9a77a"><rect x="58" y="182" width="140" height="8"/><rect x="202" y="182" width="140" height="8"/><rect x="58" y="278" width="140" height="8"/><rect x="202" y="278" width="140" height="8"/></g>
+      <rect x="0" y="286" width="400" height="14" fill="#9ad889"/>`,
+    zones: { floor: [[66, 176, 190, 182], [210, 176, 334, 182], [66, 272, 190, 278], [210, 272, 334, 278]], wall: [[70, 112, 186, 140], [214, 112, 330, 140], [70, 208, 186, 236], [214, 208, 330, 236]], top: [[192, 54, 208, 56]] },
+    items1: [['🛋️', 'floor', 1.2], ['🛏️', 'floor', 1.2], ['🪑', 'floor'], ['🪴', 'floor'], ['🧸', 'floor', .9], ['🛁', 'floor', 1.1], ['🖼️', 'wall', .8], ['🕰️', 'wall', .8], ['🪞', 'wall', .8]],
+    items2: [['🐱', 'floor', .9], ['🐶', 'floor', .9], ['🐹', 'floor', .8], ['🐰', 'floor', .9], ['👧', 'floor'], ['👦', 'floor'], ['👩', 'floor'], ['🪆', 'floor', .8]],
+    finale: ['👸', 'top', 1.1]
+  });
+
+  // 6. Szavanna
+  T.push({
+    id: 'szavanna', name: 'Szavanna', p1: 'Fák és fű', p2: 'Állatok',
+    bg: () => `<defs>${grad('sS', [[0, '#ffb36b'], [.7, '#ffe0a3'], [1, '#fff1cf']])}</defs>
+      <rect width="400" height="300" fill="url(#sS)"/>${sun(200, 120, 40, '#ff8a5c')}
+      <path d="M0 150 Q120 135 240 150 T400 145 V300 H0Z" fill="#e8c86a"/>
+      <g fill="#7a5a3a"><rect x="60" y="112" width="5" height="40"/><ellipse cx="62" cy="110" rx="34" ry="9"/><rect x="330" y="118" width="4" height="32"/><ellipse cx="332" cy="116" rx="26" ry="7"/></g>
+      <path d="M0 168 Q140 155 260 170 T400 166 V300 H0Z" fill="#d6b04f"/>
+      ${dots(50, 0, 175, 400, 298, 1.6, ['#c49a3c', '#f2d68a'], 13)}`,
+    zones: { ground: [[8, 184, 392, 296, 1]], sky: [[20, 20, 380, 100]] },
+    items1: [['🌳', 'ground', 1.6, .4], ['🌴', 'ground', 1.5, .4], ['🌾', 'ground'], ['🌿', 'ground'], ['🪨', 'ground'], ['🌵', 'ground', .9]],
+    items2: [['🦁', 'ground', 1.1], ['🦒', 'ground', 1.5], ['🐘', 'ground', 1.5], ['🦓', 'ground', 1.2], ['🦛', 'ground', 1.2], ['🦏', 'ground', 1.2], ['🐆', 'ground', 1.2], ['🐒', 'ground'], ['🦩', 'ground'], ['🦅', 'sky']],
+    finale: ['🌈', 'sky', 2]
+  });
+
+  // 7. Erdő
+  T.push({
+    id: 'erdo', name: 'Erdő', p1: 'Fák, gombák', p2: 'Erdei állatok',
+    bg: () => `<defs>${grad('eS', [[0, '#d7f3ea'], [1, '#f6fff2']])}</defs>
+      <rect width="400" height="300" fill="url(#eS)"/>${sun(320, 45, 18, '#fff1a8')}
+      <g fill="#a6d5ae">${[0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400].map((x, i) => `<path d="M${x - 22} ${170} L${x} ${100 + (i % 3) * 14} L${x + 22} 170Z"/>`).join('')}</g>
+      <g fill="#7fbf8b">${[20, 70, 130, 190, 250, 300, 350].map((x, i) => `<path d="M${x - 26} ${176} L${x} ${116 + (i % 2) * 18} L${x + 26} 176Z"/>`).join('')}</g>
+      <path d="M0 170 Q100 160 200 172 T400 168 V300 H0Z" fill="#6fae63"/>
+      <path d="M150 300 Q190 240 196 172 Q206 240 270 300Z" fill="#c9a77a" opacity=".8"/>
+      ${dots(40, 0, 180, 400, 298, 2, ['#e88a5a', '#f6d36b', '#fff'], 17)}`,
+    zones: { ground: [[8, 186, 392, 296, 1]], sky: [[20, 18, 380, 110]] },
+    items1: [['🌲', 'ground', 1.6, .4], ['🌳', 'ground', 1.6, .4], ['🍄', 'ground', .8], ['🌿', 'ground'], ['🪵', 'ground'], ['🍂', 'ground', .8], ['🌰', 'ground', .7]],
+    items2: [['🦊', 'ground'], ['🦌', 'ground', 1.3], ['🐻', 'ground', 1.2], ['🐿️', 'ground', .9], ['🦔', 'ground', .9], ['🐇', 'ground'], ['🐗', 'ground', 1.1], ['🦉', 'sky'], ['🐦', 'sky', .8]],
+    finale: ['🧝‍♀️', 'ground', 1.5]
+  });
+
+  // 8. Sivatag
+  T.push({
+    id: 'sivatag', name: 'Sivatag', p1: 'Oázis', p2: 'Állatok',
+    bg: () => `<defs>${grad('dS', [[0, '#9fd8ff'], [1, '#ffe9c2']])}</defs>
+      <rect width="400" height="300" fill="url(#dS)"/>${sun(70, 55, 24, '#ffcf4a')}
+      <path d="M0 160 Q90 120 180 158 T400 140 V300 H0Z" fill="#f3cf8c"/>
+      <path d="M0 190 Q120 160 240 192 T400 180 V300 H0Z" fill="#ebbd6e"/>
+      <ellipse cx="300" cy="232" rx="58" ry="14" fill="#5fc3e4"/><ellipse cx="300" cy="230" rx="44" ry="8" fill="#9ae2f5"/>
+      ${dots(40, 0, 200, 400, 298, 1.4, ['#d9a656', '#fff0c8'], 21)}`,
+    zones: { ground: [[8, 204, 392, 296, 1]], sky: [[120, 18, 380, 110]] },
+    items1: [['🌵', 'ground', 1.2], ['🌴', 'ground', 1.6, .4], ['🪨', 'ground'], ['🌾', 'ground'], ['🌺', 'ground', .8], ['🥥', 'ground', .7]],
+    items2: [['🐫', 'ground', 1.4], ['🐪', 'ground', 1.4], ['🦎', 'ground', .9], ['🦊', 'ground'], ['🐢', 'ground', .9], ['🦜', 'ground'], ['🦅', 'sky'], ['🐞', 'ground', .7]],
+    finale: ['🧞‍♀️', 'sky', 1.6]
+  });
+
+  // 9. Mező
+  T.push({
+    id: 'mezo', name: 'Virágos mező', p1: 'Virágok', p2: 'Állatok',
+    bg: () => `<defs>${grad('mS', [[0, '#a8dcff'], [1, '#eaf7ff']])}</defs>
+      <rect width="400" height="300" fill="url(#mS)"/>${sun(340, 50, 22, '#ffe066')}${cloud(80, 50, 1)}${cloud(200, 80, .7)}
+      <path d="M0 150 Q100 125 200 148 T400 138 V300 H0Z" fill="#b5e48c"/>
+      <path d="M0 170 Q120 150 250 170 T400 162 V300 H0Z" fill="#99d36b"/>
+      ${dots(80, 0, 160, 400, 298, 2.4, ['#fff', '#ffe066', '#ff9ec7', '#c7a6ff'], 23)}`,
+    zones: { ground: [[8, 180, 392, 296, 1]], sky: [[20, 18, 380, 130]] },
+    items1: [['🌼', 'ground'], ['🌻', 'ground', 1.2], ['🌷', 'ground'], ['🌾', 'ground'], ['🌸', 'ground'], ['🍀', 'ground', .8], ['🌺', 'ground']],
+    items2: [['🐇', 'ground'], ['🐑', 'ground'], ['🐄', 'ground', 1.2], ['🐞', 'ground', .7], ['🐛', 'ground', .7], ['🦋', 'sky'], ['🐝', 'sky', .8], ['🐦', 'sky']],
+    finale: ['🌈', 'sky', 2]
+  });
+
+  // 10. Hegyvidék
+  T.push({
+    id: 'hegy', name: 'Hegyvidék', p1: 'Hegyi rét', p2: 'Állatok',
+    bg: () => `<defs>${grad('hS', [[0, '#b9e1ff'], [1, '#f2f9ff']])}</defs>
+      <rect width="400" height="300" fill="url(#hS)"/>${cloud(320, 40, .9)}
+      <path d="M-20 190 L80 70 L160 160 L240 50 L330 150 L420 80 L420 300 L-20 300Z" fill="#9aa8c7"/>
+      <path d="M80 70 L58 96 L72 92 L86 100 L102 96Z M240 50 L214 82 L230 76 L244 86 L264 78Z M420 80 L392 112 L410 106 L420 110Z" fill="#fff"/>
+      <path d="M0 196 Q120 168 240 196 T400 188 V300 H0Z" fill="#8fcf7a"/>
+      <ellipse cx="90" cy="250" rx="60" ry="12" fill="#7fcfe8"/>
+      ${dots(40, 0, 205, 400, 298, 2, ['#fff', '#ffd1e6', '#fff3a3'], 29)}`,
+    zones: { ground: [[8, 212, 392, 296, 1]], sky: [[20, 16, 380, 70]] },
+    items1: [['🌲', 'ground', 1.6, .4], ['🪨', 'ground'], ['🌼', 'ground', .8], ['🌿', 'ground'], ['⛺', 'ground', 1.2], ['🌸', 'ground', .8]],
+    items2: [['🐐', 'ground'], ['🐑', 'ground'], ['🐻', 'ground', 1.2], ['🦙', 'ground', 1.2], ['🐿️', 'ground', .9], ['🦌', 'ground', 1.3], ['🦅', 'sky']],
+    finale: ['🎈', 'sky', 1.6]
+  });
+
+  // 11. Városi élővilág
+  T.push({
+    id: 'varos', name: 'Városi park', p1: 'Park', p2: 'Városi állatok',
+    bg: () => `<defs>${grad('vS', [[0, '#ffd9e8'], [1, '#e8f3ff']])}</defs>
+      <rect width="400" height="300" fill="url(#vS)"/>${cloud(330, 40, .8)}
+      <g>${[[0, 70, 60, '#c7b8f0'], [62, 40, 50, '#f7b6cf'], [114, 90, 70, '#b8dcf0'], [186, 55, 55, '#ffd59a'], [243, 80, 60, '#c7b8f0'], [305, 45, 50, '#f7b6cf'], [357, 85, 50, '#b8dcf0']].map(b => `<rect x="${b[0]}" y="${b[1]}" width="${b[2]}" height="${180 - b[1]}" fill="${b[3]}"/>`).join('')}
+      ${dots(40, 6, 60, 394, 168, 2.6, ['#fff8c9', '#ffffff'], 31)}</g>
+      <rect x="0" y="176" width="400" height="80" fill="#9ad889"/>
+      <rect x="0" y="256" width="400" height="44" fill="#c8c8d6"/><path d="M0 278 H400" stroke="#fff" stroke-width="3" stroke-dasharray="18 14"/>
+      ${dots(30, 0, 180, 400, 254, 2, ['#fff', '#ffc2e0'], 37)}`,
+    zones: { ground: [[8, 190, 392, 252, 1]], street: [[8, 266, 392, 296, 1]], sky: [[20, 16, 380, 60]] },
+    items1: [['🌳', 'ground', 1.6, .4], ['🌷', 'ground', .8], ['🪴', 'ground'], ['🌻', 'ground'], ['🌸', 'ground', .8], ['⛲', 'ground', 1.3], ['🌲', 'ground', 1.4, .4]],
+    items2: [['🕊️', 'sky'], ['🐦', 'sky', .8], ['🐈', 'street'], ['🐕', 'street'], ['🦔', 'ground', .9], ['🐿️', 'ground', .9], ['🦆', 'ground'], ['🐌', 'ground', .7]],
+    finale: ['🎠', 'street', 1.5]
+  });
+
+  return T;
+})();
+
+// ================= Matrica elhelyezés (ütközésmentes, mindig máshová) =================
+const Placer = (function () {
+  const BASE = 37;
+  function zoneRects(theme, tag) { return theme.zones[tag] || theme.zones.ground || Object.values(theme.zones)[0]; }
+  function pickPoint(rects) {
+    const area = rects.map(r => Math.max(1, (r[2] - r[0]) * Math.max(1, r[3] - r[1])));
+    let t = Math.random() * area.reduce((a, b) => a + b, 0), i = 0;
+    while (t > area[i] && i < area.length - 1) { t -= area[i]; i++; }
+    const r = rects[i];
+    const x = r[0] + Math.random() * (r[2] - r[0]), y = r[1] + Math.random() * (r[3] - r[1]);
+    const persp = r[4] ? (.72 + .5 * (y - r[1]) / Math.max(1, r[3] - r[1])) : 1;
+    return { x, y, persp };
+  }
+  function circle(st) { return { cx: st.x, cy: st.y - st.s * .52, r: st.s * .44 * (st.w || 1) }; }
+  // "legjobb jelölt": sok véletlen pontból azt választja, amelyik a legmesszebb van a többitől
+  function place(theme, item, existing) {
+    const [e, tag, mult, wmul] = item;
+    const rects = zoneRects(theme, tag);
+    let shrink = 1, best = null;
+    for (let round = 0; round < 6; round++) {
+      best = null;
+      for (let k = 0; k < 40; k++) {
+        const p = pickPoint(rects);
+        const s = BASE * (mult || 1) * p.persp * shrink;
+        const st = { e, x: p.x, y: p.y, s, w: wmul || 1 };
+        // ne lógjon ki a képből
+        if (st.x - s * .45 < 2 || st.x + s * .45 > 398 || st.y - s * 1.05 < 2) continue;
+        const c = circle(st);
+        let gap = Infinity;
+        for (const o of existing) {
+          const d = circle(o); gap = Math.min(gap, Math.hypot(c.cx - d.cx, c.cy - d.cy) - c.r - d.r);
+        }
+        if (!best || gap > best.gap) best = { st, gap };
+      }
+      if (best && best.gap >= 0) break;
+      shrink *= .86;
+    }
+    const st = best.st;
+    st.x = +st.x.toFixed(1); st.y = +st.y.toFixed(1); st.s = +st.s.toFixed(1);
+    if (tag !== 'top' && !/[🌳🌲🌴🌵⛲⛺🏡🌈👑]/u.test(e) && Math.random() < .5) st.f = 1; // tükrözés
+    return st;
+  }
+  return { place };
+})();
+
+// ================= Alkalmazás =================
+(function () {
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const load = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
+  const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } };
+  const rnd = a => a[Math.floor(Math.random() * a.length)];
+  const A4 = 440;
+  const RMS_MIN = 0.01;
+
+  // ---------- beállítások ----------
+  const DEF = {
+    tol: 10, fing: true, perPic: 20,
+    strings: { G: 1, D: 1, A: 1, E: 1 },
+    vars: { '0': 1, '1': 1, '1lo': 0, '2lo': 1, '2hi': 1, '3': 1, '3hi': 1, '4': 1, '4hi': 0 },
+    themes: Object.fromEntries(THEMES.map(t => [t.id, 1])),
+    tempo: 60, rtol: 150, lat: 120, demo: 1, metro: 1
+  };
+  const S = Object.assign({}, DEF, load('hm.s', {}));
+  S.strings = Object.assign({}, DEF.strings, S.strings); S.vars = Object.assign({}, DEF.vars, S.vars); S.themes = Object.assign({}, DEF.themes, S.themes);
+  const saveS = () => save('hm.s', S);
+
+  // ---------- játékállapot ----------
+  const G = load('hm.g', { order: [], idx: 0, scene: null, stars: 0 });
+  let album = load('hm.a', []);
+  let mode = load('hm.m', { kind: 'free' });
+  const saveG = () => save('hm.g', G);
+
+  function activeThemes() { const t = THEMES.filter(t => S.themes[t.id]); return t.length ? t : THEMES; }
+  function nextThemeId() {
+    const ids = activeThemes().map(t => t.id);
+    let order = (G.order || []).filter(id => ids.includes(id));
+    if (!order.length || G.idx >= order.length) {
+      order = ids.slice().sort(() => Math.random() - .5);
+      const last = G.scene && G.scene.theme;
+      if (order.length > 1 && order[0] === last) order.push(order.shift());
+      G.idx = 0;
+    }
+    G.order = order;
+    return order[G.idx++];
+  }
+  function newScene() {
+    const id = nextThemeId();
+    G.scene = { theme: id, st: [], total: S.perPic, done: false };
+    saveG();
+  }
+  const themeOf = id => THEMES.find(t => t.id === id) || THEMES[0];
+  function phaseCounts(total) { const p1 = Math.round((total - 1) * .55); return { p1, p2: total - 1 - p1 }; }
+
+  // ---------- jelenet rajzolás ----------
+  function sceneHTML(sc, opts) {
+    const th = themeOf(sc.theme);
+    let h = `<svg class="bg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">${th.bg()}</svg><div class="stk">`;
+    sc.st.forEach((s, k) => {
+      const pop = opts && opts.pop === k ? ' pop' : '';
+      h += `<span class="st${pop}" style="left:${s.x / 4}%;top:${s.y / 3}%;font-size:${(s.s / 4).toFixed(2)}cqw;z-index:${Math.round(s.y)}"><i${s.f ? ' class="fl"' : ''}>${s.e}</i></span>`;
+    });
+    return h + '</div>';
+  }
+  function drawScene(pop) {
+    const sc = G.scene, th = themeOf(sc.theme);
+    $('#scene').innerHTML = sceneHTML(sc, { pop });
+    const n = sc.st.length, pc = phaseCounts(sc.total);
+    $('#sceneName').textContent = th.name;
+    let ph;
+    if (n < pc.p1) ph = `${th.items1[0][0]} ${th.p1}: ${n}/${pc.p1}`;
+    else if (n < pc.p1 + pc.p2) ph = `${th.items2[0][0]} ${th.p2}: ${n - pc.p1}/${pc.p2}`;
+    else if (n < sc.total) ph = '✨ Most jön a meglepetés!';
+    else ph = '⭐ Kész!';
+    $('#phaseInfo').textContent = ph;
+    $('#progFill').style.width = (100 * n / sc.total) + '%';
+    if (pop != null) sparkle(sc.st[pop]);
+  }
+  function sparkle(s) {
+    const box = $('#scene');
+    for (let k = 0; k < 7; k++) {
+      const sp = document.createElement('b'); sp.className = 'spark'; sp.textContent = rnd(['✨', '⭐', '💖', '✨']);
+      const a = Math.random() * Math.PI * 2, d = 6 + Math.random() * 8;
+      sp.style.left = (s.x / 4) + '%'; sp.style.top = ((s.y - s.s * .5) / 3) + '%';
+      sp.style.setProperty('--dx', (Math.cos(a) * d) + 'cqw'); sp.style.setProperty('--dy', (Math.sin(a) * d) + 'cqw');
+      box.appendChild(sp); setTimeout(() => sp.remove(), 900);
+    }
+  }
+
+  let lastItem = [];
+  function award(count) {
+    let pop = null;
+    for (let c = 0; c < count; c++) {
+      const sc = G.scene; if (sc.st.length >= sc.total) break;
+      const th = themeOf(sc.theme), n = sc.st.length, pc = phaseCounts(sc.total);
+      let item;
+      if (n >= sc.total - 1) item = th.finale;
+      else {
+        const list = n < pc.p1 ? th.items1 : th.items2;
+        const cand = list.filter(it => !lastItem.includes(it[0]));
+        // a nagy fákból kevesebb legyen
+        const pickFrom = (cand.length ? cand : list).flatMap(it => (it[3] ? [it] : [it, it]));
+        item = rnd(pickFrom);
+        lastItem = [item[0], ...lastItem].slice(0, 2);
+      }
+      const st = Placer.place(th, item, sc.st);
+      sc.st.push(st); pop = sc.st.length - 1;
+    }
+    saveG();
+    drawScene(pop);
+    if (G.scene.st.length >= G.scene.total) setTimeout(finishScene, 900);
+  }
+  let doneTimer = 0;
+  function finishScene() {
+    if (G.scene.done) return;
+    G.scene.done = true; G.stars = (G.stars || 0) + 1;
+    album.unshift({ theme: G.scene.theme, st: G.scene.st, t: Date.now() });
+    save('hm.a', album); saveG();
+    Music.fanfare(); mute(1500);
+    const th = themeOf(G.scene.theme);
+    $('#doneScene').innerHTML = sceneHTML(G.scene);
+    $('#doneTitle').textContent = 'Kész a kép: ' + th.name + '!';
+    $('#doneStars').textContent = 'Már ' + album.length + ' kép van az albumodban ⭐';
+    confetti();
+    $('#doneOv').hidden = false;
+    clearTimeout(doneTimer); doneTimer = setTimeout(closeDone, 7000);
+  }
+  function closeDone() {
+    clearTimeout(doneTimer);
+    if ($('#doneOv').hidden) return;
+    $('#doneOv').hidden = true; newScene(); drawScene();
+  }
+  function confetti() {
+    const ov = $('#doneOv');
+    for (let k = 0; k < 40; k++) {
+      const c = document.createElement('i'); c.className = 'conf';
+      c.style.left = Math.random() * 100 + '%'; c.style.background = rnd(['#ff7eb6', '#ffd166', '#8bd3ff', '#b39dff', '#7be0a0']);
+      c.style.animationDelay = (Math.random() * .6) + 's'; c.style.animationDuration = (1.6 + Math.random() * 1.4) + 's';
+      ov.appendChild(c); setTimeout(() => c.remove(), 3600);
+    }
+  }
+
+  // ---------- darabok ----------
+  let PIECES = [];
+  let repoText = null;
+  const localPieces = () => load('hm.p', []);
+  async function loadPieces() {
+    let fetched = null;
+    try { const r = await fetch('darabok.txt?v=' + Date.now(), { cache: 'no-store' }); if (r.ok) fetched = await r.text(); } catch (e) { }
+    const cache = load('hm.rc', null);
+    if (cache && cache.text && (!fetched || Date.now() - cache.at < 15 * 60 * 1000)) repoText = cache.text;
+    else repoText = fetched;
+    const src = repoText != null ? 'repo' : 'builtin';
+    const base = ABC.parseMany(repoText != null ? repoText : DEFAULT_PIECES).map(p => Object.assign(p, { origin: src }));
+    const loc = localPieces().map(raw => Object.assign(ABC.parsePiece(raw), { raw, origin: 'local' }));
+    PIECES = base.concat(loc).filter(p => p.ok);
+    $('#srcInfo').textContent = repoText != null ? 'Darabok a darabok.txt fájlból' + (loc.length ? ' + ' + loc.length + ' a telefonon' : '') : 'Beépített példadarabok' + (loc.length ? ' + ' + loc.length + ' a telefonon' : '');
+  }
+  const curPiece = () => PIECES.find(p => p.id === mode.piece) || null;
+
+  // ---------- célhang ----------
+  let target = null, prevTarget = null, needOnset = false, armedAt = 0;
+  const fingTextOf = n => n.fing || Music.fingeringFor(n.m) || 'nem első fekvésű hang';
+  function pieceNotes(p) {
+    const out = [];
+    p.seq.forEach(b => b.notes.forEach(n => { if (n.m != null && !n.cont) out.push(n); }));
+    return out;
+  }
+  function nextTarget() {
+    prevTarget = target;
+    let t = null;
+    if (mode.kind === 'free') {
+      const pool = Music.pool(S.strings, S.vars);
+      if (!pool.length) { target = null; renderTarget(); status('A beállításokban válassz ki legalább egy húrt és ujjat!'); return; }
+      const avoid = [prevTarget && prevTarget.m, mode.last2].filter(x => x != null);
+      const cand = pool.filter(n => !avoid.includes(n.m));
+      t = Object.assign({}, rnd(cand.length ? cand : pool));
+      mode.last2 = prevTarget && prevTarget.m;
+      t.showAcc = t.alt !== 0; t.fifths = 0;
+    } else {
+      const p = curPiece(); if (!p) { setMode({ kind: 'free' }); return; }
+      const notes = pieceNotes(p);
+      let n;
+      if (mode.kind === 'seq') {
+        if (mode.pos >= notes.length) { mode.pos = 0; status('🎉 Végigjátszottad a darabot! Kezdjük újra az elejéről.', 'good'); }
+        n = notes[mode.pos]; mode.posShown = mode.pos;
+      } else {
+        const uniq = [...new Map(notes.map(x => [x.m, x])).values()];
+        const cand = uniq.filter(x => !prevTarget || x.m !== prevTarget.m);
+        n = rnd(cand.length ? cand : uniq);
+      }
+      const L = ((n.step % 7) + 7) % 7, oct = Math.floor(n.step / 7);
+      const alt = n.m - Music.midiOf(L, oct, 0);
+      const kAlt = ABC.keyAlts(p.key.fifths)[L];
+      t = { m: n.m, step: n.step, L, alt, fifths: p.key.fifths, showAcc: alt !== kAlt };
+      save('hm.m', mode);
+    }
+    target = t;
+    needOnset = !!(prevTarget && target && prevTarget.m === target.m);
+    armedAt = performance.now() + 450;
+    resetDetect();
+    renderTarget();
+  }
+  function renderTarget() {
+    $('#staff').innerHTML = Music.single(target, target ? target.fifths : 0);
+    if (!target) { $('#nameBig').textContent = ''; $('#finger').textContent = ''; return; }
+    $('#nameBig').textContent = Music.huName(target.L, target.alt);
+    const f = $('#finger');
+    f.textContent = fingTextOf(target);
+    f.classList.toggle('covered', !S.fing);
+    let info = '';
+    if (mode.kind === 'seq') { const p = curPiece(); info = (mode.posShown + 1) + '. hang / ' + pieceNotes(p).length; }
+    $('#posInfo').textContent = info;
+  }
+
+  // ---------- hangfelismerés (YIN) ----------
+  function yin(buf, sr) {
+    const half = buf.length >> 1, tauMin = Math.max(2, Math.floor(sr / 1800)), tauMax = Math.min(half - 1, Math.ceil(sr / 180));
+    const d = new Float32Array(tauMax + 2);
+    for (let tau = 1; tau <= tauMax + 1; tau++) { let s = 0; for (let i = 0; i < half; i++) { const x = buf[i] - buf[i + tau]; s += x * x; } d[tau] = s; }
+    let run = 0; d[0] = 1;
+    for (let tau = 1; tau <= tauMax + 1; tau++) { run += d[tau]; d[tau] = run > 0 ? d[tau] * tau / run : 1; }
+    let tau = -1;
+    for (let t = tauMin; t <= tauMax; t++) { if (d[t] < 0.12) { while (t + 1 <= tauMax && d[t + 1] < d[t]) t++; tau = t; break; } }
+    if (tau < 0) { let mi = tauMin; for (let t = tauMin; t <= tauMax; t++) if (d[t] < d[mi]) mi = t; if (d[mi] < 0.2) tau = mi; else return -1; }
+    const a = d[tau - 1], b = d[tau], c = d[tau + 1], den = a + c - 2 * b;
+    const shift = den !== 0 ? (a - c) / (2 * den) : 0;
+    return sr / (tau + (Math.abs(shift) < 1 ? shift : 0));
+  }
+  let analyser = null, stream = null, buf = null, listening = false, raf = 0, wakeLock = null;
+  let hist = [], candStart = 0, muteUntil = 0, silentSince = 0, nearSince = 0;
+  function resetDetect() { hist = []; candStart = 0; }
+  function mute(ms) { muteUntil = Math.max(muteUntil, performance.now() + ms); resetDetect(); }
+  const median = a => { const s = a.slice().sort((x, y) => x - y); return s[s.length >> 1]; };
+
+  async function startMic() {
+    const diag = e => ' [' + ((e && e.name) || '?') + ', ' + location.protocol + ']';
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { status('Itt nem érhető el a mikrofon. Nyisd meg az oldalt a https-es GitHub címről (Chrome, Safari).' + diag(), 'err'); return false; }
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+    } catch (e) {
+      status((e && e.name === 'NotAllowedError') ? 'A mikrofont nem engedélyezted. A címsor melletti lakatnál engedélyezheted.' : 'Nem sikerült elindítani a mikrofont.' + diag(e), 'err');
+      return false;
+    }
+    const c = Music.ac();
+    const src = c.createMediaStreamSource(stream);
+    analyser = c.createAnalyser(); analyser.fftSize = 2048; buf = new Float32Array(analyser.fftSize);
+    src.connect(analyser);
+    listening = true;
+    try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (e) { }
+    tick();
+    return true;
+  }
+  function stopMic() {
+    listening = false; cancelAnimationFrame(raf);
+    if (stream) stream.getTracks().forEach(t => t.stop()); stream = null;
+    try { wakeLock && wakeLock.release(); } catch (e) { } wakeLock = null;
+    setMeter(null);
+  }
+  function tick() {
+    if (!listening) return;
+    raf = requestAnimationFrame(tick);
+    analyser.getFloatTimeDomainData(buf);
+    let r = 0; for (let i = 0; i < buf.length; i++) r += buf[i] * buf[i]; r = Math.sqrt(r / buf.length);
+    let m = null;
+    if (r > RMS_MIN) { const f = yin(buf, Music.ac().sampleRate); if (f > 0) { m = 69 + 12 * Math.log2(f / A4); if (m < 52 || m > 100) m = null; } }
+    feed(m, r, performance.now(), Music.ac().currentTime);
+  }
+  // egy képkocka feldolgozása (tesztből is hívható)
+  function feed(m, r, now, at) {
+    if (RH.rec) RH.frames.push({ t: at - S.lat / 1000, m, r });
+    if (mode.kind === 'rhythm') { if (RH.rec) liveRhythm(m); return; }
+    hist.push(m); if (hist.length > 5) hist.shift();
+    const ok = hist.filter(x => x != null);
+    process(ok.length >= 3 ? median(ok) : null, now);
+  }
+  function process(m, now) {
+    if (!target || now < muteUntil || busy) { setMeter(null); return; }
+    if (m == null) { candStart = 0; setMeter(null); if (!silentSince) silentSince = now; if (now - silentSince > 60) needOnset = false; return; }
+    silentSince = 0;
+    const cents = (m - target.m) * 100;
+    if (needOnset) { if (Math.abs(cents) > 50) needOnset = false; else { setMeter(cents); status('Kezdd újra a hangot – új vonóval!'); return; } }
+    if (now < armedAt) { setMeter(cents); return; }
+    setMeter(cents);
+    const near = Math.abs(cents) <= S.tol;
+    if (near) {
+      if (!candStart) candStart = now;
+      status('Ez az! Tartsd még egy kicsit… 🎵', 'good');
+      if (now - candStart >= 280) success();
+      return;
+    }
+    candStart = 0;
+    const heard = Music.spellMidi(Math.round(m), false);
+    if (Math.abs(cents) <= 60) status(cents > 0 ? 'Majdnem! Egy picit magas.' : 'Majdnem! Egy picit mély.');
+    else status('Hallom: ' + Music.huName(heard.L, heard.alt));
+  }
+  function setMeter(c) {
+    const n = $('#needle'), box = $('.meter');
+    if (c == null) { box.classList.remove('live', 'near'); return; }
+    box.classList.add('live'); box.classList.toggle('near', Math.abs(c) <= S.tol);
+    n.style.left = (50 + Math.max(-100, Math.min(100, c)) / 2) + '%';
+  }
+  let busy = false;
+  function success() {
+    busy = true; candStart = 0;
+    Music.chime(); mute(650);
+    status(rnd(['Szuper! ✨', 'Ügyes vagy! 💖', 'Pontosan! 🌟', 'Gyönyörű! 🎻', 'Jól eltaláltad! ⭐']), 'good');
+    if (mode.kind === 'seq') mode.pos++;
+    award(1);
+    setTimeout(() => { busy = false; if (!G.scene.done) nextTarget(); else nextTarget(); }, 700);
+  }
+
+  function status(t, cls) { const s = $('#status'); s.textContent = t; s.className = 'status' + (cls ? ' ' + cls : ''); }
+
+  // ---------- ritmusos gyakorlás ----------
+  const RH = { bar: 0, phase: 'idle', rec: false, frames: [], results: null, timers: [], expected: [], cursor: -1 };
+  function rhBars() { const p = curPiece(); return p ? p.seq : []; }
+  function renderRhythm() {
+    const p = curPiece(); if (!p) return;
+    const bars = p.seq; if (RH.bar >= bars.length) RH.bar = 0;
+    const b = bars[RH.bar];
+    const beat = p.meter[1] === 8 && p.meter[0] % 3 === 0 ? 1.5 : 1;
+    $('#rstaff').innerHTML = Music.bar(b, { fifths: p.key.fifths, meterText: RH.bar === 0 ? p.meterText : null, barLen: p.barLen, beat, results: RH.results, cursor: RH.cursor, width: Math.min(360, Math.max(250, 130 + b.notes.length * 34)) });
+    $('#rhInfo').textContent = p.title + ' · ' + (RH.bar + 1) + '/' + bars.length + '. ütem · tempó ' + S.tempo;
+  }
+  function clearRH() { RH.timers.forEach(clearTimeout); RH.timers = []; RH.rec = false; RH.phase = 'idle'; RH.cursor = -1; }
+  function rhExpected(b, start, spb) {
+    const ex = []; let t = 0;
+    b.notes.forEach((n, k) => {
+      if (n.m != null && !n.cont) {
+        let d = n.d, j = k; while (b.notes[j].tie && b.notes[j + 1]) { j++; d += b.notes[j].d; }
+        ex.push({ k, m: n.m, t: start + t * spb, d: d * spb });
+      }
+      t += n.d;
+    });
+    return ex;
+  }
+  async function runBar() {
+    if (RH.phase !== 'idle') { clearRH(); updateControls(); status('Megállítva.'); return; }
+    if (!listening) { const ok = await startMic(); if (!ok) return; }
+    const p = curPiece(); const b = p.seq[RH.bar];
+    const c = Music.ac(); const spb = 60 / S.tempo;
+    RH.results = null; renderRhythm();
+    let t = c.currentTime + .3;
+    const toMs = at => Math.max(0, (at - c.currentTime) * 1000);
+    RH.phase = 'demo'; updateControls();
+    if (S.demo) {
+      status('Figyeld, hogyan szól! 👂');
+      rhExpected(b, t, spb).forEach(e => Music.violin(e.m, e.t, Math.max(.12, e.d * .92), A4));
+      t += b.len * spb + spb * .5;
+    }
+    const cin = Math.max(2, Math.round(p.barLen / (p.meter[1] === 8 && p.meter[0] % 3 === 0 ? 1.5 : 1)));
+    const cbeat = p.meter[1] === 8 && p.meter[0] % 3 === 0 ? 1.5 * spb : spb;
+    RH.timers.push(setTimeout(() => { RH.phase = 'count'; status('Készülj… 1, 2, 3, 4'); }, toMs(t)));
+    for (let k = 0; k < cin; k++) Music.click(t + k * cbeat, k === 0);
+    const start = t + cin * cbeat;
+    if (S.metro) for (let k = 0; k * cbeat < b.len * spb - 1e-3; k++) Music.click(start + k * cbeat, k === 0);
+    RH.expected = rhExpected(b, start, spb);
+    const end = start + b.len * spb;
+    muteUntil = performance.now() + toMs(start) - 250;
+    RH.timers.push(setTimeout(() => { RH.frames = []; RH.rec = true; RH.phase = 'play'; status('Most te jössz! 🎻', 'good'); }, toMs(start - .3)));
+    // haladó kurzor
+    RH.expected.forEach(e => RH.timers.push(setTimeout(() => { RH.cursor = e.k; renderRhythm(); }, toMs(e.t))));
+    RH.timers.push(setTimeout(() => { RH.rec = false; RH.cursor = -1; finishBar(); }, toMs(end + .35)));
+  }
+  function liveRhythm(m) { setMeter(null); }
+  function finishBar() {
+    const res = analyzeRhythm(RH.frames, RH.expected, S.rtol / 1000);
+    const p = curPiece(), b = p.seq[RH.bar];
+    RH.results = b.notes.map(() => null);
+    res.forEach(r => RH.results[r.k] = r);
+    renderRhythm();
+    const okN = res.filter(r => r.r === 'ok').length, tot = res.length || 1;
+    const share = okN / tot;
+    RH.phase = 'idle';
+    if (share >= .999) { status('Hibátlan! +2 matrica 🌟', 'good'); Music.chime(); award(2); }
+    else if (share >= .75) { status('Ügyes! +1 matrica ✨ (' + okN + '/' + tot + ')', 'good'); Music.chime(); award(1); }
+    else {
+      const late = res.filter(r => r.r === 'late').length, early = res.filter(r => r.r === 'early').length;
+      let tip = 'Próbáljuk újra! (' + okN + '/' + tot + ')';
+      if (late > early && late >= 2) tip += ' Kicsit későn kezdtél – figyeld a kattanást.';
+      else if (early > late && early >= 2) tip += ' Kicsit siettél.';
+      status(tip);
+    }
+    updateControls();
+  }
+  // a felvett képkockákból hangkezdetek és összevetés a kottával
+  function analyzeRhythm(frames, expected, rtol) {
+    const fr = frames.map((f, i) => {
+      const w = [frames[i - 1], f, frames[i + 1]].filter(x => x && x.m != null && x.r > RMS_MIN).map(x => x.m);
+      return { t: f.t, r: f.r, m: (f.m != null && f.r > RMS_MIN && w.length >= 2) ? median(w) : null };
+    });
+    const ev = [];
+    let lastOn = -9, stable = null, pk = 0, tr = 1, inDip = false, silentRun = 2;
+    const push = (i) => {
+      const t = fr[i].t; if (t - lastOn < .09) return;
+      const ps = fr.filter(x => x.t >= t + .02 && x.t <= t + .16 && x.m != null).map(x => x.m);
+      if (!ps.length) return;
+      ev.push({ t, p: median(ps), used: false }); lastOn = t; pk = fr[i].r; inDip = false; tr = 1;
+      stable = median(ps);
+    };
+    for (let i = 0; i < fr.length; i++) {
+      const f = fr[i], snd = f.m != null;
+      if (snd && silentRun >= 2) push(i);
+      else if (snd && stable != null && Math.abs(f.m - stable) > .6 && fr[i + 1] && fr[i + 1].m != null && Math.abs(fr[i + 1].m - f.m) < .4) push(i);
+      else if (snd) {
+        if (f.r > pk) pk = f.r;
+        if (f.r < .55 * pk) { inDip = true; tr = Math.min(tr, f.r); }
+        else if (inDip && f.r > tr * 1.7 && f.t - lastOn > .12) push(i);
+      }
+      silentRun = snd ? 0 : silentRun + 1;
+    }
+    const out = [];
+    expected.forEach((e, q) => {
+      const prev = expected[q - 1];
+      const lo = e.t - Math.max(2 * rtol, Math.min(.25, e.d * .5)), hi = e.t + Math.max(2 * rtol, Math.min(.35, e.d * .6));
+      const cands = ev.filter(x => !x.used && x.t >= lo && x.t <= hi);
+      const good = cands.filter(x => Math.abs(x.p - e.m) <= .5).sort((a, b) => Math.abs(a.t - e.t) - Math.abs(b.t - e.t));
+      if (good.length) {
+        const g = good[0]; g.used = true; const dt = g.t - e.t;
+        out.push({ k: e.k, r: Math.abs(dt) <= rtol ? 'ok' : dt < 0 ? 'early' : 'late', dt });
+        return;
+      }
+      // ugyanaz a hang folytatódik (pl. vonóváltás nélkül hallottuk)
+      const span = fr.filter(x => x.t >= e.t + .04 && x.t <= e.t + Math.max(.08, e.d * .6));
+      const okFr = span.filter(x => x.m != null && Math.abs(x.m - e.m) <= .5).length;
+      if (span.length && okFr / span.length >= .6 && prev && prev.m === e.m) { out.push({ k: e.k, r: 'ok', dt: 0 }); return; }
+      if (cands.length) {
+        const c = cands.sort((a, b) => Math.abs(a.t - e.t) - Math.abs(b.t - e.t))[0]; c.used = true;
+        out.push({ k: e.k, r: 'wrong', heard: Math.round(c.p) }); return;
+      }
+      out.push({ k: e.k, r: 'miss' });
+    });
+    return out;
+  }
+
+  // ---------- módok, vezérlők ----------
+  function setMode(m) {
+    clearRH();
+    mode = Object.assign({ pos: 0 }, m);
+    save('hm.m', mode);
+    const rh = mode.kind === 'rhythm';
+    $('#singleView').hidden = rh; $('#rhythmView').hidden = !rh;
+    const p = curPiece();
+    const labels = { free: 'Szabad gyakorlás', seq: 'sorban', mix: 'keverve', rhythm: 'ritmussal' };
+    $('#modeChip').textContent = mode.kind === 'free' ? '🎲 Szabad gyakorlás' : '🎼 ' + (p ? p.title : '') + ' · ' + labels[mode.kind];
+    if (rh) { RH.bar = mode.bar || 0; RH.results = null; renderRhythm(); status(listening ? 'Nyomd meg a ▶ gombot, ha kezdhetjük!' : 'Nyomd meg a ▶ gombot! Először meghallgatod az ütemet, aztán te jössz.'); }
+    else { target = null; nextTarget(); if (!listening) status('Nyomd meg a „Kezdjük!” gombot, és játszd el a hangot!'); }
+    updateControls();
+  }
+  function updateControls() {
+    const rh = mode.kind === 'rhythm';
+    $('#prevBtn').hidden = !rh;
+    const mb = $('#micBtn');
+    if (rh) mb.textContent = RH.phase !== 'idle' ? '■ Állj' : (RH.results ? '↻ Újra' : '▶ Mehet');
+    else mb.textContent = listening ? '⏸ Szünet' : '🎤 Kezdjük!';
+    mb.classList.toggle('on', listening && !rh);
+    $('#skipBtn').textContent = rh ? 'Következő ›' : 'Tovább ›';
+  }
+  $('#micBtn').onclick = async () => {
+    Music.ac();
+    if (mode.kind === 'rhythm') { await runBar(); updateControls(); return; }
+    if (listening) { stopMic(); status('Szünet. Ha folytatnád, nyomd meg a „Kezdjük!” gombot.'); }
+    else { const ok = await startMic(); if (ok) { status('Hallgatlak! Játszd el a hangot. 🎻'); armedAt = performance.now() + 400; } }
+    updateControls();
+  };
+  $('#skipBtn').onclick = () => {
+    if (mode.kind === 'rhythm') { clearRH(); const n = rhBars().length; RH.bar = (RH.bar + 1) % n; mode.bar = RH.bar; save('hm.m', mode); RH.results = null; renderRhythm(); status('Nyomd meg a ▶ gombot!'); updateControls(); return; }
+    if (mode.kind === 'seq') mode.pos++;
+    nextTarget(); status('Jöhet a következő hang!');
+  };
+  $('#prevBtn').onclick = () => { clearRH(); const n = rhBars().length; RH.bar = (RH.bar - 1 + n) % n; mode.bar = RH.bar; save('hm.m', mode); RH.results = null; renderRhythm(); updateControls(); };
+  $('#playBtn').onclick = () => {
+    const c = Music.ac();
+    if (mode.kind === 'rhythm') {
+      const p = curPiece(), b = p.seq[RH.bar], spb = 60 / S.tempo;
+      const ex = rhExpected(b, c.currentTime + .15, spb); ex.forEach(e => Music.violin(e.m, e.t, Math.max(.12, e.d * .92), A4));
+      mute(b.len * spb * 1000 + 600); return;
+    }
+    if (!target) return;
+    Music.violin(target.m, c.currentTime + .02, 1.2, A4); mute(1500);
+  };
+  $('#finger').onclick = () => $('#finger').classList.remove('covered');
+
+  // ---------- lapok (dialógusok) ----------
+  function openSheet(id) { $$('.sheet').forEach(s => s.hidden = true); $('#' + id).hidden = false; $('#veil').hidden = false; }
+  function closeSheets() { $$('.sheet').forEach(s => s.hidden = true); $('#veil').hidden = true; }
+  $('#veil').onclick = closeSheets;
+  $$('.sheet .x').forEach(b => b.onclick = closeSheets);
+
+  // beállítások
+  function buildSettings() {
+    const st = $('#strChips'); st.innerHTML = '';
+    Music.STRINGS.forEach(s => st.appendChild(chip(s.id + ' húr', S.strings[s.id], v => { S.strings[s.id] = v; saveS(); if (mode.kind === 'free') nextTarget(); })));
+    const vc = $('#varChips'); vc.innerHTML = '';
+    Music.VARS.forEach(v => vc.appendChild(chip(v.lab + (v.rank >= 3 ? ' · ritka' : ''), S.vars[v.id], val => { S.vars[v.id] = val; saveS(); if (mode.kind === 'free') nextTarget(); })));
+    const tc = $('#themeChips'); tc.innerHTML = '';
+    THEMES.forEach(t => tc.appendChild(chip(t.items2[0][0] + ' ' + t.name, S.themes[t.id], v => { S.themes[t.id] = v; saveS(); })));
+    bindRange('tol', v => v + ' cent');
+    bindRange('tempo', v => v + ' ütés/perc', () => mode.kind === 'rhythm' && renderRhythm());
+    bindRange('rtol', v => '±' + v + ' ms');
+    bindRange('lat', v => v + ' ms');
+    bindCheck('fing', () => renderTarget()); bindCheck('demo'); bindCheck('metro');
+    $$('#perPic button').forEach(b => { b.classList.toggle('sel', +b.dataset.v === S.perPic); b.onclick = () => { S.perPic = +b.dataset.v; saveS(); $$('#perPic button').forEach(x => x.classList.toggle('sel', x === b)); if (G.scene && !G.scene.done && G.scene.st.length < S.perPic) { G.scene.total = S.perPic; saveG(); drawScene(); } }; });
+  }
+  function chip(label, on, cb) {
+    const b = document.createElement('button'); b.className = 'chip2' + (on ? ' sel' : ''); b.textContent = label;
+    b.onclick = () => { const v = !b.classList.contains('sel'); b.classList.toggle('sel', v); cb(v ? 1 : 0); };
+    return b;
+  }
+  function bindRange(k, fmt, after) {
+    const el = $('#s_' + k), out = $('#v_' + k);
+    el.value = S[k]; out.textContent = fmt(S[k]);
+    el.oninput = () => { S[k] = +el.value; out.textContent = fmt(S[k]); saveS(); after && after(); };
+  }
+  function bindCheck(k, after) { const el = $('#s_' + k); el.checked = !!S[k]; el.onchange = () => { S[k] = el.checked ? 1 : 0; if (k === 'fing') S[k] = el.checked; saveS(); after && after(); }; }
+  $('#setBtn').onclick = () => { buildSettings(); openSheet('setSheet'); };
+  $('#resetScene').onclick = () => { if (confirm('Biztosan új képet kezdesz? A mostani kép elvész.')) { newScene(); drawScene(); closeSheets(); } };
+
+  // mód választó
+  function buildModes() {
+    const list = $('#pieceList'); list.innerHTML = '';
+    if (!PIECES.length) list.innerHTML = '<p class="muted">Még nincs darab.</p>';
+    PIECES.forEach(p => {
+      const d = document.createElement('div'); d.className = 'prow';
+      const tag = p.origin === 'local' ? '<span class="tag">telefonon</span>' : '';
+      d.innerHTML = `<div class="pt"><b>${esc(p.title)}</b>${tag}<small>${esc(p.composer || '')}${p.composer ? ' · ' : ''}${esc(p.key.name)} · ${esc(p.meterText)} · ${p.bars.length} ütem</small></div>
+        <div class="pb"><button data-k="seq">Sorban</button><button data-k="mix">Keverve</button><button data-k="rhythm">Ritmussal</button>${p.origin !== 'builtin' ? '<button class="del" title="Törlés">🗑️</button>' : ''}</div>`;
+      d.querySelectorAll('[data-k]').forEach(b => b.onclick = () => { setMode({ kind: b.dataset.k, piece: p.id, bar: 0 }); closeSheets(); });
+      const del = d.querySelector('.del'); if (del) del.onclick = () => deletePiece(p);
+      list.appendChild(d);
+    });
+  }
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  $('#modeChip').onclick = () => { buildModes(); $('#impBox').hidden = true; openSheet('modeSheet'); };
+  $('#freeBtn').onclick = () => { setMode({ kind: 'free' }); closeSheets(); };
+
+  // album
+  $('#albumBtn').onclick = () => {
+    const g = $('#albumGrid'); g.innerHTML = '';
+    $('#albumCount').textContent = album.length ? album.length + ' kész kép' : 'Még nincs kész kép – az első már készül!';
+    const cur = document.createElement('div'); cur.className = 'acell now';
+    cur.innerHTML = `<div class="scene mini">${sceneHTML(G.scene)}</div><small>Most készül: ${themeOf(G.scene.theme).name}</small>`;
+    g.appendChild(cur);
+    album.forEach(a => {
+      const c = document.createElement('div'); c.className = 'acell';
+      c.innerHTML = `<div class="scene mini">${sceneHTML(a)}</div><small>${themeOf(a.theme).name} · ${new Date(a.t).toLocaleDateString('hu-HU')}</small>`;
+      c.onclick = () => { $('#bigScene').innerHTML = sceneHTML(a); $('#bigOv').hidden = false; };
+      g.appendChild(c);
+    });
+    openSheet('albumSheet');
+  };
+  $('#bigOv').onclick = () => $('#bigOv').hidden = true;
+  $('#doneOv').onclick = closeDone;
+
+  // ---------- új darab ----------
+  let checked = null;
+  $('#impBtn').onclick = () => { $('#impBox').hidden = !$('#impBox').hidden; $('#ghRepo').value = gh.repo || guessRepo(); $('#ghToken').value = ''; ghStateText(); };
+  $('#copyPrompt').onclick = async () => {
+    try { await navigator.clipboard.writeText(KOTTA_PROMPT); $('#copyPrompt').textContent = '✓ Kimásolva'; }
+    catch (e) { const t = $('#impText'); t.value = KOTTA_PROMPT; t.select(); document.execCommand('copy'); t.value = ''; $('#copyPrompt').textContent = '✓ Kimásolva'; }
+    setTimeout(() => $('#copyPrompt').textContent = '1. Prompt másolása', 2000);
+  };
+  $('#impCheck').onclick = () => {
+    const txt = $('#impText').value.trim();
+    const ps = ABC.parseMany(txt);
+    const out = $('#impRes');
+    checked = null;
+    if (!ps.length) { out.innerHTML = '<p class="err">Nem találok kottát. A szövegben legyen X:, T:, M:, L:, K: sor és utána a hangok.</p>'; return; }
+    const p = ps[0];
+    let h = `<p><b>${esc(p.title)}</b> · ${esc(p.key.name)} · ${esc(p.meterText)} · ${p.bars.length} ütem, ${pieceNotes(p).length} hang</p>`;
+    if (p.warnings.length) h += '<ul class="warn">' + p.warnings.map(w => '<li>' + esc(w) + '</li>').join('') + '</ul><p class="muted">Ha a figyelmeztetés ellenére jó, akkor is elmentheted.</p>';
+    else h += '<p class="ok">✓ Minden ütem hossza rendben.</p>';
+    const beat = p.meter[1] === 8 && p.meter[0] % 3 === 0 ? 1.5 : 1;
+    h += p.bars.slice(0, 2).map((b, k) => `<div class="rstaff small">${Music.bar(b, { fifths: p.key.fifths, meterText: k === 0 ? p.meterText : null, barLen: p.barLen, beat, width: 360 })}</div>`).join('');
+    out.innerHTML = h;
+    if (p.ok) checked = p; else out.innerHTML += '<p class="err">Ebben nincs lejátszható hang.</p>';
+    $('#impSave').disabled = !checked; $('#impUp').disabled = !checked;
+  };
+  $('#impSave').onclick = async () => {
+    if (!checked) return;
+    const arr = localPieces().filter(raw => ABC.parsePiece(raw).id !== checked.id); arr.push(checked.raw); save('hm.p', arr);
+    await loadPieces(); buildModes(); $('#impBox').hidden = true; $('#impText').value = ''; $('#impRes').innerHTML = '';
+    $('#setupMsg').textContent = '✓ Elmentve ezen a telefonon: ' + checked.title;
+  };
+
+  // ---------- GitHub ----------
+  const gh = load('hm.gh', { repo: '', token: '' });
+  function guessRepo() {
+    if (/\.github\.io$/i.test(location.hostname)) { const owner = location.hostname.split('.')[0]; const r = location.pathname.split('/').filter(Boolean)[0]; return owner + '/' + (r && !/\.html?$/.test(r) ? r : owner + '.github.io'); }
+    return '';
+  }
+  function ghStateText() { $('#ghState').textContent = gh.token ? '✓ Van elmentett kulcs ehhez: ' + (gh.repo || guessRepo() || '?') : 'Nincs még elmentett kulcs.'; }
+  const b64e = s => btoa(unescape(encodeURIComponent(s)));
+  const b64d = s => decodeURIComponent(escape(atob(s.replace(/\s/g, ''))));
+  async function ghApi(method, body) {
+    const repo = gh.repo || guessRepo();
+    if (!repo || !gh.token) throw new Error('Előbb add meg a tárolót és a kulcsot (lent).');
+    const r = await fetch('https://api.github.com/repos/' + repo + '/contents/darabok.txt', {
+      method, headers: { Authorization: 'Bearer ' + gh.token, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: body ? JSON.stringify(body) : undefined, cache: 'no-store'
+    });
+    return r;
+  }
+  async function ghGet() {
+    const r = await ghApi('GET');
+    if (r.status === 404) return { text: '', sha: null };
+    if (r.status === 401 || r.status === 403) throw new Error('A GitHub nem fogadta el a kulcsot (' + r.status + ').');
+    if (!r.ok) throw new Error('GitHub hiba: ' + r.status);
+    const j = await r.json(); return { text: b64d(j.content || ''), sha: j.sha };
+  }
+  function replaceChunk(text, piece, newRaw) {
+    const head = [], chunks = []; let cur = null;
+    for (const line of (text || '').split(/\r?\n/)) {
+      if (/^X:/.test(line)) { cur = [line]; chunks.push(cur); }
+      else if (cur) cur.push(line); else head.push(line);
+    }
+    let found = false;
+    const out = [];
+    for (const c of chunks) {
+      const raw = c.join('\n').trim();
+      const p = ABC.parsePiece(raw);
+      if (p.id === piece.id || (piece.x && p.x === piece.x && p.title === piece.title)) { found = true; if (newRaw) out.push(newRaw.trim()); }
+      else out.push(raw);
+    }
+    if (!found && newRaw) out.push(newRaw.trim());
+    let h = head.join('\n').trim();
+    if (!h) h = '% Hangmatrica – darabok\n% Minden darab X: sorral kezdődik, a darabok között legyen egy üres sor.';
+    return h + '\n\n' + out.join('\n\n') + '\n';
+  }
+  async function ghWrite(piece, newRaw, msg) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const cur = await ghGet();
+      const text = replaceChunk(cur.text, piece, newRaw);
+      const r = await ghApi('PUT', Object.assign({ message: msg, content: b64e(text) }, cur.sha ? { sha: cur.sha } : {}));
+      if (r.ok) { save('hm.rc', { text, at: Date.now() }); return; }
+      if (r.status === 409 || r.status === 422) continue;
+      if (r.status === 401 || r.status === 403) throw new Error('A GitHub nem engedte a mentést (' + r.status + '). A kulcsnak „Contents: Read and write” jog kell.');
+      throw new Error('GitHub hiba: ' + r.status);
+    }
+    throw new Error('Nem sikerült menteni, próbáld újra.');
+  }
+  $('#ghSave').onclick = async () => {
+    gh.repo = $('#ghRepo').value.trim().replace(/^https?:\/\/github\.com\//, '').replace(/\/$/, '');
+    const tk = $('#ghToken').value.trim(); if (tk) gh.token = tk;
+    save('hm.gh', gh); ghStateText();
+    $('#ghRes').textContent = 'Ellenőrzöm…';
+    try { await ghGet(); $('#ghRes').textContent = '✓ Működik, elérem a tárolót.'; }
+    catch (e) { $('#ghRes').textContent = e.message; }
+  };
+  $('#impUp').onclick = async () => {
+    if (!checked) return;
+    $('#setupMsg').textContent = 'Feltöltés…';
+    try {
+      await ghWrite(checked, checked.raw, 'Új darab: ' + checked.title);
+      const arr = localPieces().filter(raw => ABC.parsePiece(raw).id !== checked.id); save('hm.p', arr);
+      await loadPieces(); buildModes(); $('#impBox').hidden = true; $('#impText').value = ''; $('#impRes').innerHTML = '';
+      $('#setupMsg').textContent = '✓ Feltöltve a GitHubra: ' + checked.title + '. Minden eszközön megjelenik pár perc múlva.';
+    } catch (e) { $('#setupMsg').textContent = e.message; }
+  };
+  async function deletePiece(p) {
+    if (!confirm('Törlöd ezt a darabot: ' + p.title + '?')) return;
+    if (p.origin === 'local') { save('hm.p', localPieces().filter(raw => ABC.parsePiece(raw).id !== p.id)); }
+    else {
+      $('#setupMsg').textContent = 'Törlés a GitHubról…';
+      try { await ghWrite(p, null, 'Darab törlése: ' + p.title); $('#setupMsg').textContent = '✓ Törölve.'; }
+      catch (e) { $('#setupMsg').textContent = e.message; return; }
+    }
+    if (mode.piece === p.id) setMode({ kind: 'free' });
+    await loadPieces(); buildModes();
+  }
+
+  // ---------- indulás ----------
+  (async function init() {
+    if (!G.scene || G.scene.done || !THEMES.some(t => t.id === G.scene.theme)) newScene();
+    drawScene();
+    await loadPieces();
+    if (mode.kind !== 'free' && !curPiece()) mode = { kind: 'free' };
+    setMode(mode);
+    document.addEventListener('visibilitychange', () => { if (document.hidden && listening) { stopMic(); clearRH(); updateControls(); status('Szünet. Nyomd meg a gombot a folytatáshoz.'); } });
+  })();
+
+  // tesztekhez
+  window.__hm = { rhExpected, feed, analyzeRhythm, award, get target() { return target; }, get G() { return G; }, get RH() { return RH; }, setMode, PIECES: () => PIECES, nextTarget, finishScene, closeDone, renderRhythm, finishBar };
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+% Hangmatrica – darabok
+% Minden darab X: sorral kezdődik, a darabok között legyen egy üres sor.
+% Új darabot az appból is feltölthetsz („＋ Új darab hozzáadása”), vagy ide másolhatod a végére.
+
+X:1
+T:Örömóda
+C:L. van Beethoven
+M:4/4
+L:1/4
+K:D
+F F G A | A G F E | D D E F | F3/2 E/ E2 |
+F F G A | A G F E | D D E F | E3/2 D/ D2 |]
+
+X:2
+T:Twinkle, Twinkle, Little Star
+C:francia népdal
+M:4/4
+L:1/4
+K:A
+A A e e | f f e2 | d d c c | B B A2 |
+e e d d | c c B2 | e e d d | c c B2 |
+A A e e | f f e2 | d d c c | B B A2 |]
+
+X:3
+T:Au clair de la lune
+C:francia népdal
+M:4/4
+L:1/4
+K:G
+G G G A | B2 A2 | G B A A | G4 |
+G G G A | B2 A2 | G B A A | G4 |]
