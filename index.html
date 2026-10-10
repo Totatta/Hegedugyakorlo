@@ -111,11 +111,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .btn.main{background:var(--pink);color:#fff}
 .btn:disabled{opacity:.45}
 .prow{border:2px solid var(--line);border-radius:16px;padding:10px;margin-bottom:8px}
+.phead{display:flex;gap:6px;align-items:flex-start}.phead .pt{flex:1;min-width:0}
+.ptools{display:flex;gap:4px;flex:none}.ptools .upl{background:var(--lav)!important;width:42px!important}
+.ptools button{border:0;background:#f6eef3;border-radius:10px;width:36px;height:34px;font-size:16px;padding:0}
 .pt b{font-size:16px}.pt small{display:block;color:var(--muted);font-size:12px}
-.tag{font-size:11px;background:var(--lav2);color:#4b3596;border-radius:8px;padding:1px 6px;margin-left:6px}
+.tag{display:inline-block;font-size:11px;background:var(--lav2);color:#4b3596;border-radius:8px;padding:1px 6px;margin:2px 0}
 .pb{display:flex;gap:6px;margin-top:8px}
 .pb button{flex:1;border:0;border-radius:12px;background:var(--pink2);font-weight:900;padding:9px 4px;font-size:14px}
-.pb .del{flex:none;width:42px;background:#f6eef3}
 #impBox{border:2px dashed var(--lav);border-radius:16px;padding:12px;margin-top:10px}
 #impBox ol{padding-left:18px;margin:0 0 8px;font-size:14px}
 #impText{width:100%;min-height:120px;border:2px solid var(--line);border-radius:12px;padding:8px;font:13px ui-monospace,Menlo,monospace}
@@ -205,6 +207,7 @@ details input[type=text],details input[type=password]{width:100%;border:2px soli
   <p id="setupMsg"></p>
   <button id="impBtn" class="btn" style="width:100%">＋ Új darab hozzáadása</button>
   <div id="impBox" hidden>
+    <h3 id="impTitle" style="margin-top:0">Új darab</h3>
     <ol>
       <li>Másold ki a promptot, és küldd el egy MI-nek (pl. Claude) a lefotózott kottával együtt.</li>
       <li>A kapott választ illeszd be ide.</li>
@@ -1508,11 +1511,17 @@ const Placer = (function () {
     if (!PIECES.length) list.innerHTML = '<p class="muted">Még nincs darab.</p>';
     PIECES.forEach(p => {
       const d = document.createElement('div'); d.className = 'prow';
-      const tag = p.origin === 'local' ? '<span class="tag">telefonon</span>' : '';
-      d.innerHTML = `<div class="pt"><b>${esc(p.title)}</b>${tag}<small>${esc(p.composer || '')}${p.composer ? ' · ' : ''}${esc(p.key.name)} · ${esc(p.meterText)} · ${p.bars.length} ütem</small></div>
-        <div class="pb"><button data-k="seq">Sorban</button><button data-k="mix">Keverve</button><button data-k="rhythm">Ritmussal</button>${p.origin !== 'builtin' ? '<button class="del" title="Törlés">🗑️</button>' : ''}</div>`;
+      const tag = p.origin === 'local' ? '<span class="tag">csak ezen a telefonon</span>' : '';
+      const own = p.origin !== 'builtin';
+      const tools = own ? `<div class="ptools"><button class="ren" title="Átnevezés">✏️</button><button class="edt" title="Kotta szerkesztése">📝</button>${p.origin === 'local' ? '<button class="upl" title="Feltöltés GitHubra">☁️</button>' : ''}<button class="del" title="Törlés">🗑️</button></div>` : '';
+      d.innerHTML = `<div class="phead"><div class="pt"><b>${esc(p.title)}</b>${tag ? '<br>' + tag : ''}<small>${esc(p.composer || '')}${p.composer ? ' · ' : ''}${esc(p.key.name)} · ${esc(p.meterText)} · ${p.bars.length} ütem</small></div>${tools}</div>
+        <div class="pb"><button data-k="seq">Sorban</button><button data-k="mix">Keverve</button><button data-k="rhythm">Ritmussal</button></div>`;
       d.querySelectorAll('[data-k]').forEach(b => b.onclick = () => { setMode({ kind: b.dataset.k, piece: p.id, bar: 0 }); closeSheets(); });
-      const del = d.querySelector('.del'); if (del) del.onclick = () => deletePiece(p);
+      const q = s => d.querySelector(s);
+      if (q('.del')) q('.del').onclick = () => deletePiece(p);
+      if (q('.ren')) q('.ren').onclick = () => renamePiece(p);
+      if (q('.edt')) q('.edt').onclick = () => editPiece(p);
+      if (q('.upl')) q('.upl').onclick = () => uploadLocal(p);
       list.appendChild(d);
     });
   }
@@ -1539,8 +1548,15 @@ const Placer = (function () {
   $('#doneOv').onclick = closeDone;
 
   // ---------- új darab ----------
-  let checked = null;
-  $('#impBtn').onclick = () => { $('#impBox').hidden = !$('#impBox').hidden; $('#ghRepo').value = gh.repo || guessRepo(); $('#ghToken').value = ''; ghStateText(); };
+  let checked = null, editing = null;
+  function openImp(show) {
+    $('#impBox').hidden = !show; $('#ghRepo').value = gh.repo || guessRepo(); $('#ghToken').value = ''; ghStateText();
+    $('#impTitle').textContent = editing ? 'Szerkesztés: ' + editing.title : 'Új darab';
+    $('#impSave').textContent = editing && editing.origin === 'local' ? 'Mentés ezen a telefonon' : (editing ? 'Mentés másolatként a telefonra' : 'Mentés ezen a telefonon');
+    $('#impUp').textContent = editing && editing.origin === 'repo' ? 'Mentés a GitHubra' : 'Feltöltés GitHubra';
+  }
+  $('#impBtn').onclick = () => { const show = $('#impBox').hidden || !!editing; editing = null; checked = null; $('#impText').value = ''; $('#impRes').innerHTML = ''; $('#impSave').disabled = $('#impUp').disabled = true; openImp(show); };
+  function closeImp() { editing = null; checked = null; $('#impBox').hidden = true; $('#impText').value = ''; $('#impRes').innerHTML = ''; }
   $('#copyPrompt').onclick = async () => {
     try { await navigator.clipboard.writeText(KOTTA_PROMPT); $('#copyPrompt').textContent = '✓ Kimásolva'; }
     catch (e) { const t = $('#impText'); t.value = KOTTA_PROMPT; t.select(); document.execCommand('copy'); t.value = ''; $('#copyPrompt').textContent = '✓ Kimásolva'; }
@@ -1564,9 +1580,11 @@ const Placer = (function () {
   };
   $('#impSave').onclick = async () => {
     if (!checked) return;
-    const arr = localPieces().filter(raw => ABC.parsePiece(raw).id !== checked.id); arr.push(checked.raw); save('hm.p', arr);
-    await loadPieces(); buildModes(); $('#impBox').hidden = true; $('#impText').value = ''; $('#impRes').innerHTML = '';
-    $('#setupMsg').textContent = '✓ Elmentve ezen a telefonon: ' + checked.title;
+    const p = checked, old = editing && editing.origin === 'local' ? editing : null;
+    putLocal(p.raw, old);
+    if (old && mode.piece === old.id) { mode.piece = p.id; save('hm.m', mode); }
+    closeImp(); await loadPieces(); buildModes(); refreshChip();
+    $('#setupMsg').textContent = '✓ Elmentve ezen a telefonon: ' + p.title;
   };
 
   // ---------- GitHub ----------
@@ -1637,12 +1655,72 @@ const Placer = (function () {
     if (!checked) return;
     $('#setupMsg').textContent = 'Feltöltés…';
     try {
-      await ghWrite(checked, checked.raw, 'Új darab: ' + checked.title);
-      const arr = localPieces().filter(raw => ABC.parsePiece(raw).id !== checked.id); save('hm.p', arr);
-      await loadPieces(); buildModes(); $('#impBox').hidden = true; $('#impText').value = ''; $('#impRes').innerHTML = '';
-      $('#setupMsg').textContent = '✓ Feltöltve a GitHubra: ' + checked.title + '. Minden eszközön megjelenik pár perc múlva.';
-    } catch (e) { $('#setupMsg').textContent = e.message; }
+      const p = checked, old = editing;
+      await ghWrite(old && old.origin === 'repo' ? old : p, p.raw, (old ? 'Darab módosítása: ' : 'Új darab: ') + p.title);
+      dropLocal(p.id); if (old && old.origin === 'local') dropLocal(old.id);
+      if (old && mode.piece === old.id) { mode.piece = p.id; save('hm.m', mode); }
+      closeImp(); await loadPieces(); buildModes(); refreshChip();
+      $('#setupMsg').textContent = '✓ Feltöltve a GitHubra: ' + p.title + '. Minden eszközön megjelenik pár perc múlva.';
+    } catch (e) { ghFail(e); }
   };
+  // ---------- darabok kezelése ----------
+  function putLocal(raw, old) {
+    const nid = ABC.parsePiece(raw).id;
+    const arr = localPieces();
+    const i = arr.findIndex(r => { const id = ABC.parsePiece(r).id; return (old && id === old.id) || id === nid; });
+    const rest = arr.filter((r, k) => k !== i && ABC.parsePiece(r).id !== nid && !(old && ABC.parsePiece(r).id === old.id));
+    if (i >= 0) rest.splice(Math.min(i, rest.length), 0, raw); else rest.push(raw);
+    save('hm.p', rest);
+  }
+  function dropLocal(id) { save('hm.p', localPieces().filter(r => ABC.parsePiece(r).id !== id)); }
+  function withTitle(raw, t) {
+    t = t.replace(/[\r\n]+/g, ' ').trim();
+    if (/^T:.*$/m.test(raw)) return raw.replace(/^T:.*$/m, 'T:' + t);
+    if (/^X:.*$/m.test(raw)) return raw.replace(/^(X:.*)$/m, '$1\nT:' + t);
+    return 'T:' + t + '\n' + raw;
+  }
+  function ghFail(e) {
+    $('#setupMsg').textContent = e.message;
+    if (/kulcs|tároló/i.test(e.message)) { openImp(true); const det = $('#impBox details'); if (det) { det.open = true; setTimeout(() => det.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50); } }
+  }
+  function refreshChip() {
+    const p = curPiece(); if (mode.kind === 'free' || !p) return;
+    const labels = { seq: 'sorban', mix: 'keverve', rhythm: 'ritmussal' };
+    $('#modeChip').textContent = '🎼 ' + p.title + ' · ' + labels[mode.kind];
+    if (mode.kind === 'rhythm') renderRhythm();
+  }
+  async function renamePiece(p) {
+    const t = prompt('A darab új címe:', p.title);
+    if (t == null || !t.trim() || t.trim() === p.title) return;
+    const raw = withTitle(p.raw, t), np = ABC.parsePiece(raw);
+    const wasCur = mode.piece === p.id;
+    if (p.origin === 'local') putLocal(raw, p);
+    else {
+      $('#setupMsg').textContent = 'Átnevezés a GitHubon…';
+      try { await ghWrite(p, raw, 'Darab átnevezése: ' + p.title + ' → ' + np.title); }
+      catch (e) { ghFail(e); return; }
+    }
+    if (wasCur) { mode.piece = np.id; save('hm.m', mode); }
+    await loadPieces(); buildModes(); refreshChip();
+    $('#setupMsg').textContent = '✓ Átnevezve: ' + np.title;
+  }
+  function editPiece(p) {
+    editing = p; checked = null;
+    $('#impText').value = p.raw; $('#impRes').innerHTML = '';
+    $('#impSave').disabled = $('#impUp').disabled = true;
+    openImp(true);
+    $('#impCheck').click();
+    setTimeout(() => $('#impBox').scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+  async function uploadLocal(p) {
+    $('#setupMsg').textContent = 'Feltöltés a GitHubra…';
+    try {
+      await ghWrite(p, p.raw, 'Új darab: ' + p.title);
+      dropLocal(p.id);
+      await loadPieces(); buildModes();
+      $('#setupMsg').textContent = '✓ Feltöltve a GitHubra: ' + p.title + '. Minden eszközön megjelenik pár perc múlva.';
+    } catch (e) { ghFail(e); }
+  }
   async function deletePiece(p) {
     if (!confirm('Törlöd ezt a darabot: ' + p.title + '?')) return;
     if (p.origin === 'local') { save('hm.p', localPieces().filter(raw => ABC.parsePiece(raw).id !== p.id)); }
@@ -1666,7 +1744,7 @@ const Placer = (function () {
   })();
 
   // tesztekhez
-  window.__hm = { rhExpected, feed, analyzeRhythm, award, get target() { return target; }, get G() { return G; }, get RH() { return RH; }, setMode, PIECES: () => PIECES, nextTarget, finishScene, closeDone, renderRhythm, finishBar };
+  window.__hm = { renamePiece, uploadLocal, editPiece, rhExpected, feed, analyzeRhythm, award, get target() { return target; }, get G() { return G; }, get RH() { return RH; }, setMode, PIECES: () => PIECES, nextTarget, finishScene, closeDone, renderRhythm, finishBar };
 })();
 
 </script>
