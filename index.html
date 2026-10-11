@@ -136,6 +136,32 @@ details input[type=text],details input[type=password]{width:100%;border:2px soli
 .doneCard{background:#fff;border-radius:24px;padding:14px;max-width:520px;width:100%;text-align:center}
 .doneCard h2{margin:10px 0 2px;font-weight:900;color:var(--pink)}
 .doneCard p{margin:0 0 10px;color:var(--muted)}
+
+.st.sil{filter:none}
+.st.sil i{filter:brightness(0);opacity:.13}
+.st.sil.nx i{animation:sil 1.2s ease-in-out infinite}
+@keyframes sil{50%{opacity:.32}}
+.st .no{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font:900 .26em "Nunito",sans-serif;color:#fff;background:rgba(91,58,88,.42);border-radius:999px;min-width:1.6em;padding:.08em .3em;text-align:center;font-style:normal;line-height:1.2}
+.st.sil.nx .no{background:var(--pink)}
+.st.gold{filter:drop-shadow(0 0 .06em #fff) drop-shadow(0 0 .1em #ffd34d) drop-shadow(0 0 .14em #ffc400)}
+.st.gold::after{content:"✨";position:absolute;right:-.25em;top:-.2em;font-size:.4em}
+.st.hero i{animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5%)}}
+.cv,.pz{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pz{z-index:1000}
+.rg.pc{animation:paint .9s ease-out}
+@keyframes paint{from{fill:#fff}}
+.rg.nx{stroke:#ec5e9f;stroke-width:3;stroke-dasharray:7 5;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+.pz .pzq{font:900 22px "Nunito",sans-serif;fill:#fff;text-anchor:middle}
+.pz g.fly{animation:fly .9s ease-in forwards}
+@keyframes fly{to{transform:translateY(-30px) scale(.3) rotate(35deg);opacity:0}}
+.story{background:#fff4d2;border-radius:14px;padding:8px 12px;font-weight:800;font-size:15px;margin-top:8px;color:#6b4a2b;line-height:1.3}
+.story .more{font-weight:600;color:var(--muted);font-size:12px}
+.pickRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.pickRow button{border:0;border-radius:18px;background:var(--pink2);padding:12px 8px;font-weight:900;font-size:16px;color:var(--ink)}
+.pickRow .pi{display:block;font-size:30px;line-height:1.2}
+.pickRow small{display:block;font-weight:600;font-size:11px;color:var(--muted);margin-top:2px}
 .conf{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall 2s linear forwards}
 @keyframes fall{to{transform:translateY(105vh) rotate(540deg)}}
 </style>
@@ -151,6 +177,7 @@ details input[type=text],details input[type=password]{width:100%;border:2px soli
 
   <section class="sceneBox">
     <div id="scene" class="scene"></div>
+    <div id="storyText" class="story" hidden></div>
     <div class="sceneInfo"><span id="sceneName"></span><span id="phaseInfo"></span><div class="bar"><i id="progFill"></i></div></div>
   </section>
 
@@ -187,9 +214,9 @@ details input[type=text],details input[type=password]{width:100%;border:2px soli
   <div class="row"><label>Tűrés: <span id="v_tol"></span><small>Ennyit térhet el a hang a tisztától. Kisebb szám = szigorúbb. Hangolás: a¹ = 440 Hz.</small></label><input type="range" id="s_tol" min="5" max="20" step="1"></div>
   <div class="row"><label>Fogás mutatása<small>Kikapcsolva a „Segítség” mezőre koppintva derül ki.</small></label><input type="checkbox" id="s_fing"></div>
   <h3>Kép</h3>
-  <div class="row"><label>Matrica egy képen</label><div id="perPic" class="seg"><button data-v="12">12</button><button data-v="20">20</button><button data-v="30">30</button></div></div>
+  <div class="row"><label>Hány hang egy kép?<small>A témák az albumra, a mesékre és a kirakóra vonatkoznak.</small></label><div id="perPic" class="seg"><button data-v="12">12</button><button data-v="20">20</button><button data-v="30">30</button></div></div>
   <div id="themeChips" class="chips"></div>
-  <div class="row"><label>Új képet kezdek<small>A mostani, félkész kép elvész.</small></label><button id="resetScene" class="btn">Új kép</button></div>
+  <div class="row"><label>Új kép választása<small>Matricaalbum, kifestő, kirakó vagy mese. A félkész kép elvész.</small></label><button id="resetScene" class="btn">Új kép</button></div>
   <h3>Ritmusos gyakorlás</h3>
   <div class="row"><label>Tempó: <span id="v_tempo"></span></label><input type="range" id="s_tempo" min="40" max="120" step="4"></div>
   <div class="row"><label>Ritmus tűrés: <span id="v_rtol"></span><small>Ennyit csúszhat egy hang a helyéhez képest.</small></label><input type="range" id="s_rtol" min="60" max="250" step="10"></div>
@@ -245,7 +272,14 @@ details input[type=text],details input[type=password]{width:100%;border:2px soli
     <div id="doneScene" class="scene"></div>
     <h2 id="doneTitle"></h2>
     <p id="doneStars"></p>
-    <button class="btn main">Jöhet a következő kép! ✨</button>
+    <div id="donePick" class="pickRow"></div>
+  </div>
+</div>
+<div id="pickOv" class="ov" hidden>
+  <div class="doneCard">
+    <h2>Mi legyen a következő kép?</h2>
+    <div id="pickRow" class="pickRow"></div>
+    <button id="pickCancel" class="btn" style="margin-top:10px">Mégse</button>
   </div>
 </div>
 <div id="bigOv" class="ov" hidden><div id="bigScene" class="scene"></div></div>
@@ -991,6 +1025,438 @@ const Placer = (function () {
   return { place };
 })();
 
+// ================= Képtípusok: matricaalbum, kifestő, kirakó, mese =================
+const Pictures = (function () {
+  const R4 = v => Math.round(v * 10) / 10;
+  function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  const pick = (r, a) => a[Math.floor(r() * a.length)];
+  const themeOf = id => THEMES.find(t => t.id === id) || THEMES[0];
+  const TYPES = [
+    { id: 'album', icon: '📒', name: 'Matricaalbum', desc: 'A matricák a helyükre kerülnek' },
+    { id: 'color', icon: '🖍️', name: 'Kifestő', desc: 'Kiszínezed a rajzot' },
+    { id: 'puzzle', icon: '🧩', name: 'Kirakó', desc: 'Mi bújik a darabok alatt?' },
+    { id: 'story', icon: '📖', name: 'Mese', desc: 'Segíts a mese hősének!' }];
+
+  // ---------------------------------------------------------------- matrica (span)
+  function stickerHTML(s, cls, extra) {
+    return `<span class="st ${cls || ''}" style="left:${s.x / 4}%;top:${s.y / 3}%;font-size:${(s.s / 4).toFixed(2)}cqw;z-index:${Math.round(s.y)}"><i${s.f ? ' class="fl"' : ''}>${s.e}</i>${extra || ''}</span>`;
+  }
+  function bgHTML(theme) { return `<svg class="bg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">${themeOf(theme).bg()}</svg>`; }
+
+  // ---------------------------------------------------------------- 1. matricaalbum
+  function makeAlbumSlots(themeId, count) {
+    const th = themeOf(themeId);
+    const p1 = Math.round((count - 1) * .55);
+    const slots = []; let last = [];
+    for (let k = 0; k < count; k++) {
+      let item;
+      if (k === count - 1) item = th.finale;
+      else {
+        const list = k < p1 ? th.items1 : th.items2;
+        const cand = list.filter(it => !last.includes(it[0]));
+        const pool = (cand.length ? cand : list).flatMap(it => (it[3] ? [it] : [it, it]));
+        item = pool[Math.floor(Math.random() * pool.length)];
+        last = [item[0], ...last].slice(0, 2);
+      }
+      const st = Placer.place(th, item, slots);
+      if (k < count - 1 && Math.random() < .1) st.g = 1;
+      slots.push(st);
+    }
+    return slots;
+  }
+  function albumHTML(theme, slots, n, from) {
+    let h = bgHTML(theme) + '<div class="stk">';
+    slots.forEach((s, k) => {
+      if (k < n) h += stickerHTML(s, (k >= from ? 'pop ' : '') + (s.g ? 'gold' : ''));
+      else h += stickerHTML(s, 'sil' + (k === n ? ' nx' : ''), `<b class="no">${k + 1}</b>`);
+    });
+    return h + '</div>';
+  }
+
+  // ---------------------------------------------------------------- 2. kifestő
+  const OUT = 'stroke="#5b3a58" stroke-width="2" stroke-linejoin="round"';
+  const C = (cx, cy, r) => `<circle cx="${R4(cx)}" cy="${R4(cy)}" r="${R4(r)}"`;
+  const E = (cx, cy, rx, ry) => `<ellipse cx="${R4(cx)}" cy="${R4(cy)}" rx="${R4(rx)}" ry="${R4(ry)}"`;
+  const Rc = (x, y, w, h, rx) => `<rect x="${R4(x)}" y="${R4(y)}" width="${R4(w)}" height="${R4(h)}" rx="${rx || 0}"`;
+  const P = d => `<path d="${d.replace(/-?\d+\.\d+/g, m => R4(+m))}"`;
+  const dots = (pts, r) => pts.map(([x, y]) => `M${x - r} ${y}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`).join('');
+  const cloudD = (x, y, s) => `M${x - 30 * s} ${y}a${13 * s} ${13 * s} 0 0 1 ${11 * s} ${-15 * s}a${17 * s} ${17 * s} 0 0 1 ${30 * s} ${-5 * s}a${13 * s} ${13 * s} 0 0 1 ${19 * s} ${20 * s}Z`;
+  function bumpy(cx, cy, R, n, rot) {
+    let d = '';
+    for (let i = 0; i <= n; i++) {
+      const a = rot + i * 2 * Math.PI / n, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a);
+      if (i === 0) d += `M${x} ${y}`;
+      else d += `A${R * Math.sin(Math.PI / n) * 1.25} ${R * Math.sin(Math.PI / n) * 1.25} 0 0 1 ${x} ${y}`;
+    }
+    return d + 'Z';
+  }
+  const PAL = {
+    sky: ['#bfe6ff', '#ffd9ec', '#e3dcff', '#ffe7c7', '#c9f0ec'],
+    hill: ['#c6eab0', '#d6efc0', '#bfe3c9', '#e6dcff'],
+    ground: ['#9bd88a', '#b5e48c', '#8fd17a'],
+    wall: ['#ffe3a8', '#ffd1e3', '#cfe8ff', '#e4d6ff', '#fff1c1', '#d8f5d0'],
+    roof: ['#ec6a95', '#b57edc', '#ff8a65', '#ef5b8c', '#7e8cf0'],
+    door: ['#b07a4f', '#8e6cf0', '#4fb0c6', '#e86a8a'],
+    petal: ['#ff8fc0', '#ffd166', '#b39dff', '#ff9e7a', '#ff6f91', '#8bd3ff', '#fff'],
+    bright: ['#ff8fc0', '#ffd166', '#b39dff', '#8bd3ff', '#7be0a0', '#ff9e7a'],
+    cat: ['#ffb36b', '#c9c9d6', '#f4e1c6', '#8a8a9a'],
+  };
+
+  // --- tárgyak: mindegyik {parts:[{el,col}], deco:''} ---
+  const OBJ = {
+    house(r, cx, by) {
+      const w = pick(r, PAL.wall), rf = pick(r, PAL.roof);
+      return {
+        title: 'Mesés házikó', parts: [
+          { el: Rc(cx + 26, by - 128, 16, 34), col: '#d98b7a' },
+          { el: Rc(cx - 60, by - 82, 120, 82), col: w },
+          { el: P(`M${cx - 74} ${by - 80}L${cx} ${by - 138}L${cx + 74} ${by - 80}Z`), col: rf },
+          { el: P(`M${cx - 15} ${by}V${by - 34}a15 15 0 0 1 30 0V${by}Z`), col: pick(r, PAL.door) },
+          { el: Rc(cx - 50, by - 66, 26, 24, 3), col: '#bfe9ff' },
+          { el: Rc(cx + 24, by - 66, 26, 24, 3), col: '#bfe9ff' },
+          { el: C(cx, by - 104, 10), col: '#fff3a8' }],
+        deco: `<path d="M${cx - 37} ${by - 66}v24M${cx - 50} ${by - 54}h26M${cx + 37} ${by - 66}v24M${cx + 24} ${by - 54}h26M${cx} ${by - 114}v20M${cx - 10} ${by - 104}h20" ${OUT} fill="none"/><circle cx="${cx + 8}" cy="${by - 16}" r="2.5" fill="#5b3a58"/>`
+      };
+    },
+    castle(r, cx, by) {
+      const w = pick(r, ['#ffe3ef', '#e9e1ff', '#fff1d6', '#dff1ff']), rf = pick(r, PAL.roof), rf2 = pick(r, PAL.roof);
+      const cren = `M${cx - 50} ${by}V${by - 92}h10v8h10v-8h10v8h10v-8h10v8h10v-8h10v8h10v-8h10V${by}Z`;
+      return {
+        title: 'Hercegnős kastély', parts: [
+          { el: P(cren), col: w },
+          { el: Rc(cx - 82, by - 122, 34, 122), col: w },
+          { el: Rc(cx + 48, by - 122, 34, 122), col: w },
+          { el: P(`M${cx - 88} ${by - 122}L${cx - 65} ${by - 172}L${cx - 42} ${by - 122}Z`), col: rf },
+          { el: P(`M${cx + 42} ${by - 122}L${cx + 65} ${by - 172}L${cx + 88} ${by - 122}Z`), col: rf },
+          { el: P(`M${cx - 18} ${by}V${by - 34}a18 18 0 0 1 36 0V${by}Z`), col: pick(r, PAL.door) },
+          { el: C(cx, by - 62, 11), col: '#bfe9ff' },
+          { el: P(`M${cx - 65} ${by - 190}l22 6l-22 6Z`), col: rf2 },
+          { el: P(`M${cx + 65} ${by - 190}l22 6l-22 6Z`), col: rf2 },
+          { el: P(dots([[cx - 65, by - 92], [cx + 65, by - 92]], 7)), col: '#bfe9ff' }],
+        deco: `<path d="M${cx - 65} ${by - 172}v-20M${cx + 65} ${by - 172}v-20" ${OUT} fill="none"/>`
+      };
+    },
+    tree(r, cx, by, s) {
+      s = s || 1; const cy = by - 98 * s;
+      const ap = [[cx - 22 * s, cy - 8 * s], [cx + 18 * s, cy - 18 * s], [cx + 6 * s, cy + 16 * s]];
+      return {
+        title: 'Almafa a réten', parts: [
+          { el: P(`M${cx - 11 * s} ${by}L${cx - 7 * s} ${by - 60 * s}L${cx + 7 * s} ${by - 60 * s}L${cx + 11 * s} ${by}Z`), col: '#b07a4f' },
+          { el: P(bumpy(cx, cy, 48 * s, 9, r() * 6)), col: pick(r, ['#7fcf72', '#8fd17a', '#6fc48a']) },
+          ...ap.map(([x, y]) => ({ el: C(x, y, 6.5 * s), col: pick(r, ['#ff6f7d', '#ff8fc0', '#ffb347']) }))]
+      };
+    },
+    rainbow(r, cx, by) {
+      const cols = ['#ff8f9e', '#ffc26b', '#fff07a', '#8fe0a0', '#8bc8ff', '#c3a6ff'];
+      const parts = cols.map((c, i) => { const a = 128 - 13 * i, b = a - 13; return { el: P(`M${cx - a} ${by}A${a} ${a} 0 0 1 ${cx + a} ${by}L${cx + b} ${by}A${b} ${b} 0 0 0 ${cx - b} ${by}Z`), col: c }; });
+      parts.push({ el: P(cloudD(cx - 112, by + 6, 1.1)), col: '#fff' }, { el: P(cloudD(cx + 112, by + 6, 1.1)), col: '#fff' });
+      return { title: 'Szivárvány', parts };
+    },
+    balloon(r, cx, by) {
+      const c1 = pick(r, PAL.bright), c2 = pick(r, PAL.bright.filter(c => c !== c1));
+      const top = by - 150;
+      return {
+        title: 'Hőlégballon', parts: [
+          { el: P(`M${cx} ${top}C${cx + 62} ${top} ${cx + 58} ${top + 70} ${cx + 16} ${by - 50}L${cx - 16} ${by - 50}C${cx - 58} ${top + 70} ${cx - 62} ${top} ${cx} ${top}Z`), col: c1 },
+          { el: P(`M${cx} ${top}C${cx + 24} ${top} ${cx + 22} ${top + 70} ${cx + 8} ${by - 50}L${cx - 8} ${by - 50}C${cx - 22} ${top + 70} ${cx - 24} ${top} ${cx} ${top}Z`), col: c2 },
+          { el: Rc(cx - 14, by - 30, 28, 22, 4), col: '#c98a5b' }],
+        deco: `<path d="M${cx - 16} ${by - 50}L${cx - 12} ${by - 30}M${cx + 16} ${by - 50}L${cx + 12} ${by - 30}" ${OUT} fill="none"/>`
+      };
+    },
+    mushroom(r, cx, by) {
+      const cap = pick(r, ['#ff6f7d', '#ec6a95', '#b57edc', '#ff8a65']);
+      return {
+        title: 'Gombaház', parts: [
+          { el: P(`M${cx - 34} ${by}L${cx - 28} ${by - 70}L${cx + 28} ${by - 70}L${cx + 34} ${by}Z`), col: pick(r, ['#fff1d6', '#ffe9f2', '#f2ecff']) },
+          { el: P(`M${cx - 70} ${by - 64}Q${cx - 66} ${by - 150} ${cx} ${by - 150}Q${cx + 66} ${by - 150} ${cx + 70} ${by - 64}Q${cx} ${by - 80} ${cx - 70} ${by - 64}Z`), col: cap },
+          { el: P(dots([[cx - 36, by - 104], [cx + 6, by - 128], [cx + 40, by - 100], [cx - 8, by - 94]], 8)), col: '#fff' },
+          { el: P(`M${cx - 12} ${by}V${by - 26}a12 12 0 0 1 24 0V${by}Z`), col: pick(r, PAL.door) },
+          { el: C(cx + 18, by - 48, 7), col: '#bfe9ff' }]
+      };
+    },
+    // ---- kicsik
+    flower(r, x, by) {
+      const pc = pick(r, PAL.petal), cy = by - 46;
+      const pts = []; for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * 2 * Math.PI / 5; pts.push([x + 11 * Math.cos(a), cy + 11 * Math.sin(a)]); }
+      return {
+        parts: [
+          { el: P(`M${x - 2} ${by}V${by - 38}h4V${by}ZM${x + 2} ${by - 14}q14 -12 21 -3q-10 9 -21 3Z`), col: '#7fcf72' },
+          { el: P(dots(pts, 9)), col: pc },
+          { el: C(x, cy, 7), col: pc === '#ffd166' ? '#ff9e7a' : '#ffd166' }]
+      };
+    },
+    tulip(r, x, by) {
+      return {
+        parts: [
+          { el: P(`M${x - 2} ${by}V${by - 36}h4V${by}ZM${x - 2} ${by - 10}q-14 -14 -18 -4q8 8 18 4Z`), col: '#7fcf72' },
+          { el: P(`M${x - 12} ${by - 38}V${by - 58}l6 7l6 -9l6 9l6 -7V${by - 38}Q${x} ${by - 28} ${x - 12} ${by - 38}Z`), col: pick(r, ['#ff6f91', '#ff8fc0', '#b39dff', '#ffd166']) }]
+      };
+    },
+    ladybug(r, x, by) {
+      return {
+        parts: [{ el: C(x + 15, by - 10, 7), col: '#5b3a58' }, { el: E(x, by - 11, 16, 11), col: '#ff5e6c' }],
+        deco: `<path d="M${x} ${by - 22}V${by}" ${OUT} fill="none"/><path d="${dots([[x - 8, by - 13], [x + 7, by - 9], [x - 4, by - 5]], 2.6)}" fill="#5b3a58"/>`
+      };
+    },
+    snail(r, x, by) {
+      return {
+        parts: [
+          { el: P(`M${x - 22} ${by}Q${x - 26} ${by - 7} ${x - 14} ${by - 8}L${x + 20} ${by - 8}Q${x + 26} ${by - 24} ${x + 32} ${by - 14}Q${x + 34} ${by} ${x + 20} ${by}Z`), col: '#f6d36b' },
+          { el: C(x, by - 22, 16), col: pick(r, ['#b39dff', '#ff8fc0', '#8bd3ff', '#ffb36b']) }],
+        deco: `<path d="M${x} ${by - 22}m-2 0a3 3 0 1 1 5 3a7 7 0 1 1 -9 -8a11 11 0 1 1 14 12" ${OUT} fill="none"/>`
+      };
+    },
+    bush(r, x, by) {
+      return { parts: [{ el: P(`M${x - 32} ${by}a15 15 0 0 1 14 -20a18 18 0 0 1 32 -4a15 15 0 0 1 18 24Z`), col: pick(r, ['#7fcf72', '#6fc48a', '#9bd88a']) }, { el: P(dots([[x - 12, by - 14], [x + 10, by - 18], [x + 22, by - 8]], 3.5)), col: pick(r, ['#ff8fc0', '#ff6f7d', '#b39dff']) }] };
+    },
+    cat(r, x, by) {
+      const c = pick(r, PAL.cat);
+      return {
+        parts: [
+          { el: P(`M${x + 14} ${by - 6}q22 -2 18 -26q-2 -6 -6 -2q2 18 -14 18Z`), col: c },
+          { el: E(x, by - 16, 18, 16), col: c },
+          { el: P(`M${x - 12} ${by - 44}L${x - 11} ${by - 62}L${x - 3} ${by - 54}Q${x} ${by - 55} ${x + 3} ${by - 54}L${x + 11} ${by - 62}L${x + 12} ${by - 44}A12 12 0 0 1 ${x - 12} ${by - 44}Z`), col: c }],
+        deco: `<circle cx="${x - 5}" cy="${by - 46}" r="1.8" fill="#5b3a58"/><circle cx="${x + 5}" cy="${by - 46}" r="1.8" fill="#5b3a58"/><path d="M${x - 2} ${by - 41}h4M${x - 4} ${by - 40}l-10 -2M${x + 4} ${by - 40}l10 -2" stroke="#5b3a58" stroke-width="1.2" fill="none"/>`
+      };
+    },
+    butterfly(r, x, y) {
+      const c = pick(r, PAL.bright), c2 = pick(r, PAL.bright);
+      return {
+        parts: [
+          { el: P(`M${x} ${y}C${x - 20} ${y - 28} ${x - 36} ${y - 6} ${x - 18} ${y + 2}C${x - 30} ${y + 14} ${x - 14} ${y + 24} ${x} ${y + 4}Z`), col: c },
+          { el: P(`M${x} ${y}C${x + 20} ${y - 28} ${x + 36} ${y - 6} ${x + 18} ${y + 2}C${x + 30} ${y + 14} ${x + 14} ${y + 24} ${x} ${y + 4}Z`), col: c },
+          { el: E(x, y + 3, 3.5, 12), col: c2 }],
+        deco: `<path d="M${x - 1} ${y - 8}q-4 -10 -9 -12M${x + 1} ${y - 8}q4 -10 9 -12" ${OUT} fill="none"/>`
+      };
+    },
+    bird(r, x, y) {
+      const c = pick(r, ['#8bd3ff', '#ffd166', '#ff8fc0', '#b39dff']);
+      return {
+        parts: [
+          { el: P(`M${x - 16} ${y}Q${x - 14} ${y - 16} ${x + 2} ${y - 14}Q${x + 14} ${y - 18} ${x + 14} ${y - 6}Q${x + 10} ${y + 8} ${x - 6} ${y + 6}L${x - 22} ${y + 4}Z`), col: c },
+          { el: P(`M${x - 6} ${y - 4}Q${x + 2} ${y - 22} ${x + 8} ${y - 6}Z`), col: pick(r, PAL.bright) }],
+        deco: `<path d="M${x + 14} ${y - 8}l7 2l-7 3Z" fill="#ffb347" ${OUT}/><circle cx="${x + 8}" cy="${y - 9}" r="1.6" fill="#5b3a58"/>`
+      };
+    },
+    pond(r, x, by) {
+      return {
+        parts: [{ el: E(x, by - 8, 46, 12), col: '#8fd6f0' },
+        { el: P(`M${x - 4} ${by - 12}q-2 -10 8 -10q8 0 6 8q10 -4 12 2q0 6 -10 6h-14q-4 0 -2 -6Z`), col: '#fff3a8' }],
+        deco: `<path d="M${x + 12} ${by - 18}l5 1l-5 2Z" fill="#ffb347"/><circle cx="${x + 7}" cy="${by - 18}" r="1.4" fill="#5b3a58"/>`
+      };
+    },
+  };
+  const MAINS = ['house', 'castle', 'tree', 'rainbow', 'balloon', 'mushroom'];
+  const SMALL = ['flower', 'flower', 'tulip', 'tulip', 'ladybug', 'snail', 'bush', 'cat', 'pond'];
+
+  function buildColoring(seed, perPic) {
+    const r = rng(seed);
+    const target = Math.max(16, Math.min(40, Math.round(perPic * 1.25)));
+    const sunLeft = r() < .5, sunX = sunLeft ? 58 : 342;
+    const bg = [];  // rajzolási sorrendben
+    const sky = { el: Rc(0, 0, 400, 300), col: pick(r, PAL.sky), noStroke: true };
+    bg.push(sky);
+    const sun = { el: C(sunX, 54, 24), col: '#ffe066' };
+    let rays = ''; for (let i = 0; i < 9; i++) { const a = i * 2 * Math.PI / 9 + .2, b = .17; rays += `M${sunX + 30 * Math.cos(a - b)} ${54 + 30 * Math.sin(a - b)}L${sunX + 44 * Math.cos(a)} ${54 + 44 * Math.sin(a)}L${sunX + 30 * Math.cos(a + b)} ${54 + 30 * Math.sin(a + b)}Z`; }
+    const raysP = { el: P(rays), col: '#ffc94a' };
+    const cl1 = { el: P(cloudD(sunLeft ? 200 : 120, 58 + r() * 14, 1)), col: '#fff' };
+    const cl2 = { el: P(cloudD(sunLeft ? 300 : 230, 88 + r() * 16, .75)), col: '#fff' };
+    const h1 = 160 + r() * 25, h2 = 150 + r() * 25;
+    const hill = { el: P(`M0 ${h1}Q100 ${h1 - 45} 200 ${h1 - 5}T400 ${h2}V300H0Z`), col: pick(r, PAL.hill) };
+    const ground = { el: P(`M0 212Q110 192 230 210T400 206V300H0Z`), col: pick(r, PAL.ground) };
+    bg.push(raysP, sun, cl1, cl2, hill, ground);
+
+    const mainId = pick(r, MAINS);
+    let cx = 160 + r() * 80, mby = 232;
+    if (mainId === 'rainbow') { cx = 200; mby = 214; }
+    if (mainId === 'balloon') { mby = 180; }
+    const main = OBJ[mainId](r, cx, mby);
+    const objs = [{ o: main, z: mby }];
+    let count = main.parts.length;
+    // hátsó fa(k)
+    if (mainId !== 'tree' && r() < .7) {
+      const tx = cx > 200 ? 52 : 348;
+      const t = OBJ.tree(r, tx, 222, .62); objs.push({ o: t, z: 200 }); count += t.parts.length;
+    }
+    const front = [45, 355, 110, 290, 175, 230].filter(x => mainId === 'balloon' || mainId === 'rainbow' || Math.abs(x - cx) > 55 || x === 45 || x === 355);
+    const skySpots = sunLeft ? [[150, 120], [260, 140], [95, 150]] : [[90, 120], [250, 140], [300, 160]];
+    const smalls = [];
+    let fi = 0, si = 0;
+    const used = {};
+    while (count < target && (fi < front.length || si < skySpots.length)) {
+      const wantSky = si < skySpots.length && (fi >= front.length || r() < .25) && mainId !== 'balloon';
+      if (wantSky) {
+        const [x, y] = skySpots[si++]; const o = OBJ[r() < .6 ? 'butterfly' : 'bird'](r, x, y);
+        smalls.push({ o, z: 100 }); count += o.parts.length;
+      } else if (fi < front.length) {
+        const x = front[fi++]; const by = 262 + r() * 26;
+        let kind = pick(r, SMALL); let guard = 0;
+        while ((used[kind] || 0) >= (kind === 'flower' || kind === 'tulip' ? 3 : 1) && guard++ < 10) kind = pick(r, SMALL);
+        used[kind] = (used[kind] || 0) + 1;
+        const o = OBJ[kind](r, x, by); smalls.push({ o, z: by }); count += o.parts.length;
+      } else break;
+    }
+    // rajzolási sorrend: háttér, majd z szerint
+    const draw = [...bg.map(p => ({ p })), ...[...objs, ...smalls].sort((a, b) => a.z - b.z).flatMap(x => [...x.o.parts.map(p => ({ p })), { deco: x.o.deco || '' }])];
+    // színezési sorrend: főtárgy, kicsik, nap, felhők, domb, föld, ég
+    const order = [...main.parts, ...objs.slice(1).flatMap(x => x.o.parts), ...smalls.flatMap(x => x.o.parts), sun, raysP, cl1, cl2, hill, ground, sky];
+    order.forEach((p, i) => p.i = i);
+    return { draw, R: order.length, title: main.title };
+  }
+  const colorCache = {};
+  function coloring(pic) {
+    const key = pic.seed + ':' + pic.pp;
+    return colorCache[key] || (colorCache[key] = buildColoring(pic.seed, pic.pp));
+  }
+  function colorSVG(cd, c, cPrev) {
+    let h = '<svg class="cv" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">';
+    for (const d of cd.draw) {
+      if (d.deco !== undefined) { h += d.deco; continue; }
+      const p = d.p, on = p.i < c;
+      const cls = 'rg' + (on && p.i >= cPrev ? ' pc' : '') + (p.i === c ? ' nx' : '');
+      h += `${p.el} fill="${on ? p.col : '#fff'}" ${p.noStroke ? '' : OUT} class="${cls}" style="--c:${p.col}"/>`;
+    }
+    return h + '</svg>';
+  }
+
+  // ---------------------------------------------------------------- 3. kirakó
+  const GRID = { 12: [4, 3], 20: [5, 4], 30: [6, 5] };
+  function puzzlePieces(cols, rows, seed) {
+    const r = rng(seed), w = 400 / cols, h = 300 / rows, t = Math.min(w, h) * .2;
+    const H = [], V = [];
+    for (let y = 0; y <= rows; y++) { H[y] = []; for (let x = 0; x < cols; x++) H[y][x] = (y === 0 || y === rows) ? 0 : (r() < .5 ? 1 : -1); }
+    for (let y = 0; y < rows; y++) { V[y] = []; for (let x = 0; x <= cols; x++) V[y][x] = (x === 0 || x === cols) ? 0 : (r() < .5 ? 1 : -1); }
+    const hE = (x0, x1, y, v) => {
+      if (!v) return `L${x1} ${y}`;
+      const L = x1 - x0, o = v * t;
+      return `L${x0 + L * .37} ${y}C${x0 + L * .22} ${y + o * 1.3} ${x0 + L * .78} ${y + o * 1.3} ${x0 + L * .63} ${y}L${x1} ${y}`;
+    };
+    const vE = (y0, y1, x, v) => {
+      if (!v) return `L${x} ${y1}`;
+      const L = y1 - y0, o = v * t;
+      return `L${x} ${y0 + L * .37}C${x + o * 1.3} ${y0 + L * .22} ${x + o * 1.3} ${y0 + L * .78} ${x} ${y0 + L * .63}L${x} ${y1}`;
+    };
+    const out = [];
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const X0 = x * w, X1 = X0 + w, Y0 = y * h, Y1 = Y0 + h;
+      const d = `M${X0} ${Y0}` + hE(X0, X1, Y0, H[y][x]) + vE(Y0, Y1, X1, V[y][x + 1]) + hE(X1, X0, Y1, H[y + 1][x]) + vE(Y1, Y0, X0, V[y][x]) + 'Z';
+      out.push({ d: d.replace(/-?\d+\.\d+/g, m => R4(+m)), cx: X0 + w / 2, cy: Y0 + h / 2 });
+    }
+    return out;
+  }
+  const PZC = ['#ffc7de', '#e3d6ff', '#ffe2b8', '#c9ecff', '#d4f3cf', '#ffd1d1'];
+  function puzzleHTML(pic, n, from) {
+    let base;
+    if (pic.base.kind === 'color') base = colorSVG(coloring(pic.base), 999, 999);
+    else base = albumHTML(pic.base.theme, pic.base.slots, 999, 999);
+    const [cols, rows] = pic.grid;
+    const pcs = puzzlePieces(cols, rows, pic.seed);
+    const removed = new Set(pic.order.slice(0, n)), fresh = new Set(pic.order.slice(from, n));
+    let o = '<svg class="pz" viewBox="0 0 400 300" preserveAspectRatio="none">';
+    pcs.forEach((p, i) => {
+      if (removed.has(i) && !fresh.has(i)) return;
+      const col = PZC[(Math.floor(i / cols) + i) % PZC.length];
+      o += `<g class="${fresh.has(i) ? 'fly' : ''}" style="transform-origin:${R4(p.cx)}px ${R4(p.cy)}px"><path d="${p.d}" fill="${col}" stroke="#fff" stroke-width="2.4"/><text x="${R4(p.cx)}" y="${R4(p.cy + 7)}" class="pzq">${pic.order.indexOf(i) === n ? '★' : '?'}</text></g>`;
+    });
+    return base + o + '</svg>';
+  }
+
+  // ---------------------------------------------------------------- 4. mese
+  const STORIES = [
+    { id: 'panni', theme: 'kert', title: 'Nyuszi Panni kertje', hero: ['🐰', 'ground', 1.5], intro: 'Nyuszi Panni virágoskertet szeretne. Segítesz neki?', end: 'Panni kertje gyönyörű lett! Köszöni a segítséget! 💐',
+      steps: [['🌷', 'ground', 1, 'Panni elültette az első tulipánt.'], ['🌷', 'ground', 1, 'Mellé még egy tulipán került.'], ['🥕', 'ground', .9, 'A sarokba répát vetett – az a kedvence!'], ['🌻', 'ground', 1.2, 'Kinyílt egy nagy napraforgó.'], ['🌳', 'ground', 1.6, 'Nőtt egy fa is, hogy legyen árnyék.'], ['🍄', 'ground', .9, 'A fa alatt gomba bújt elő.'], ['🐞', 'ground', .7, 'Megjött az első látogató: egy katica.'], ['🦋', 'sky', 1, 'Egy pillangó is odarepült.'], ['🐝', 'sky', .8, 'A méhecske dúdolva gyűjti a virágport.'], ['🐦', 'sky', 1, 'Egy rigó dalolni kezdett.'], ['🦔', 'ground', 1, 'Süni Sári átjött megnézni a kertet.'], ['🌈', 'sky', 2, 'Szivárvány ívelt a kert fölé!']] },
+    { id: 'lili', theme: 'tenger', title: 'Lili, a kis sellő', hero: ['🧜‍♀️', 'water', 1.6], intro: 'Lili, a kis sellő bált rendez a tenger mélyén. Díszítsük fel együtt!', end: 'Kezdődhet a víz alatti bál! 💙',
+      steps: [['🐚', 'bottom', .9, 'Lili talált egy csillogó kagylót.'], ['🌿', 'bottom', 1.2, 'Hínárt ültetett a palota elé.'], ['⭐', 'bottom', .8, 'Tengeri csillag került a homokra.'], ['🪨', 'bottom', 1, 'Egy nagy kő lett a trónja.'], ['🐠', 'water', 1, 'Megjött az első vendég: egy csíkos hal.'], ['🐟', 'water', 1, 'A barátja is úszik utána.'], ['🐡', 'water', 1, 'A gömbhal felfújta magát – milyen vicces!'], ['🦀', 'bottom', .9, 'Egy rák oldalazva odasietett.'], ['🐙', 'water', 1, 'Polip néni nyolc karral integet.'], ['🐢', 'water', 1.1, 'Egy öreg teknős is benézett.'], ['🐬', 'water', 1.3, 'Delfin Dóri bukfencet vetett.'], ['🐳', 'water', 1.4, 'Még a bálna is eljött!']] },
+    { id: 'cili', theme: 'cuki', title: 'Cukrász Cili tortája', hero: ['👩‍🍳', 'table', 1.3], intro: 'Cili születésnapi tortát készít. Segítesz feldíszíteni?', end: 'Boldog születésnapot! 🎂',
+      steps: [['🍓', 'cake', .7, 'Az alsó emeletre eper került.'], ['🍓', 'cake', .7, 'Még egy eper – hmm!'], ['🍒', 'cake', .7, 'Cseresznye is jár rá.'], ['🍋', 'cake', .65, 'Egy kis citrom a frissességért.'], ['🌸', 'cake', .7, 'Cukorvirágokat rakott körbe.'], ['🎀', 'cake', .7, 'Masni is került a tortára!'], ['🧁', 'table', 1, 'Mellé muffinokat sütött.'], ['🍩', 'table', 1, 'És fánkot, rózsaszín mázzal.'], ['🍪', 'table', 1, 'Kekszet a vendégeknek.'], ['🍭', 'table', 1, 'Nyalókát a kicsiknek.'], ['🎁', 'table', 1, 'Megérkezett az ajándék is!'], ['🕯️', 'top', 1.1, 'Végül gyertya került a tetejére.']] },
+    { id: 'csilla', theme: 'tanya', title: 'Csilla, a csikó', hero: ['🐴', 'ground', 1.5], intro: 'Csilla, a csikó a tanyán lakik. Ma vendégek jönnek!', end: 'Milyen vidám nap volt a tanyán! 🐴',
+      steps: [['🌻', 'ground', 1.2, 'Napraforgót ültettek a kerítés mellé.'], ['🌾', 'ground', 1, 'Learatták a búzát.'], ['🍎', 'ground', .7, 'Almát szedtek csemegének.'], ['🌳', 'ground', 1.6, 'Az öreg fa árnyékot ad.'], ['🐔', 'ground', .9, 'Kitipegett a tyúkanyó.'], ['🐤', 'ground', .7, 'Utána a kiscsibék!'], ['🐑', 'ground', 1, 'Bari bégetve köszönt.'], ['🐄', 'ground', 1.2, 'Riska tehén is kijött a rétre.'], ['🐐', 'ground', 1, 'A kecske mindent megkóstol.'], ['🐕', 'ground', 1, 'Bodri kutya csóválja a farkát.'], ['🐈', 'ground', .9, 'Cirmos cica napozik.'], ['🦄', 'ground', 1.5, 'És a meglepetésvendég: egy unikornis!']] },
+    { id: 'babahaz', theme: 'babahaz', title: 'Költözés a babaházba', hero: ['👧', 'floor', 1.1], intro: 'Lili beköltözik a babaházba. Rendezzük be együtt!', end: 'Kész az otthon! 🏠',
+      steps: [['🛏️', 'floor', 1.2, 'Bekerült az ágy.'], ['🪑', 'floor', 1, 'Egy szék az asztal mellé.'], ['🛋️', 'floor', 1.2, 'Puha kanapé a nappaliba.'], ['🛁', 'floor', 1.1, 'Kád a fürdőszobába.'], ['🖼️', 'wall', .8, 'Képet akasztott a falra.'], ['🕰️', 'wall', .8, 'Óra is kell – hogy tudja, mikor van gyakorlás!'], ['🪞', 'wall', .8, 'Tükör a fürdőbe.'], ['🪴', 'floor', 1, 'Zöld növény a sarokba.'], ['🧸', 'floor', .9, 'A maci is megérkezett.'], ['🐱', 'floor', .9, 'Beköltözött a cica.'], ['🐶', 'floor', .9, 'És a kiskutya!'], ['👵', 'floor', 1, 'Nagyi is eljött látogatóba.']] },
+    { id: 'zsofi', theme: 'szavanna', title: 'Zsiráf Zsófi barátai', hero: ['🦒', 'ground', 1.6], intro: 'Zsiráf Zsófi barátokat keres a szavannán.', end: 'Zsófinak most már rengeteg barátja van! 💛',
+      steps: [['🌳', 'ground', 1.6, 'Zsófi talált egy árnyas fát.'], ['🌴', 'ground', 1.5, 'Arrébb pálmák nőnek.'], ['🌾', 'ground', 1, 'A magas fűben valaki mocorog…'], ['🦓', 'ground', 1.2, 'Egy zebra! Csíkos barát.'], ['🐘', 'ground', 1.5, 'Elefánt Elek is csatlakozott.'], ['🦛', 'ground', 1.2, 'A víziló kijött fürdés után.'], ['🐒', 'ground', 1, 'Majom Miki leugrott a fáról.'], ['🦩', 'ground', 1, 'Egy flamingó fél lábon áll.'], ['🦁', 'ground', 1.1, 'Oroszlán Leó szelíden köszön.'], ['🐆', 'ground', 1.2, 'A gepárd versenyt fut a széllel.'], ['🦅', 'sky', 1, 'A sas fentről figyel.'], ['🌈', 'sky', 2, 'Szivárvány jelent meg az égen!']] },
+    { id: 'rozi', theme: 'erdo', title: 'Róka Rozi pikniket rendez', hero: ['🦊', 'ground', 1.4], intro: 'Rozi, a kis róka erdei pikniket rendez.', end: 'Ez volt a legjobb erdei piknik! 🍯',
+      steps: [['🌲', 'ground', 1.6, 'Egy nagy fenyő alatt lesz a piknik.'], ['🪵', 'ground', 1, 'Egy farönk lesz az asztal.'], ['🍄', 'ground', .8, 'Gombát talált az avarban.'], ['🌰', 'ground', .7, 'Mogyorót gyűjtött a mókusoknak.'], ['🍂', 'ground', .8, 'Színes falevelek hullanak.'], ['🐿️', 'ground', .9, 'Mókus Marci érkezett elsőként.'], ['🦔', 'ground', .9, 'Süni Sári almát hozott.'], ['🐇', 'ground', 1, 'A nyuszi ugrálva jött.'], ['🦌', 'ground', 1.3, 'Az őzike félénken közelebb lépett.'], ['🐻', 'ground', 1.2, 'Mackó Brumi mézet hozott.'], ['🦉', 'sky', 1, 'A bagoly is felébredt.'], ['🦋', 'sky', 1, 'Pillangók táncolnak a tisztás fölött.']] },
+    { id: 'teodora', theme: 'sivatag', title: 'Teve Teodóra és az oázis', hero: ['🐫', 'ground', 1.5], intro: 'Teve Teodóra oázist keres a sivatagban.', end: 'Az oázis mindenkinek otthont adott! ✨',
+      steps: [['🌵', 'ground', 1.2, 'Talált egy kaktuszt – jó jel!'], ['🌴', 'ground', 1.6, 'Pálmafák! Közel az oázis.'], ['🥥', 'ground', .7, 'Kókuszdió pottyant le.'], ['🌺', 'ground', .8, 'Virág nyílt a víz mellett.'], ['🪨', 'ground', 1, 'Egy nagy kő ad árnyékot.'], ['🦎', 'ground', .9, 'Gyík Gyuri napozik.'], ['🐢', 'ground', .9, 'Egy teknős lassan odaballag.'], ['🦊', 'ground', 1, 'A sivatagi róka nagy füllel hallgatózik.'], ['🦜', 'ground', 1, 'Papagáj érkezett a pálmára.'], ['🐪', 'ground', 1.4, 'Teodóra barátja is megjött.'], ['🦅', 'sky', 1, 'A sas köröz fölöttük.'], ['🧞‍♀️', 'sky', 1.6, 'Egy dzsinn teljesít egy kívánságot!']] },
+    { id: 'bori', theme: 'mezo', title: 'Bárány Bori koszorúja', hero: ['🐑', 'ground', 1.4], intro: 'Bori, a bárányka virágkoszorút fon a mezőn.', end: 'Bori a legszebb koszorút viseli! 🌸',
+      steps: [['🌼', 'ground', 1, 'Talált egy margarétát.'], ['🌸', 'ground', 1, 'Aztán egy rózsaszín virágot.'], ['🌷', 'ground', 1, 'Egy tulipánt is.'], ['🌻', 'ground', 1.2, 'Egy nagy napraforgót!'], ['🍀', 'ground', .8, 'Négylevelű lóhere – szerencse!'], ['🌺', 'ground', 1, 'Egy piros virág a közepére.'], ['🐛', 'ground', .7, 'Egy hernyó kíváncsian nézi.'], ['🐞', 'ground', .7, 'A katica is segít keresni.'], ['🐝', 'sky', .8, 'A méhecske megmutatja a legszebbeket.'], ['🦋', 'sky', 1, 'Pillangók kísérik Borit.'], ['🐇', 'ground', 1, 'A nyuszi is szed egy csokrot.'], ['🌈', 'sky', 2, 'Kész a koszorú, és még szivárvány is lett!']] },
+    { id: 'kinga', theme: 'hegy', title: 'Kecske Kinga túrája', hero: ['🐐', 'ground', 1.3], intro: 'Kecske Kinga felmászik a hegyre a barátaival.', end: 'Fent vannak a csúcson! ⛰️',
+      steps: [['⛺', 'ground', 1.2, 'Sátrat vertek a tó partján.'], ['🌲', 'ground', 1.6, 'Az erdő szélén pihentek.'], ['🪨', 'ground', 1, 'Átugrottak egy nagy sziklát.'], ['🌼', 'ground', .8, 'Havasi virágot találtak.'], ['🌿', 'ground', 1, 'Friss füvet legeltek.'], ['🐿️', 'ground', .9, 'Egy mókus mutatta az utat.'], ['🐑', 'ground', 1, 'Egy báránykával találkoztak.'], ['🦙', 'ground', 1.2, 'Láma Lajos is velük tart.'], ['🦌', 'ground', 1.3, 'Egy szarvas is köszönt.'], ['🐻', 'ground', 1.2, 'Mackó integetett a barlangból.'], ['🦅', 'sky', 1, 'Egy sas köröz a csúcs fölött.'], ['🎈', 'sky', 1.6, 'Egy léggömb száll fel az ünneplésre!']] },
+    { id: 'cica', theme: 'varos', title: 'Cica Cili a parkban', hero: ['🐈', 'street', 1.3], intro: 'Cica Cili sétálni indul a városi parkba.', end: 'Milyen jó nap volt a parkban! 🎠',
+      steps: [['🌳', 'ground', 1.6, 'Leült egy nagy fa árnyékába.'], ['🌷', 'ground', .8, 'Megszagolt egy tulipánt.'], ['⛲', 'ground', 1.3, 'Csobog a szökőkút.'], ['🌻', 'ground', 1, 'Napraforgók nőnek a szélén.'], ['🪴', 'ground', 1, 'Virágtartókat is kitettek.'], ['🕊️', 'sky', 1, 'Galambok repültek fel.'], ['🐦', 'sky', .8, 'Egy veréb csiripel.'], ['🦆', 'ground', 1, 'A kacsák a tóból jöttek ki.'], ['🐿️', 'ground', .9, 'Egy mókus diót keres.'], ['🦔', 'ground', .9, 'Egy süni szuszog a bokorban.'], ['🐕', 'street', 1, 'Egy kutyus csatlakozott a sétához.'], ['🎠', 'street', 1.5, 'A végén körhintáztak!']] },
+  ];
+  function makeStory(sid, perPic) {
+    const s = STORIES.find(x => x.id === sid) || STORIES[0];
+    const th = themeOf(s.theme);
+    const placed = [];
+    const hero = Placer.place(th, s.hero, []); hero.f = 0; placed.push(hero);
+    const items = s.steps.map(st => { const p = Placer.place(th, [st[0], st[1], st[2]], placed); placed.push(p); return p; });
+    const k = Math.max(1, Math.round(perPic / s.steps.length));
+    return { type: 'story', sid: s.id, theme: s.theme, hero, items, k, total: s.steps.length * k, n: 0 };
+  }
+
+  // ---------------------------------------------------------------- közös API
+  function create(type, ctx) {
+    const pp = ctx.perPic;
+    if (type === 'album') { const theme = ctx.themeId(); return { type, theme, slots: makeAlbumSlots(theme, pp), total: pp, n: 0 }; }
+    if (type === 'color') { const seed = Math.floor(Math.random() * 1e9); return { type, seed, pp, total: pp, n: 0 }; }
+    if (type === 'puzzle') {
+      const grid = GRID[pp] || GRID[20], cnt = grid[0] * grid[1];
+      let base;
+      if (Math.random() < .5) base = { kind: 'color', seed: Math.floor(Math.random() * 1e9), pp: 30 };
+      else { const theme = ctx.themeId(); base = { kind: 'album', theme, slots: makeAlbumSlots(theme, 22) }; }
+      const order = [...Array(cnt).keys()].sort(() => Math.random() - .5);
+      return { type, base, grid, order, seed: Math.floor(Math.random() * 1e9), total: cnt, n: 0 };
+    }
+    if (type === 'story') return makeStory(ctx.storyId(), pp);
+    throw new Error('ismeretlen képtípus');
+  }
+  function render(pic, from) {
+    const n = pic.n, f = from == null ? n : from;
+    if (!pic.type) return albumHTML(pic.theme, pic.st, 999, 999); // régi album-kép
+    if (pic.type === 'album') return albumHTML(pic.theme, pic.slots, n, f);
+    if (pic.type === 'color') {
+      const cd = coloring(pic), c = Math.round(cd.R * n / pic.total), cp = Math.round(cd.R * f / pic.total);
+      return colorSVG(cd, c, cp);
+    }
+    if (pic.type === 'puzzle') return puzzleHTML(pic, n, f);
+    if (pic.type === 'story') {
+      const st = Math.floor(n / pic.k), sp = Math.floor(f / pic.k);
+      let h = bgHTML(pic.theme) + '<div class="stk">' + stickerHTML(pic.hero, 'hero');
+      pic.items.slice(0, st).forEach((s, i) => h += stickerHTML(s, i >= sp ? 'pop' : ''));
+      return h + '</div>';
+    }
+    return '';
+  }
+  // pontok, ahol csillogást mutatunk az új elemeknél (400×300-as koordináták)
+  function popPoints(pic, from) {
+    const n = pic.n;
+    if (pic.type === 'album') return pic.slots.slice(from, n).map(s => ({ x: s.x, y: s.y - s.s * .5 }));
+    if (pic.type === 'story') { const a = Math.floor(from / pic.k), b = Math.floor(n / pic.k); return pic.items.slice(a, b).map(s => ({ x: s.x, y: s.y - s.s * .5 })); }
+    if (pic.type === 'puzzle') { const pcs = puzzlePieces(pic.grid[0], pic.grid[1], pic.seed); return pic.order.slice(from, n).map(i => ({ x: pcs[i].cx, y: pcs[i].cy })); }
+    return [];
+  }
+  function info(pic) {
+    const n = pic.n, T = pic.total;
+    if (!pic.type) return { name: themeOf(pic.theme).name, label: 'Matricaalbum' };
+    if (pic.type === 'album') {
+      const th = themeOf(pic.theme), gold = pic.slots[n - 1] && pic.slots[n - 1].g;
+      return { name: '📒 ' + th.name, phase: n < T ? `${n}/${T} matrica` : '⭐ Kész!', note: gold && pic.lastGold !== n ? 'gold' : '', label: 'Matricaalbum · ' + th.name };
+    }
+    if (pic.type === 'color') { const cd = coloring(pic); return { name: '🖍️ ' + cd.title, phase: n < T ? `${n}/${T} szín` : '⭐ Kész!', label: 'Kifestő · ' + cd.title }; }
+    if (pic.type === 'puzzle') return { name: '🧩 Kirakó', phase: n < T ? `${n}/${T} darab` : '⭐ Kész!', label: 'Kirakó' };
+    if (pic.type === 'story') {
+      const s = STORIES.find(x => x.id === pic.sid), st = Math.floor(n / pic.k), steps = s.steps.length;
+      let text = st === 0 ? s.intro : st >= steps ? s.end : s.steps[st - 1][3];
+      if (st < steps && pic.k > 1 && n % pic.k) text += ` <span class="more">(még ${pic.k - n % pic.k} hang a folytatásig)</span>`;
+      return { name: '📖 ' + s.title, phase: st < steps ? `${st}/${steps}. rész` : '⭐ Vége', text, label: 'Mese · ' + s.title, end: s.end };
+    }
+    return { name: '', phase: '' };
+  }
+  return { TYPES, STORIES, create, render, info, popPoints, themeOf };
+})();
+
 // ================= Alkalmazás =================
 (function () {
   const $ = s => document.querySelector(s);
@@ -1032,91 +1498,86 @@ const Placer = (function () {
     G.order = order;
     return order[G.idx++];
   }
-  function newScene() {
-    const id = nextThemeId();
-    G.scene = { theme: id, st: [], total: S.perPic, done: false };
+  function nextStoryId() {
+    const th = new Set(activeThemes().map(t => t.id));
+    const ids = Pictures.STORIES.filter(s => th.has(s.theme)).map(s => s.id);
+    const all = ids.length ? ids : Pictures.STORIES.map(s => s.id);
+    let order = (G.sOrder || []).filter(id => all.includes(id));
+    if (!order.length || (G.sIdx || 0) >= order.length) { order = all.slice().sort(() => Math.random() - .5); G.sIdx = 0; }
+    G.sOrder = order;
+    return order[G.sIdx++];
+  }
+  const ctx = () => ({ perPic: S.perPic, themeId: nextThemeId, storyId: nextStoryId });
+  function newScene(type) {
+    type = type || G.lastType || 'album';
+    G.lastType = type;
+    G.scene = Pictures.create(type, ctx());
     saveG();
   }
   const themeOf = id => THEMES.find(t => t.id === id) || THEMES[0];
-  function phaseCounts(total) { const p1 = Math.round((total - 1) * .55); return { p1, p2: total - 1 - p1 }; }
+  const validScene = sc => sc && sc.type && Pictures.TYPES.some(t => t.id === sc.type) && !sc.done && sc.n < sc.total;
 
   // ---------- jelenet rajzolás ----------
-  function sceneHTML(sc, opts) {
-    const th = themeOf(sc.theme);
-    let h = `<svg class="bg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">${th.bg()}</svg><div class="stk">`;
-    sc.st.forEach((s, k) => {
-      const pop = opts && opts.pop === k ? ' pop' : '';
-      h += `<span class="st${pop}" style="left:${s.x / 4}%;top:${s.y / 3}%;font-size:${(s.s / 4).toFixed(2)}cqw;z-index:${Math.round(s.y)}"><i${s.f ? ' class="fl"' : ''}>${s.e}</i></span>`;
-    });
-    return h + '</div>';
+  function drawScene(from) {
+    const sc = G.scene, inf = Pictures.info(sc);
+    $('#scene').innerHTML = Pictures.render(sc, from);
+    $('#sceneName').textContent = inf.name;
+    $('#phaseInfo').textContent = inf.phase;
+    $('#progFill').style.width = (100 * sc.n / sc.total) + '%';
+    const stx = $('#storyText');
+    stx.hidden = !inf.text; if (inf.text) stx.innerHTML = inf.text;
+    if (from != null && from < sc.n) Pictures.popPoints(sc, from).forEach(sparkle);
   }
-  function drawScene(pop) {
-    const sc = G.scene, th = themeOf(sc.theme);
-    $('#scene').innerHTML = sceneHTML(sc, { pop });
-    const n = sc.st.length, pc = phaseCounts(sc.total);
-    $('#sceneName').textContent = th.name;
-    let ph;
-    if (n < pc.p1) ph = `${th.items1[0][0]} ${th.p1}: ${n}/${pc.p1}`;
-    else if (n < pc.p1 + pc.p2) ph = `${th.items2[0][0]} ${th.p2}: ${n - pc.p1}/${pc.p2}`;
-    else if (n < sc.total) ph = '✨ Most jön a meglepetés!';
-    else ph = '⭐ Kész!';
-    $('#phaseInfo').textContent = ph;
-    $('#progFill').style.width = (100 * n / sc.total) + '%';
-    if (pop != null) sparkle(sc.st[pop]);
-  }
-  function sparkle(s) {
+  function sparkle(p) {
     const box = $('#scene');
     for (let k = 0; k < 7; k++) {
       const sp = document.createElement('b'); sp.className = 'spark'; sp.textContent = rnd(['✨', '⭐', '💖', '✨']);
       const a = Math.random() * Math.PI * 2, d = 6 + Math.random() * 8;
-      sp.style.left = (s.x / 4) + '%'; sp.style.top = ((s.y - s.s * .5) / 3) + '%';
+      sp.style.left = (p.x / 4) + '%'; sp.style.top = (p.y / 3) + '%';
       sp.style.setProperty('--dx', (Math.cos(a) * d) + 'cqw'); sp.style.setProperty('--dy', (Math.sin(a) * d) + 'cqw');
       box.appendChild(sp); setTimeout(() => sp.remove(), 900);
     }
   }
 
-  let lastItem = [];
   function award(count) {
-    let pop = null;
-    for (let c = 0; c < count; c++) {
-      const sc = G.scene; if (sc.st.length >= sc.total) break;
-      const th = themeOf(sc.theme), n = sc.st.length, pc = phaseCounts(sc.total);
-      let item;
-      if (n >= sc.total - 1) item = th.finale;
-      else {
-        const list = n < pc.p1 ? th.items1 : th.items2;
-        const cand = list.filter(it => !lastItem.includes(it[0]));
-        // a nagy fákból kevesebb legyen
-        const pickFrom = (cand.length ? cand : list).flatMap(it => (it[3] ? [it] : [it, it]));
-        item = rnd(pickFrom);
-        lastItem = [item[0], ...lastItem].slice(0, 2);
-      }
-      const st = Placer.place(th, item, sc.st);
-      sc.st.push(st); pop = sc.st.length - 1;
-    }
+    const sc = G.scene; if (!sc || sc.done) return;
+    const from = sc.n;
+    sc.n = Math.min(sc.total, sc.n + count);
     saveG();
-    drawScene(pop);
-    if (G.scene.st.length >= G.scene.total) setTimeout(finishScene, 900);
+    drawScene(from);
+    if (sc.type === 'album' && sc.slots.slice(from, sc.n).some(s => s.g)) setTimeout(() => status('Ritka, csillogó matrica! ✨🌟', 'good'), 50);
+    if (sc.n >= sc.total) setTimeout(finishScene, 1100);
   }
-  let doneTimer = 0;
+  function pickButtons(box) {
+    box.innerHTML = '';
+    Pictures.TYPES.forEach(t => {
+      const b = document.createElement('button');
+      b.innerHTML = `<span class="pi">${t.icon}</span>${t.name}<small>${t.desc}</small>`;
+      b.onclick = ev => { ev.stopPropagation(); startType(t.id); };
+      box.appendChild(b);
+    });
+  }
+  function startType(type) {
+    $('#doneOv').hidden = true; $('#pickOv').hidden = true;
+    newScene(type); drawScene();
+    if (mode.kind !== 'rhythm' && listening) status('Új kép! Játszd el a hangot. 🎻');
+  }
+  function openPicker() { pickButtons($('#pickRow')); $('#pickCancel').hidden = !validScene(G.scene); $('#pickOv').hidden = false; }
   function finishScene() {
-    if (G.scene.done) return;
-    G.scene.done = true; G.stars = (G.stars || 0) + 1;
-    album.unshift({ theme: G.scene.theme, st: G.scene.st, t: Date.now() });
+    const sc = G.scene;
+    if (sc.done) return;
+    sc.done = true; G.stars = (G.stars || 0) + 1;
+    album.unshift(Object.assign({}, sc, { t: Date.now() }));
+    if (album.length > 120) album.length = 120;
     save('hm.a', album); saveG();
     Music.fanfare(); mute(1500);
-    const th = themeOf(G.scene.theme);
-    $('#doneScene').innerHTML = sceneHTML(G.scene);
-    $('#doneTitle').textContent = 'Kész a kép: ' + th.name + '!';
-    $('#doneStars').textContent = 'Már ' + album.length + ' kép van az albumodban ⭐';
+    const inf = Pictures.info(sc);
+    $('#doneScene').innerHTML = Pictures.render(sc);
+    $('#doneTitle').textContent = sc.type === 'story' ? inf.end : 'Kész! ' + inf.label.replace(/^.* · /, '');
+    $('#doneStars').textContent = 'Már ' + album.length + ' kép van az albumodban ⭐ Mi legyen a következő?';
+    pickButtons($('#donePick'));
     confetti();
     $('#doneOv').hidden = false;
-    clearTimeout(doneTimer); doneTimer = setTimeout(closeDone, 7000);
-  }
-  function closeDone() {
-    clearTimeout(doneTimer);
-    if ($('#doneOv').hidden) return;
-    $('#doneOv').hidden = true; newScene(); drawScene();
   }
   function confetti() {
     const ov = $('#doneOv');
@@ -1263,7 +1724,7 @@ const Placer = (function () {
     process(ok.length >= 3 ? median(ok) : null, now);
   }
   function process(m, now) {
-    if (!target || now < muteUntil || busy) { setMeter(null); return; }
+    if (!target || now < muteUntil || busy || !$('#doneOv').hidden || !$('#pickOv').hidden) { setMeter(null); return; }
     if (m == null) { candStart = 0; setMeter(null); if (!silentSince) silentSince = now; if (now - silentSince > 60) needOnset = false; return; }
     silentSince = 0;
     const cents = (m - target.m) * 100;
@@ -1295,7 +1756,7 @@ const Placer = (function () {
     status(rnd(['Szuper! ✨', 'Ügyes vagy! 💖', 'Pontosan! 🌟', 'Gyönyörű! 🎻', 'Jól eltaláltad! ⭐']), 'good');
     if (mode.kind === 'seq') mode.pos++;
     award(1);
-    setTimeout(() => { busy = false; if (!G.scene.done) nextTarget(); else nextTarget(); }, 700);
+    setTimeout(() => { busy = false; nextTarget(); }, 700);
   }
 
   function status(t, cls) { const s = $('#status'); s.textContent = t; s.className = 'status' + (cls ? ' ' + cls : ''); }
@@ -1489,7 +1950,7 @@ const Placer = (function () {
     bindRange('rtol', v => '±' + v + ' ms');
     bindRange('lat', v => v + ' ms');
     bindCheck('fing', () => renderTarget()); bindCheck('demo'); bindCheck('metro');
-    $$('#perPic button').forEach(b => { b.classList.toggle('sel', +b.dataset.v === S.perPic); b.onclick = () => { S.perPic = +b.dataset.v; saveS(); $$('#perPic button').forEach(x => x.classList.toggle('sel', x === b)); if (G.scene && !G.scene.done && G.scene.st.length < S.perPic) { G.scene.total = S.perPic; saveG(); drawScene(); } }; });
+    $$('#perPic button').forEach(b => { b.classList.toggle('sel', +b.dataset.v === S.perPic); b.onclick = () => { S.perPic = +b.dataset.v; saveS(); $$('#perPic button').forEach(x => x.classList.toggle('sel', x === b)); if (G.scene && G.scene.n === 0) { newScene(G.scene.type); drawScene(); } }; });
   }
   function chip(label, on, cb) {
     const b = document.createElement('button'); b.className = 'chip2' + (on ? ' sel' : ''); b.textContent = label;
@@ -1503,7 +1964,8 @@ const Placer = (function () {
   }
   function bindCheck(k, after) { const el = $('#s_' + k); el.checked = !!S[k]; el.onchange = () => { S[k] = el.checked ? 1 : 0; if (k === 'fing') S[k] = el.checked; saveS(); after && after(); }; }
   $('#setBtn').onclick = () => { buildSettings(); openSheet('setSheet'); };
-  $('#resetScene').onclick = () => { if (confirm('Biztosan új képet kezdesz? A mostani kép elvész.')) { newScene(); drawScene(); closeSheets(); } };
+  $('#resetScene').onclick = () => { if (G.scene.n > 0 && !confirm('Biztosan új képet kezdesz? A mostani kép elvész.')) return; closeSheets(); openPicker(); };
+  $('#pickCancel').onclick = () => { $('#pickOv').hidden = true; };
 
   // mód választó
   function buildModes() {
@@ -1534,18 +1996,17 @@ const Placer = (function () {
     const g = $('#albumGrid'); g.innerHTML = '';
     $('#albumCount').textContent = album.length ? album.length + ' kész kép' : 'Még nincs kész kép – az első már készül!';
     const cur = document.createElement('div'); cur.className = 'acell now';
-    cur.innerHTML = `<div class="scene mini">${sceneHTML(G.scene)}</div><small>Most készül: ${themeOf(G.scene.theme).name}</small>`;
+    cur.innerHTML = `<div class="scene mini">${Pictures.render(G.scene)}</div><small>Most készül: ${Pictures.info(G.scene).label}</small>`;
     g.appendChild(cur);
     album.forEach(a => {
       const c = document.createElement('div'); c.className = 'acell';
-      c.innerHTML = `<div class="scene mini">${sceneHTML(a)}</div><small>${themeOf(a.theme).name} · ${new Date(a.t).toLocaleDateString('hu-HU')}</small>`;
-      c.onclick = () => { $('#bigScene').innerHTML = sceneHTML(a); $('#bigOv').hidden = false; };
+      c.innerHTML = `<div class="scene mini">${Pictures.render(a)}</div><small>${Pictures.info(a).label} · ${new Date(a.t).toLocaleDateString('hu-HU')}</small>`;
+      c.onclick = () => { $('#bigScene').innerHTML = Pictures.render(a); $('#bigOv').hidden = false; };
       g.appendChild(c);
     });
     openSheet('albumSheet');
   };
   $('#bigOv').onclick = () => $('#bigOv').hidden = true;
-  $('#doneOv').onclick = closeDone;
 
   // ---------- új darab ----------
   let checked = null, editing = null;
@@ -1735,8 +2196,10 @@ const Placer = (function () {
 
   // ---------- indulás ----------
   (async function init() {
-    if (!G.scene || G.scene.done || !THEMES.some(t => t.id === G.scene.theme)) newScene();
+    const fresh = !validScene(G.scene);
+    if (fresh) newScene('album');
     drawScene();
+    if (fresh) openPicker();
     await loadPieces();
     if (mode.kind !== 'free' && !curPiece()) mode = { kind: 'free' };
     setMode(mode);
@@ -1744,7 +2207,7 @@ const Placer = (function () {
   })();
 
   // tesztekhez
-  window.__hm = { renamePiece, uploadLocal, editPiece, rhExpected, feed, analyzeRhythm, award, get target() { return target; }, get G() { return G; }, get RH() { return RH; }, setMode, PIECES: () => PIECES, nextTarget, finishScene, closeDone, renderRhythm, finishBar };
+  window.__hm = { renamePiece, uploadLocal, editPiece, rhExpected, feed, analyzeRhythm, award, get target() { return target; }, get G() { return G; }, get RH() { return RH; }, setMode, PIECES: () => PIECES, nextTarget, finishScene, startType, openPicker, renderRhythm, finishBar };
 })();
 
 </script>
